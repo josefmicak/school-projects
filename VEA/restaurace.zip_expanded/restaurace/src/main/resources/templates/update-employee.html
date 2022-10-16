@@ -1,0 +1,10 @@
+<form action="#" 
+  th:action="@{/employees/update/{id}(id=${employee.id})}" 
+  th:object="${employee}" 
+  method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{employeeName}" id="name" placeholder="Jméno">
+    <label for="email">Email</label>
+    <input type="text" th:field="*{employeeEmail}" id="email" placeholder="Email">
+    <input type="submit" value="Upravit zaměstnance">   
+</form>
