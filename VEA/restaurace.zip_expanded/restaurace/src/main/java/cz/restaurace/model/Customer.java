@@ -12,8 +12,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Employee {
-    
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
@@ -24,25 +23,25 @@ public class Employee {
     @NotBlank(message = "Email is mandatory")
     public String email;
     
-    @OneToMany (mappedBy="employee", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
+    @OneToMany (mappedBy="customer", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
     public List<Delivery> deliveries; 
     
-    public long getEmployeeId() {
+    public long getCustomerId() {
         return id;
     }
-    public void setEmployeeId(long id) {
+    public void setCustomerId(long id) {
         this.id = id;
     }
-    public String getEmployeeName() {
+    public String getCustomerName() {
         return name;
     }
-    public void setEmployeeName(String name) {
+    public void setCustomerName(String name) {
         this.name = name;
     }
-    public String getEmployeeEmail() {
+    public String getCustomerEmail() {
         return email;
     }
-    public void setEmployeeEmail(String email) {
+    public void setCustomerEmail(String email) {
         this.email = email;
     }
 }

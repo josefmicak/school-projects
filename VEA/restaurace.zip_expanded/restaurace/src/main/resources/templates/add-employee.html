@@ -1,8 +1,9 @@
+<p><a href="/employees">Zpět</a></p>
 <h2>Přidání zaměstnance</h2>
   <form action="#" th:action="@{/employees/save}" th:object="${employee}" method="post">
     <label for="name">Jméno</label>
-    <input type="text" th:field="*{employeeName}" id="name" placeholder="Jméno">
+    <input required type="text" th:field="*{employeeName}" id="name" placeholder="Jméno"><br>
     <label for="email">Email</label>
-    <input type="text" th:field="*{employeeEmail}" id="email" placeholder="Email">
+    <input required type="text" th:field="*{employeeEmail}" id="email" placeholder="Email"><br>
     <input type="submit" value="Přidat zaměstnance">   
 </form>
