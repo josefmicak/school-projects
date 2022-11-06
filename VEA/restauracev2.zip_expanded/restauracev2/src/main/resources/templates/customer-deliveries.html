@@ -1,0 +1,34 @@
+<p><a href="/customers">Zpět</a></p>
+<b>Zákazník</b><br>
+<p th:text="'ID: ' + ${customer.id}"></p>
+<p th:text="'Jméno: ' + ${customer.name}"></p>
+<p th:text="'Email: ' + ${customer.email}"></p>
+<p th:text="'Počet objednávek: ' + ${#lists.size(customer.deliveries)}"></p>
+
+<div th:switch="${customer.deliveries}"> 
+	<h2 th:case="null">Žádné objednávky zatím nebyly přidány</h2>
+    	<div th:case="*">  
+     		<h2>Seznam objednávek</h2>
+            <table>
+                <thead>
+                    <tr>
+                    	<th>ID</th>
+                        <th>Zaměstnanec</th>
+                        <th>Datum vytvoření</th>
+                        <th>Cena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="delivery, iDel : ${customer.deliveries}">
+                	<td th:text="${delivery.id}"></td>
+                    <td th:text="${delivery.employee.name}"></td>
+                    <td th:text="${deliveriesCreationDates[iDel.index]}"></td>
+                    <td th:text="${delivery.price} + ' Kč'"></td>
+                </tr>
+            	</tbody>
+        	</table>
+    	</div>   
+	<div th:if="${message!=null}"  class="card-footer bg-white text-info">
+		<span th:text="${message}"></span>
+	</div>
+</div> 
