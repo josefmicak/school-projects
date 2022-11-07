@@ -32,16 +32,25 @@ public class Customer {
     public void setCustomerId(long id) {
         this.id = id;
     }
+    
     public String getCustomerName() {
         return name;
     }
     public void setCustomerName(String name) {
         this.name = name;
     }
+    
     public String getCustomerEmail() {
         return email;
     }
     public void setCustomerEmail(String email) {
         this.email = email;
     }
+    
+    @Override
+    public String toString() {
+        return "Customer: ID = " + id + ", name = " + name + ", email: " + email;
+    }
+    
+    
 }

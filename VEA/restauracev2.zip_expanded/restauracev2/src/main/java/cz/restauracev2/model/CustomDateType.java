@@ -47,6 +47,7 @@ public class CustomDateType {
 		this.miliseconds = miliseconds;
 	}
 	
+	@Override
 	public String toString() {
 		return padLeftZeros(String.valueOf(day), 2) + "." + padLeftZeros(String.valueOf(month), 2) + "." + String.valueOf(year) + " " + 
 				padLeftZeros(String.valueOf(hours), 2) + ":" + padLeftZeros(String.valueOf(minutes), 2) + ":" + padLeftZeros(String.valueOf(seconds), 2);

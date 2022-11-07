@@ -68,4 +68,10 @@ public class Delivery {
     public void setPrice(double price) {
         this.price = price;
     }
+    
+    @Override
+    public String toString() {
+        return "Delivery: ID = " + id + ", employee name = " + employee.name + ", customer name = " + customer.name + 
+        		"creation date: " + creationDate + ", price: " + price + "CZK";
+    }
 }

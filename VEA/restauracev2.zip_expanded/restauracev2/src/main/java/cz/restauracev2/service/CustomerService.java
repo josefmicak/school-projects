@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import cz.restauracev2.logging.Log;
 import cz.restauracev2.model.Customer;
 import cz.restauracev2.repository.CustomerRepository;
 import cz.restauracev2.repository.CustomerRepositoryJdbc;
@@ -37,22 +38,27 @@ public class CustomerService {
 		}
 	}
 	
+	@Log
 	public List<Customer> findAll() {
 		return customerRepository.findAll();
 	}
 	
+	@Log
 	public Customer findById(long id) {
 		return customerRepository.findById(id);
 	}
 
+	@Log
 	public void insert(Customer customer) {
 		customerRepository.insert(customer);
 	}
 	
+	@Log
 	public void update(Customer customer) {
 		customerRepository.update(customer);
 	}
 	
+	@Log
 	public void delete(Customer customer) {
 		customerRepository.delete(customer);
 	}

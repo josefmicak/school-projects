@@ -1,11 +1,10 @@
 package cz.restauracev2.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import cz.restauracev2.logging.Log;
 import cz.restauracev2.model.CustomDateType;
 import cz.restauracev2.repository.CustomDateTypeRepository;
 import cz.restauracev2.repository.CustomDateTypeRepositoryJdbc;
@@ -37,14 +36,17 @@ public class CustomDateTypeService {
 		}
 	}
 	
+	@Log
 	public CustomDateType findById(long id) {
 		return customDateTypeRepository.findById(id);
 	}
 	
+	@Log
 	public CustomDateType findByDeliveryId(long deliveryId) {
 		return customDateTypeRepository.findByDeliveryId(deliveryId);
 	}
 
+	@Log
 	public CustomDateType insert(CustomDateType customDateType) {
 		return customDateTypeRepository.insert(customDateType);
 	}

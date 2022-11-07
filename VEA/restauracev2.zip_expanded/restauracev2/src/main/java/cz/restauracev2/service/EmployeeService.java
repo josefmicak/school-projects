@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import cz.restauracev2.logging.Log;
+
 import cz.restauracev2.model.Employee;
 import cz.restauracev2.repository.EmployeeRepository;
 import cz.restauracev2.repository.EmployeeRepositoryJdbc;
@@ -37,22 +39,27 @@ public class EmployeeService {
 		}
 	}
 	
+	@Log
 	public List<Employee> findAll() {
 		return employeeRepository.findAll();
 	}
 	
+	@Log
 	public Employee findById(long id) {
 		return employeeRepository.findById(id);
 	}
 
+	@Log
 	public void insert(Employee employee) {
 		employeeRepository.insert(employee);
 	}
 	
+	@Log
 	public void update(Employee employee) {
 		employeeRepository.update(employee);
 	}
 	
+	@Log
 	public void delete(Employee employee) {
 		employeeRepository.delete(employee);
 	}

@@ -31,28 +31,35 @@ public class Employee {
     public List<Delivery> deliveries; 
     
     public long getEmployeeId() {
-    	System.out.println("Method getEmployeeById() called");
         return id;
     }
     public void setEmployeeId(long id) {
         this.id = id;
     }
+    
     public String getEmployeeName() {
         return name;
     }
     public void setEmployeeName(String name) {
         this.name = name;
     }
+    
     public String getEmployeeEmail() {
         return email;
     }
     public void setEmployeeEmail(String email) {
         this.email = email;
     }
-    public List<Delivery> getDeliveries(){
+    
+    /*public List<Delivery> getDeliveries(){
     	return deliveries;
     }
     public void setDeliveries(List<Delivery> deliveries) {
     	this.deliveries = deliveries;
+    }*/
+    
+    @Override
+    public String toString() {
+        return "Employee: ID = " + id + ", name = " + name + ", email: " + email;
     }
 }
