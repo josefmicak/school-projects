@@ -82,4 +82,9 @@ public class DeliveryService {
 	public void deleteByEmployeeId(long employeeId) {
 		deliveryRepository.deleteByEmployeeId(employeeId);
 	}
+	
+	@Log
+	public void deleteByCarId(long carId) {
+		deliveryRepository.deleteByCarId(carId);
+	}
 }

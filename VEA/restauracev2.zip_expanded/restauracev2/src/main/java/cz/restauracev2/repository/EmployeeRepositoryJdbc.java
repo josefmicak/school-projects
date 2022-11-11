@@ -34,10 +34,13 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
 			Connection con = dataSource.getConnection();
 			try(Statement stm = con.createStatement()){
 				stm.execute(
-						"CREATE TABLE employee ("
+						"CREATE TABLE person ("
 						+ "id INTEGER NOT NULL IDENTITY(1,1) PRIMARY KEY, "
+						+ "person_type VARCHAR(255), "
 						+ "email VARCHAR(255), "
-						+ "name VARCHAR(255));"
+						+ "name VARCHAR(255), "
+						+ "salary FLOAT, "
+						+ "address VARCHAR(255));"
 					);
 			}
 		} catch (SQLException e) {
@@ -48,7 +51,7 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
 	
 	@Override
 	public List<Employee> findAll() {
-		List<Employee> employees = jdbcTemplate.query("SELECT * FROM employee", new EmployeeMapper());
+		List<Employee> employees = jdbcTemplate.query("SELECT * FROM person WHERE person_type = 'employee'", new EmployeeMapper());
 		for(Employee employee : employees){
 			List<Delivery> deliveries = deliveryRepositoryJdbc.findEmployeeDeliveries(employee.id);
 			employee.deliveries = deliveries;
@@ -58,7 +61,7 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
 	
 	@Override
 	public Employee findById(long id) {
-		Employee employee = jdbcTemplate.queryForObject("SELECT * FROM employee WHERE id = ?", new EmployeeMapper(), id);
+		Employee employee = jdbcTemplate.queryForObject("SELECT * FROM person WHERE id = ?", new EmployeeMapper(), id);
 		List<Delivery> deliveries = deliveryRepositoryJdbc.findEmployeeDeliveries(id);
 		employee.deliveries = deliveries;
 		return employee;
@@ -67,18 +70,18 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
     @Override
     @Transactional
     public void insert(Employee employee){
-	    jdbcTemplate.update("INSERT INTO employee (email, name) VALUES (?, ?)", employee.email, employee.name);
+	    jdbcTemplate.update("INSERT INTO person (person_type, email, name, address, salary) VALUES ('employee', ?, ?, NULL, ?)", employee.email, employee.name, employee.salary);
     }
     
     @Override
     @Transactional
     public void update(Employee employee){
-    	jdbcTemplate.update("UPDATE employee SET email = ?, name = ? WHERE id = ?", employee.email, employee.name, employee.id);
+    	jdbcTemplate.update("UPDATE person SET email = ?, name = ?, salary = ? WHERE id = ?", employee.email, employee.name, employee.salary, employee.id);
     }
     
     @Override
     @Transactional
     public void delete(Employee employee){
-	    jdbcTemplate.update("DELETE FROM EMPLOYEE WHERE ID = ?", employee.id);
+	    jdbcTemplate.update("DELETE FROM person WHERE ID = ?", employee.id);
     }
 }

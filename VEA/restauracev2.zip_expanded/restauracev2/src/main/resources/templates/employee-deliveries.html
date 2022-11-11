@@ -14,6 +14,7 @@
                     <tr>
                     	<th>ID</th>
                         <th>Zákazník</th>
+                        <th>Auto</th>
                         <th>Datum vytvoření</th>
                         <th>Cena</th>
                     </tr>
@@ -22,6 +23,7 @@
                 <tr th:each="delivery, iDel : ${employee.deliveries}">
                 	<td th:text="${delivery.id}"></td>
                     <td th:text="${delivery.customer.name}"></td>
+                    <td th:text="${delivery.car.name}"></td>
                     <td th:text="${deliveriesCreationDates[iDel.index]}"></td>
                     <td th:text="${delivery.price} + ' Kč'"></td>
                 </tr>

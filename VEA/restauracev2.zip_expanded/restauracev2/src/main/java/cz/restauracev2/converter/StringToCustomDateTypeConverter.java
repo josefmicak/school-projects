@@ -1,7 +1,5 @@
 package cz.restauracev2.converter;
 
-import java.util.Arrays;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;

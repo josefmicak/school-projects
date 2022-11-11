@@ -66,13 +66,14 @@ public class EmployeeController {
     public String updateEmployee(@PathVariable("id") long id, @Valid Employee employee, 
       BindingResult result, Model model, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-        	employee.setEmployeeId(id);
+        	employee.setId(id);
             return "update-employee";
         }
         
         Employee existingEmployee = employeeService.findById(id);
-        existingEmployee.setEmployeeName(employee.name);
-        existingEmployee.setEmployeeEmail(employee.email);
+        existingEmployee.setName(employee.name);
+        existingEmployee.setEmail(employee.email);
+        existingEmployee.setSalary(employee.salary);
         String message = "Zaměstnanec s id " + id + " byl úspěšně upraven.";
         attributes.addFlashAttribute("message", message);
         employeeService.update(existingEmployee);

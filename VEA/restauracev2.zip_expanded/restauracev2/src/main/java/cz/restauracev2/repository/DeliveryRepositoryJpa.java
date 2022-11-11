@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import cz.restauracev2.model.Delivery;
 import cz.restauracev2.model.Employee;
+import cz.restauracev2.model.Car;
 import cz.restauracev2.model.CustomDateType;
 import cz.restauracev2.model.Customer;
 
@@ -40,6 +41,11 @@ public class DeliveryRepositoryJpa implements DeliveryRepository {
    }
    
    @Override
+   public Car findCarId(long carId) {
+	   return null;//TODO
+   }
+    
+   @Override
    public CustomDateType findCustomDateType(long id) {
 	   return null;//TODO
    }
@@ -53,6 +59,11 @@ public class DeliveryRepositoryJpa implements DeliveryRepository {
    public Customer findByCustomerId(long customerId) {
 	   return null;//TODO
    }
+   
+   @Override
+   public Car findByCarId(long carId) {
+	   return null;//TODO
+   }
     
 	@Override
 	public List<Delivery> findEmployeeDeliveries(long employeeId) {
@@ -61,6 +72,16 @@ public class DeliveryRepositoryJpa implements DeliveryRepository {
 	
 	@Override
 	public List<Delivery> findCustomerDeliveries(long customerId) {
+		return null;//TODO
+   }
+	
+	@Override
+	public List<Delivery> findPersonDeliveries(long personId, String personType) {
+		return null;//TODO
+   }
+	
+	@Override
+	public List<Delivery> findCarDeliveries(long carId) {
 		return null;//TODO
    }
 	
@@ -91,6 +112,12 @@ public class DeliveryRepositoryJpa implements DeliveryRepository {
    @Override
    @Transactional
    public void deleteByEmployeeId(long employeeId) {
+	   
+   }
+   
+   @Override
+   @Transactional
+   public void deleteByCarId(long carId) {
 	   
    }
 }

@@ -1,0 +1,37 @@
+<p><a href="/">Zpět</a></p>
+<div th:switch="${persons}"> 
+	<h2 th:case="null">Žádné osoby zatím nebyly přidány</h2>
+    	<div th:case="*">  
+     		<h2>Seznam osob</h2>
+            <table>
+                <thead>
+                    <tr>
+                    	<th>ID</th>
+                    	<th>Typ osoby</th>
+                        <th>Jméno</th>
+                        <th>Email</th>
+                        <th>Mzda</th>
+                        <th>Adresa</th>
+                        <th>Upravit</th>
+                        <th>Smazat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="person : ${persons}">
+                	<td th:text="${person.id}"></td>
+                	<td th:text="${person.getDiscriminatorValue().equals('employee') ? 'Zaměstnanec' : 'Zákazník'}"></td>
+                    <td th:text="${person.name}"></td>
+                    <td th:text="${person.email}"></td>
+                    <td th:text="${person instanceof T(cz.restauracev2.model.Employee) ? person.salary + ' Kč' : '---'}"></td>
+                    <td th:text="${person instanceof T(cz.restauracev2.model.Customer) ? person.address : '---'}"></td>
+                    <td><a th:href="@{/persons/edit/{id}(id=${person.id})}">Upravit</a></td>
+                    <td><a th:href="@{/persons/delete/{id}(id=${person.id})}">Smazat</a></td>
+                </tr>
+            	</tbody>
+        	</table>
+    	</div>   
+    <p><a href="/persons/add">Přidat osobu</a></p>
+	<div th:if="${message!=null}"  class="card-footer bg-white text-info">
+		<span th:text="${message}"></span>
+	</div>
+</div> 

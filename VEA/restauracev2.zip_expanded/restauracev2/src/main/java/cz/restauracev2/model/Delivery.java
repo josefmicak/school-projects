@@ -28,7 +28,12 @@ public class Delivery {
     @JoinColumn(name="customer")
     public Customer customer;
     
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="car")
+    public Car car;
+    
     @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    //@OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="creationDate")
     public CustomDateType creationDate;
     
@@ -54,6 +59,13 @@ public class Delivery {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+    
+    public Car getCar() {
+        return car;
+    }
+    public void setCar(Car car) {
+        this.car = car;
+    }
 
     public CustomDateType getCreationDate() {
         return creationDate;
@@ -72,6 +84,6 @@ public class Delivery {
     @Override
     public String toString() {
         return "Delivery: ID = " + id + ", employee name = " + employee.name + ", customer name = " + customer.name + 
-        		"creation date: " + creationDate + ", price: " + price + "CZK";
+        		", car name: " + car.name + ", creation date: " + creationDate + ", price: " + price + " CZK";
     }
 }

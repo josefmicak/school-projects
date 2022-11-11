@@ -33,10 +33,13 @@ public class CustomerRepositoryJdbc implements CustomerRepository {
 			Connection con = dataSource.getConnection();
 			try(Statement stm = con.createStatement()){
 				stm.execute(
-						"CREATE TABLE customer ("
+						"CREATE TABLE person ("
 						+ "id INTEGER NOT NULL IDENTITY(1,1) PRIMARY KEY, "
+						+ "person_type VARCHAR(255), "
 						+ "email VARCHAR(255), "
-						+ "name VARCHAR(255));"
+						+ "name VARCHAR(255), "
+						+ "salary FLOAT, "
+						+ "address VARCHAR(255));"
 					);
 			}
 		} catch (SQLException e) {
@@ -47,7 +50,7 @@ public class CustomerRepositoryJdbc implements CustomerRepository {
 	
 	@Override
 	public List<Customer> findAll() {
-		List<Customer> customers = jdbcTemplate.query("SELECT * FROM customer", new CustomerMapper());
+		List<Customer> customers = jdbcTemplate.query("SELECT * FROM person WHERE person_type = 'customer'", new CustomerMapper());
 		for(Customer customer : customers){
 			List<Delivery> deliveries = deliveryRepositoryJdbc.findCustomerDeliveries(customer.id);
 			customer.deliveries = deliveries;
@@ -57,7 +60,7 @@ public class CustomerRepositoryJdbc implements CustomerRepository {
    
 	@Override
 	public Customer findById(long id) {
-		Customer customer = jdbcTemplate.queryForObject("SELECT * FROM customer WHERE id = ?", new CustomerMapper(), id);
+		Customer customer = jdbcTemplate.queryForObject("SELECT * FROM person WHERE id = ?", new CustomerMapper(), id);
 		
 		List<Delivery> deliveries = deliveryRepositoryJdbc.findCustomerDeliveries(id);
 		customer.deliveries = deliveries;
@@ -68,18 +71,18 @@ public class CustomerRepositoryJdbc implements CustomerRepository {
     @Override
     @Transactional
     public void insert(Customer customer){
-	    jdbcTemplate.update("INSERT INTO customer (email, name) VALUES (?, ?)", customer.email, customer.name);
+	    jdbcTemplate.update("INSERT INTO person (person_type, email, name, address, salary) VALUES ('customer', ?, ?, ?, NULL)", customer.email, customer.name, customer.address);
     }
     
     @Override
     @Transactional
     public void update(Customer customer){
-    	jdbcTemplate.update("UPDATE customer SET email = ?, name = ? WHERE id = ?", customer.email, customer.name, customer.id);
+    	jdbcTemplate.update("UPDATE person SET email = ?, name = ?, address = ? WHERE id = ?", customer.email, customer.name, customer.address, customer.id);
     }
     
     @Override
     @Transactional
     public void delete(Customer customer){
-	    jdbcTemplate.update("DELETE FROM customer WHERE id = ?", customer.id);
+	    jdbcTemplate.update("DELETE FROM person WHERE id = ?", customer.id);
     }
 }

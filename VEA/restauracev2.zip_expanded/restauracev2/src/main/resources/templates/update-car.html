@@ -1,0 +1,10 @@
+<p><a href="/cars">Zpět</a></p>
+<form action="#" th:action="@{/cars/update/{id}(id=${car.id})}" th:object="${car}" method="post">
+    <label for="name">Jméno</label>
+    <input required type="text" th:field="*{name}" id="name" placeholder="Jméno"><br>
+    <label for="licencePlate">Poznávací značka</label>
+    <input required type="text" th:field="*{licencePlate}" id="licencePlate" placeholder="Poznávací značka"><br>
+    <label for="price">Najeté kilometry</label>
+    <input required type="number" min="0" th:field="*{mileage}" id="mileage" placeholder="Najeté kilometry"> km<br>
+    <input type="submit" value="Upravit auto">   
+</form>

@@ -12,18 +12,14 @@ import cz.restauracev2.model.Delivery;
 import cz.restauracev2.model.Employee;
 
 public class EmployeeMapper implements RowMapper<Employee>{
-	
-	//@Autowired
-	//DeliveryRepositoryJdbc deliveryRepositoryJdbc;
 
 	@Override
 	public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Employee employee = new Employee();
-		employee.setEmployeeId(rs.getLong("id"));
-		employee.setEmployeeName(rs.getString("name"));
-		employee.setEmployeeEmail(rs.getString("email"));
-
-		//employee.se
+		employee.setId(rs.getLong("id"));
+		employee.setName(rs.getString("name"));
+		employee.setEmail(rs.getString("email"));
+		employee.setSalary(rs.getDouble("salary"));
 		return employee;
 	}
 

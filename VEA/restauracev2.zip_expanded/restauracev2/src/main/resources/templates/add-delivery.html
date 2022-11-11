@@ -9,6 +9,10 @@
     <select class="form-control" id="customerId" name="customerId">
     	<option th:each="customer : ${customers}" th:value="${customer.id}" th:text="'(ID: ' + ${customer.id} + ') ' + ${customer.name}"></option>
 	</select><br>
+    <label for="carId">Auto</label>
+    <select class="form-control" id="carId" name="carId">
+    	<option th:each="car : ${cars}" th:value="${car.id}" th:text="'(ID: ' + ${car.id} + ') ' + ${car.name}"></option>
+	</select><br>
     <label for="price">Cena</label>
     <input required type="number" min="0" th:field="*{price}" id="price" placeholder="Cena"> Kč<br>
     <input type="submit" value="Přidat objednávku">   

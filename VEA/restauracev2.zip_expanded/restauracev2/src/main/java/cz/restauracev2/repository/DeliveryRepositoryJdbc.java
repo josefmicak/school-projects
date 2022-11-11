@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import cz.restauracev2.model.Car;
 import cz.restauracev2.model.CustomDateType;
 import cz.restauracev2.model.Customer;
 import cz.restauracev2.model.Delivery;
@@ -40,6 +41,7 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 						+ "id INTEGER NOT NULL IDENTITY(1,1) PRIMARY KEY, "
 						+ "employee INTEGER NOT NULL, "
 						+ "customer INTEGER NOT NULL, "
+						+ "car INTEGER NOT NULL, "
 						+ "creation_date INTEGER, "
 						+ "price FLOAT);"
 					);
@@ -62,6 +64,9 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 			
 			long customerId = delivery.customer.id;
 			delivery.customer = findByCustomerId(customerId);
+			
+			long carId = delivery.car.id;
+			delivery.car = findByCarId(carId);
 		}
 		return deliveries;
     }
@@ -69,7 +74,7 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 	//Get employee whose ID we know
 	@Override
 	public Employee findByEmployeeId(long employeeId) {
-		Employee employee = jdbcTemplate.queryForObject("SELECT * FROM employee WHERE id = ?", new EmployeeMapper(), employeeId);
+		Employee employee = jdbcTemplate.queryForObject("SELECT * FROM person WHERE id = ?", new EmployeeMapper(), employeeId);
 		return employee;
 	}
 	
@@ -92,7 +97,7 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 	//Get customer whose ID we know
 	@Override
 	public Customer findByCustomerId(long customerId) {
-		Customer customer = jdbcTemplate.queryForObject("SELECT * FROM customer WHERE id = ?", new CustomerMapper(), customerId);
+		Customer customer = jdbcTemplate.queryForObject("SELECT * FROM person WHERE id = ?", new CustomerMapper(), customerId);
 		return customer;
 	}
 	
@@ -102,6 +107,21 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 		Map<String, Object> map = jdbcTemplate.queryForMap("SELECT customer AS c FROM delivery WHERE id = ?", id);
 		long customerId = (long)map.get("c");
 		return findByCustomerId(customerId);
+	}
+	
+	//Get car whose ID we know
+	@Override
+	public Car findByCarId(long carId) {
+		Car car = jdbcTemplate.queryForObject("SELECT * FROM car WHERE id = ?", new CarMapper(), carId);
+		return car;
+	}
+	
+	//Get car whose ID we don't know yet
+	@Override 
+	public Car findCarId(long id) {
+		Map<String, Object> map = jdbcTemplate.queryForMap("SELECT car AS c FROM delivery WHERE id = ?", id);
+		long carId = (long)map.get("c");
+		return findByCarId(carId);
 	}
    
 	@Override
@@ -117,6 +137,9 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 			Customer customer = findCustomerId(delivery.id);
 			delivery.customer = customer;
 			
+			Car car = findCarId(delivery.id);
+			delivery.car = car;
+			
 			CustomDateType customDateType = findCustomDateType(delivery.id);
 			delivery.creationDate = customDateType;
 		}
@@ -131,6 +154,50 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 			Employee employee = findEmployeeId(delivery.id);
 			delivery.employee = employee;
 			
+			Car car = findCarId(delivery.id);
+			delivery.car = car;
+			
+			CustomDateType customDateType = findCustomDateType(delivery.id);
+			delivery.creationDate = customDateType;
+		}
+		return deliveries;
+    }
+	
+	@Override
+	public List<Delivery> findPersonDeliveries(long personId, String personType) {
+		String query = "";
+		if(personType.equals("employee")) {
+			query = "SELECT * FROM delivery WHERE employee = ?";
+		}
+		else if(personType.equals("customer")) {
+			query = "SELECT * FROM delivery WHERE customer = ?";
+		}
+		List<Delivery> deliveries = jdbcTemplate.query(query, new DeliveryMapper(), personId);
+		for(Delivery delivery : deliveries) {
+			
+			Employee employee = findEmployeeId(delivery.id);
+			delivery.employee = employee;
+			
+			Car car = findCarId(delivery.id);
+			delivery.car = car;
+			
+			CustomDateType customDateType = findCustomDateType(delivery.id);
+			delivery.creationDate = customDateType;
+		}
+		return deliveries;
+    }
+	
+	@Override
+	public List<Delivery> findCarDeliveries(long carId) {
+		List<Delivery> deliveries = jdbcTemplate.query("SELECT * FROM delivery WHERE car = ?", new DeliveryMapper(), carId);
+		for(Delivery delivery : deliveries) {
+			
+			Employee employee = findEmployeeId(delivery.id);
+			delivery.employee = employee;
+			
+			Customer customer = findCustomerId(delivery.id);
+			delivery.customer = customer;
+			
 			CustomDateType customDateType = findCustomDateType(delivery.id);
 			delivery.creationDate = customDateType;
 		}
@@ -140,13 +207,15 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
     @Override
     @Transactional
     public void insert(Delivery delivery){
-	    jdbcTemplate.update("INSERT INTO delivery (employee, customer, creation_date, price) VALUES (?, ?, ?, ?)", delivery.employee.id, delivery.customer.id, delivery.creationDate.getCustomDateTypeId(), delivery.price);
+	    jdbcTemplate.update("INSERT INTO delivery (employee, customer, car, creation_date, price) VALUES (?, ?, ?, ?, ?)", 
+	    		delivery.employee.id, delivery.customer.id, delivery.car.id, delivery.creationDate.getCustomDateTypeId(), delivery.price);
     }
     
     @Override
     @Transactional
     public void update(Delivery delivery){
-    	jdbcTemplate.update("UPDATE delivery SET price = ?, customer = ?, employee = ? WHERE id = ?", delivery.price, delivery.customer.id, delivery.employee.id, delivery.id);
+    	jdbcTemplate.update("UPDATE delivery SET price = ?, customer = ?, employee = ?, car = ? WHERE id = ?", 
+    			delivery.price, delivery.customer.id, delivery.employee.id, delivery.car.id, delivery.id);
     }
     
     @Override
@@ -169,5 +238,11 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
     @Transactional
     public void deleteByEmployeeId(long employeeId){
 	    jdbcTemplate.update("DELETE FROM delivery WHERE employee = ?", employeeId);
+    }
+    
+    @Override
+    @Transactional
+    public void deleteByCarId(long carId){
+	    jdbcTemplate.update("DELETE FROM delivery WHERE car = ?", carId);
     }
 }

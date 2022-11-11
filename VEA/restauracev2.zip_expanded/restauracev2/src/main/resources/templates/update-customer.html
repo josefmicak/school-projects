@@ -1,8 +1,10 @@
 <p><a href="/customers">Zpět</a></p>
 <form action="#" th:action="@{/customers/update/{id}(id=${customer.id})}" th:object="${customer}" method="post">
     <label for="name">Name</label>
-    <input required type="text" th:field="*{customerName}" id="name" placeholder="Jméno"><br>
+    <input required type="text" th:field="*{name}" id="name" placeholder="Jméno"><br>
     <label for="email">Email</label>
-    <input required type="text" th:field="*{customerEmail}" id="email" placeholder="Email"><br>
+    <input required type="text" th:field="*{email}" id="email" placeholder="Email"><br>
+    <label for="address">Adresa</label>
+    <input required type="text" th:field="*{address}" id="address" placeholder="Adresa"><br>
     <input type="submit" value="Upravit zákazníka">   
 </form>

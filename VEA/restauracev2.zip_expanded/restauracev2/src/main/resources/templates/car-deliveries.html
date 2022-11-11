@@ -1,11 +1,12 @@
-<p><a href="/customers">Zpět</a></p>
-<b>Zákazník</b><br>
-<p th:text="'ID: ' + ${customer.id}"></p>
-<p th:text="'Jméno: ' + ${customer.name}"></p>
-<p th:text="'Email: ' + ${customer.email}"></p>
-<p th:text="'Počet objednávek: ' + ${#lists.size(customer.deliveries)}"></p>
+<p><a href="/cars">Zpět</a></p>
+<b>Auto</b><br>
+<p th:text="'ID: ' + ${car.id}"></p>
+<p th:text="'Jméno: ' + ${car.name}"></p>
+<p th:text="'Poznávací značka: ' + ${car.licencePlate}"></p>
+<p th:text="'Najeté kilometry: ' + ${car.mileage} + ' km'"></p>
+<p th:text="'Počet objednávek: ' + ${#lists.size(car.deliveries)}"></p>
 
-<div th:switch="${customer.deliveries}"> 
+<div th:switch="${car.deliveries}"> 
 	<h2 th:case="null">Žádné objednávky zatím nebyly přidány</h2>
     	<div th:case="*">  
      		<h2>Seznam objednávek</h2>
@@ -13,17 +14,17 @@
                 <thead>
                     <tr>
                     	<th>ID</th>
-                        <th>Zaměstnanec</th>
-                        <th>Auto</th>
+                    	<th>Zaměstnanec</th>
+                        <th>Zákazník</th>
                         <th>Datum vytvoření</th>
                         <th>Cena</th>
                     </tr>
                 </thead>
                 <tbody>
-                <tr th:each="delivery, iDel : ${customer.deliveries}">
+                <tr th:each="delivery, iDel : ${car.deliveries}">
                 	<td th:text="${delivery.id}"></td>
-                    <td th:text="${delivery.employee.name}"></td>
-                    <td th:text="${delivery.car.name}"></td>
+                	<td th:text="${delivery.employee.name}"></td>
+                    <td th:text="${delivery.customer.name}"></td>
                     <td th:text="${deliveriesCreationDates[iDel.index]}"></td>
                     <td th:text="${delivery.price} + ' Kč'"></td>
                 </tr>

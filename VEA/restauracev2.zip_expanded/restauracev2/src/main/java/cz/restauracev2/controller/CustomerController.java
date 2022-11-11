@@ -64,12 +64,13 @@ public class CustomerController {
     public String updateCustomer(@PathVariable("id") long id, @Valid Customer customer, 
       BindingResult result, Model model, RedirectAttributes attributes) {
         if (result.hasErrors()) {
-        	customer.setCustomerId(id);
+        	customer.setId(id);
             return "update-customer";
         }
         Customer existingCustomer = customerService.findById(id);
-        existingCustomer.setCustomerName(customer.name);
-        existingCustomer.setCustomerEmail(customer.email);
+        existingCustomer.setName(customer.name);
+        existingCustomer.setEmail(customer.email);
+        existingCustomer.setAddress(customer.address);
         String message = "Zákazník s id " + id + " byl úspěšně upraven.";
         attributes.addFlashAttribute("message", message);
         customerService.update(existingCustomer);

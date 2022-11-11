@@ -3,63 +3,29 @@ package cz.restauracev2.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotBlank;
-
-import org.springframework.stereotype.Component;
 
 @Entity
-@Component
-public class Employee {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
-    
-    @NotBlank(message = "Name is mandatory")
-    public String name;
-    
-    @NotBlank(message = "Email is mandatory")
-    public String email;
-    
+//@Component//TODO: delete?
+@DiscriminatorValue("employee")
+public class Employee extends Person{
+	public double salary;
+	
     @OneToMany (mappedBy="employee", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
     public List<Delivery> deliveries; 
     
-    public long getEmployeeId() {
-        return id;
+    public double getSalary() {
+        return salary;
     }
-    public void setEmployeeId(long id) {
-        this.id = id;
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
-    
-    public String getEmployeeName() {
-        return name;
-    }
-    public void setEmployeeName(String name) {
-        this.name = name;
-    }
-    
-    public String getEmployeeEmail() {
-        return email;
-    }
-    public void setEmployeeEmail(String email) {
-        this.email = email;
-    }
-    
-    /*public List<Delivery> getDeliveries(){
-    	return deliveries;
-    }
-    public void setDeliveries(List<Delivery> deliveries) {
-    	this.deliveries = deliveries;
-    }*/
     
     @Override
     public String toString() {
-        return "Employee: ID = " + id + ", name = " + name + ", email: " + email;
+        return "Employee: ID = " + id + ", name = " + name + ", email = " + email + ", salary = " + salary + " Kč";
     }
 }

@@ -9,6 +9,7 @@
                     	<th>ID</th>
                         <th>Jméno</th>
                         <th>Email</th>
+                        <th>Mzda</th>
                         <th>Seznam objednávek</th>
                         <th>Upravit</th>
                         <th>Smazat</th>
@@ -19,6 +20,7 @@
                 	<td th:text="${employee.id}"></td>
                     <td th:text="${employee.name}"></td>
                     <td th:text="${employee.email}"></td>
+                    <td th:text="${employee.salary} + ' Kč'"></td>
                     <td><a th:href="@{/employees/deliveries/{id}(id=${employee.id})}">Zobrazit</a></td>
                     <td><a th:href="@{/employees/edit/{id}(id=${employee.id})}">Upravit</a></td>
                     <td><a th:href="@{/employees/delete/{id}(id=${employee.id})}">Smazat</a></td>

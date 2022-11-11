@@ -10,6 +10,11 @@
     	<option th:object="${selectedOption}" th:each="customer : ${customers}" th:value="${customer.id}" th:text="'(ID: ' + ${customer.id} + ') ' + ${customer.name}"
     		th:selected="${customer.id == delivery.customer.id}"></option>
 	</select><br>
+    <label for="carId">Auto</label>
+    <select class="form-control" id="carId" name="carId">
+    	<option th:each="car : ${cars}" th:value="${car.id}" th:text="'(ID: ' + ${car.id} + ') ' + ${car.name}"
+    	th:selected="${car.id == delivery.car.id}"></option>
+	</select><br>
 	<input type="hidden" th:field="*{creationDate}">
     <label for="price">Cena</label>
     <input required type="number" min="0" th:field="*{price}" id="price" name="price" placeholder="Cena"> Kč<br>

@@ -1,0 +1,35 @@
+<p><a href="/">Zpět</a></p>
+<div th:switch="${cars}"> 
+	<h2 th:case="null">Žádná auta nebyla přidána</h2>
+    	<div th:case="*">  
+     		<h2>Seznam aut</h2>
+            <table>
+                <thead>
+                    <tr>
+                    	<th>ID</th>
+                        <th>Jméno</th>
+                        <th>Poznávací značka</th>
+                        <th>Najeté kilometry</th>
+                        <th>Seznam objednávek</th>
+                        <th>Upravit</th>
+                        <th>Smazat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="car : ${cars}">
+                	<td th:text="${car.id}"></td>
+                    <td th:text="${car.name}"></td>
+                    <td th:text="${car.licencePlate}"></td>
+                    <td th:text="${car.mileage} + ' km'"></td>
+                    <td><a th:href="@{/cars/deliveries/{id}(id=${car.id})}">Zobrazit</a></td>
+                    <td><a th:href="@{/cars/edit/{id}(id=${car.id})}">Upravit</a></td>
+                    <td><a th:href="@{/cars/delete/{id}(id=${car.id})}">Smazat</a></td>
+                </tr>
+            	</tbody>
+        	</table>
+    	</div>   
+    <p><a href="/cars/add">Přidat auto</a></p>
+	<div th:if="${message!=null}"  class="card-footer bg-white text-info">
+		<span th:text="${message}"></span>
+	</div>
+</div> 

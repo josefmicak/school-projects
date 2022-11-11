@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import cz.restauracev2.model.Car;
 import cz.restauracev2.model.CustomDateType;
 import cz.restauracev2.model.Customer;
 import cz.restauracev2.model.Delivery;
@@ -30,6 +31,10 @@ public class DeliveryMapper implements RowMapper<Delivery>{
 		Customer customer = new Customer();
 		customer.id = rs.getLong("customer");
 		delivery.customer = customer;
+		
+		Car car = new Car();
+		car.id = rs.getLong("car");
+		delivery.car = car;
 		return delivery;
 	}
 

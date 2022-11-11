@@ -1,0 +1,20 @@
+<p><a href="/persons">Zpět</a></p>
+<form action="#" th:action="@{/persons/update/{id}(id=${person.id})}" th:object="${person}" method="post">
+    <label for="personType">Typ osoby</label>
+    <select class="form-control" disabled>
+    	<option th:value="employee" th:text="Zaměstnanec" th:selected="${person.getDiscriminatorValue() == 'employee'}"></option>
+    	<option th:value="customer" th:text="Zákazník" th:selected="${person.getDiscriminatorValue() == 'customer'}"></option>
+	</select><br>
+	<input type="hidden" id="personType" name="personType" th:value="${person.getDiscriminatorValue()}">
+    <label for="name">Jméno</label>
+    <input required type="text" th:field="*{name}" id="name" placeholder="Jméno"><br>
+    <label for="email">Email</label>
+    <input required type="text" th:field="*{email}" id="email" placeholder="Email"><br>
+    <label for="price">Výplata</label>
+    <input type="number" min="0" id="salary" name="salary" placeholder="Výplata" 
+    	th:disabled="${person.getDiscriminatorValue() == 'customer'}" th:value="${person instanceof T(cz.restauracev2.model.Employee) ? person.salary : ''}"> Kč<br>
+    <label for="address">Adresa</label>
+    <input type="text" id="address" name="address" placeholder="Adresa"
+     th:disabled="${person.getDiscriminatorValue() == 'employee'}" th:value="${person instanceof T(cz.restauracev2.model.Customer) ? person.address : ''}"><br>
+    <input type="submit" value="Upravit osobu">   
+</form>
