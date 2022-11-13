@@ -45,8 +45,23 @@ public class PersonService {
 	}
 	
 	@Log
+	public List<Person> findAllRegistrations() {
+		return personRepository.findAllRegistrations();
+	}
+	
+	@Log
 	public Person findById(long id) {
 		return personRepository.findById(id);
+	}
+	
+	@Log
+	public long findPersonCountByLogin(String login) {
+		return personRepository.findPersonCountByLogin(login);
+	}
+	
+	@Log
+	public Person findByLogin(String login) throws Exception {
+		return personRepository.findByLogin(login);
 	}
 
 	@Log

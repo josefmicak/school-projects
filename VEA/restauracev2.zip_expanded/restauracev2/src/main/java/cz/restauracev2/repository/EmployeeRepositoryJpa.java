@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import cz.restauracev2.model.Employee;
+import cz.restauracev2.model.Person;
 
 @Repository
 public class EmployeeRepositoryJpa implements EmployeeRepository {
@@ -18,7 +19,7 @@ public class EmployeeRepositoryJpa implements EmployeeRepository {
    
    @Override
    public List<Employee> findAll() {
-	   	return entityManager.createQuery("select e from Employee e", Employee.class).getResultList();
+	   	return entityManager.createQuery("SELECT e FROM Employee e WHERE e.isApproved = 1", Employee.class).getResultList();
    }
    
    @Override

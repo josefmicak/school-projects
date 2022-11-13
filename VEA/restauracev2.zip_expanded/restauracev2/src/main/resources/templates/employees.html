@@ -1,4 +1,4 @@
-<p><a href="/">Zpět</a></p>
+<p><a href="/employeemenu">Zpět</a></p>
 <div th:switch="${employees}"> 
 	<h2 th:case="null">Žádní zaměstnanci zatím nebyli přidáni</h2>
     	<div th:case="*">  
@@ -8,6 +8,7 @@
                     <tr>
                     	<th>ID</th>
                         <th>Jméno</th>
+                        <th>Login</th>
                         <th>Email</th>
                         <th>Mzda</th>
                         <th>Seznam objednávek</th>
@@ -19,6 +20,7 @@
                 <tr th:each="employee : ${employees}">
                 	<td th:text="${employee.id}"></td>
                     <td th:text="${employee.name}"></td>
+                    <td th:text="${employee.login}"></td>
                     <td th:text="${employee.email}"></td>
                     <td th:text="${employee.salary} + ' Kč'"></td>
                     <td><a th:href="@{/employees/deliveries/{id}(id=${employee.id})}">Zobrazit</a></td>
@@ -33,3 +35,4 @@
 		<span th:text="${message}"></span>
 	</div>
 </div> 
+

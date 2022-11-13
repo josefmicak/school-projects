@@ -28,7 +28,7 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
 	@Autowired
 	DeliveryRepositoryJdbc deliveryRepositoryJdbc;
 	
-	@PostConstruct
+	/*@PostConstruct
 	public void init() {
 		try {
 			Connection con = dataSource.getConnection();
@@ -46,12 +46,12 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	
 	@Override
 	public List<Employee> findAll() {
-		List<Employee> employees = jdbcTemplate.query("SELECT * FROM person WHERE person_type = 'employee'", new EmployeeMapper());
+		List<Employee> employees = jdbcTemplate.query("SELECT * FROM person WHERE person_type = 'employee' AND is_approved = 1", new EmployeeMapper());
 		for(Employee employee : employees){
 			List<Delivery> deliveries = deliveryRepositoryJdbc.findEmployeeDeliveries(employee.id);
 			employee.deliveries = deliveries;
@@ -70,13 +70,15 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
     @Override
     @Transactional
     public void insert(Employee employee){
-	    jdbcTemplate.update("INSERT INTO person (person_type, email, name, address, salary) VALUES ('employee', ?, ?, NULL, ?)", employee.email, employee.name, employee.salary);
+	    jdbcTemplate.update("INSERT INTO person (person_type, email, name, login, password, address, salary, is_approved) VALUES ('employee', ?, ?, ?, ?, NULL, ?, ?)", 
+	    		employee.email, employee.name, employee.login, employee.password, employee.salary, employee.isApproved);
     }
     
     @Override
     @Transactional
     public void update(Employee employee){
-    	jdbcTemplate.update("UPDATE person SET email = ?, name = ?, salary = ? WHERE id = ?", employee.email, employee.name, employee.salary, employee.id);
+    	jdbcTemplate.update("UPDATE person SET email = ?, name = ?, login = ?, salary = ?, is_approved = ? WHERE id = ?",
+    			employee.email, employee.name, employee.login, employee.salary, employee.isApproved, employee.id);
     }
     
     @Override

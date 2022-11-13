@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 
 @Entity
-//@Component//TODO: delete?
 @DiscriminatorValue("employee")
 public class Employee extends Person{
 	public double salary;
@@ -26,6 +25,6 @@ public class Employee extends Person{
     
     @Override
     public String toString() {
-        return "Employee: ID = " + id + ", name = " + name + ", email = " + email + ", salary = " + salary + " Kč";
+        return "Employee: ID = " + id + ", name = " + name + ", email = " + email + ", salary = " + salary + " Kč" + ", is approved = " + isApproved;
     }
 }

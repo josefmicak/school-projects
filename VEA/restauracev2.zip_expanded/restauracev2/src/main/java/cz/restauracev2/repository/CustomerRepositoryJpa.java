@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import cz.restauracev2.model.Customer;
+import cz.restauracev2.model.Person;
 
 @Repository
 public class CustomerRepositoryJpa implements CustomerRepository {
@@ -18,7 +19,7 @@ public class CustomerRepositoryJpa implements CustomerRepository {
    
    @Override
    public List<Customer> findAll() {
-	   	return entityManager.createQuery("select c from Customer c", Customer.class).getResultList();
+	   	return entityManager.createQuery("SELECT c FROM Customer c WHERE c.isApproved = 1", Customer.class).getResultList();
    }
    
    @Override

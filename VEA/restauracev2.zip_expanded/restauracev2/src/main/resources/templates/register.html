@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<script type="text/javascript" th:src="@{/js/script.js}"></script>
+	<script type="text/javascript" th:src="@{js/script.js}"></script>	
 </head>
-<body onload="personTypeSelectChangedAddPerson()">
-	<p><a href="/persons">Zpět</a></p>
-	<h2>Přidání osoby</h2>
-	  <form action="#" th:action="@{/persons/save}" th:object="${person}" method="post">
+<body onload="personTypeSelectChangedRegistration()">
+	<p><a href="/login">Zpět</a></p>
+	<h2>Zaregistrovat se</h2>
+	  <form action="#" th:action="@{/register/submit}" th:object="${person}" method="post">
 	    <label for="personType">Typ osoby</label>
-	    <select class="form-control" id="personType" name="personType" onchange="personTypeSelectChangedAddPerson()">
+	    <select class="form-control" id="personType" name="personType" onchange="personTypeSelectChangedRegistration()">
 	    	<option th:value="employee" th:text="Zaměstnanec"></option>
 	    	<option th:value="customer" th:text="Zákazník"></option>
 		</select><br>
@@ -17,16 +17,12 @@
         <label for="name">Login</label>
 	    <input required type="text" th:field="*{login}" id="login" placeholder="Login"><br>
 	    <label for="password">Heslo</label>
-	    <input required type="text" th:field="*{password}" id="password" placeholder="Heslo"><br>
+	    <input required type="password" th:field="*{password}" id="password" placeholder="Heslo"><br>
 	    <label for="email">Email</label>
 	    <input required type="text" th:field="*{email}" id="email" placeholder="Email"><br>
-	    <label for="price">Výplata</label>
-	    <input type="number" min="0" name="salary" id="salary" placeholder="Výplata"> Kč<br>
 	    <label for="address">Adresa</label>
 	    <input type="text" name="address" id="address" placeholder="Adresa"><br>
-	    <input type="submit" value="Přidat osobu">   
+	    <input type="submit" value="Zaregistrovat se">   
 	</form>
 </body>
 </html>
-
-<p><a href="/performlogout">Odhlásit se</a></p>

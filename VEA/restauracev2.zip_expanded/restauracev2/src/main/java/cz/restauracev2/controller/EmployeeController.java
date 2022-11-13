@@ -16,8 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import cz.restauracev2.model.Delivery;
 import cz.restauracev2.model.Employee;
+import cz.restauracev2.model.Person;
+import cz.restauracev2.security.Encoder;
 import cz.restauracev2.service.DeliveryService;
 import cz.restauracev2.service.EmployeeService;
+import cz.restauracev2.service.PersonService;
 
 @Controller
 public class EmployeeController {	
@@ -26,6 +29,10 @@ public class EmployeeController {
 	private EmployeeService employeeService;
 	@Autowired
 	private DeliveryService deliveryService;
+	@Autowired
+	private PersonService personService;
+	@Autowired
+	private Encoder encoder;
 	@Value("${customdatasource}")
 	private String customDataSource;
 	
@@ -47,8 +54,20 @@ public class EmployeeController {
             return "add-employee";
         }
         
-        employeeService.insert(employee);
-        String message = "Zaměstnanec byl úspěšně přidán.";
+        String message;
+        
+        //check if person with this login already exists, don't add new employee if true
+        long personCountByLogin = personService.findPersonCountByLogin(employee.login);
+        if(personCountByLogin > 0) {
+        	message = "Chyba: již existuje jiná osoba s tímto loginem.";
+        }
+        else {
+        	employee.isApproved = true;
+            employee.setPassword(encoder.passwordEncoder().encode(employee.password));
+            employeeService.insert(employee);
+            message = "Zaměstnanec byl úspěšně přidán.";
+        }
+
         attributes.addFlashAttribute("message", message);
         return "redirect:/employees";
     }
@@ -56,7 +75,6 @@ public class EmployeeController {
     @GetMapping("/employees/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
     	Employee employee = employeeService.findById(id);
-         // .orElseThrow(() -> new IllegalArgumentException("Zaměstnanec s id " + id + " nebyl nalezen."));
         
         model.addAttribute("employee", employee);
         return "update-employee";
@@ -64,26 +82,46 @@ public class EmployeeController {
     
     @PostMapping("/employees/update/{id}")
     public String updateEmployee(@PathVariable("id") long id, @Valid Employee employee, 
-      BindingResult result, Model model, RedirectAttributes attributes) {
+      BindingResult result, Model model, RedirectAttributes attributes) throws Exception {
         if (result.hasErrors()) {
         	employee.setId(id);
             return "update-employee";
         }
         
-        Employee existingEmployee = employeeService.findById(id);
-        existingEmployee.setName(employee.name);
-        existingEmployee.setEmail(employee.email);
-        existingEmployee.setSalary(employee.salary);
-        String message = "Zaměstnanec s id " + id + " byl úspěšně upraven.";
+        String message;
+        boolean isDuplicateLogin = false;
+        
+        //check if person with this login already exists, don't edit employee if true
+        long personCountByLogin = personService.findPersonCountByLogin(employee.login);
+        if(personCountByLogin > 0) {
+        	Person personByLogin = personService.findByLogin(employee.login);
+        	if(personByLogin.id != employee.id) {
+        		isDuplicateLogin = true;
+        	}	
+        }
+        
+        if(!isDuplicateLogin) {
+            Employee existingEmployee = employeeService.findById(id);
+            existingEmployee.setName(employee.name);
+            existingEmployee.setLogin(employee.login);
+            existingEmployee.setPassword(employee.password);
+            existingEmployee.setEmail(employee.email);
+            existingEmployee.setSalary(employee.salary);
+            existingEmployee.setIsApproved(true);
+            message = "Zaměstnanec s id " + id + " byl úspěšně upraven.";
+            employeeService.update(existingEmployee);
+        }
+        else {
+        	message = "Chyba: již existuje jiná osoba s tímto loginem.";
+        }
+
         attributes.addFlashAttribute("message", message);
-        employeeService.update(existingEmployee);
         return "redirect:/employees";
     }
        
     @GetMapping("/employees/delete/{id}")
     public String deleteEmployee(@PathVariable("id") long id, Model model, RedirectAttributes attributes) {
     	Employee employee = employeeService.findById(id);
-    //      .orElseThrow(() -> new IllegalArgumentException("Zaměstnanec s id " + id + " nebyl nalezen."));
         String message = "Zaměstnanec s id " + id + " byl úspěšně smazán.";
         attributes.addFlashAttribute("message", message);
         

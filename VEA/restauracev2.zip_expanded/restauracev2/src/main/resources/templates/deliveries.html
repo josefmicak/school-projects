@@ -1,4 +1,4 @@
-<p><a href="/">Zpět</a></p>
+<p><a href="/employeemenu">Zpět</a></p>
 <div th:switch="${deliveries}"> 
 	<h2 th:case="null">Žádné objednávky zatím nebyly přidány</h2>
     	<div th:case="*">  
@@ -35,3 +35,5 @@
 		<span th:text="${message}"></span>
 	</div>
 </div> 
+
+<p><a href="/performlogout">Odhlásit se</a></p>

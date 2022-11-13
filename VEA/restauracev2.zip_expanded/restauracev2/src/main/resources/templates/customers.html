@@ -1,4 +1,13 @@
-<p><a href="/">Zpět</a></p>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+</head>
+<body>
+<div sec:authorize="hasRole('ADMIN')">
+  <p><a href="/employeemenu">Zpět</a></p>
+</div>
+
 <div th:switch="${customers}"> 
 	<h2 th:case="null">Žádní zákazníci zatím nebyli přidáni</h2>
     	<div th:case="*">  
@@ -8,6 +17,7 @@
                     <tr>
                     	<th>ID</th>
                         <th>Jméno</th>
+                        <th>Login</th>
                         <th>Email</th>
                         <th>Adresa</th>
                         <th>Seznam objednávek</th>
@@ -19,9 +29,10 @@
                 <tr th:each="customer : ${customers}">
                 	<td th:text="${customer.id}"></td>
                     <td th:text="${customer.name}"></td>
+                    <td th:text="${customer.login}"></td>
                     <td th:text="${customer.email}"></td>
                     <td th:text="${customer.address}"></td>
-                    <td><a th:href="@{/customers/deliveries/{id}(id=${customer.id})}">Zobrazit</a></td>
+                    <td><a th:href="@{/customerdeliveries/{id}(id=${customer.id})}">Zobrazit</a></td>
                     <td><a th:href="@{/customers/edit/{id}(id=${customer.id})}">Upravit</a></td>
                     <td><a th:href="@{/customers/delete/{id}(id=${customer.id})}">Smazat</a></td>
                 </tr>
@@ -33,3 +44,7 @@
 		<span th:text="${message}"></span>
 	</div>
 </div> 
+</body>
+</html>
+
+<p><a href="/performlogout">Odhlásit se</a></p>

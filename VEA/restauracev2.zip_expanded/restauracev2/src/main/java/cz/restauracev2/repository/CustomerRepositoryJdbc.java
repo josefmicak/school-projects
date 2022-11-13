@@ -27,7 +27,7 @@ public class CustomerRepositoryJdbc implements CustomerRepository {
 	@Autowired
 	DeliveryRepositoryJdbc deliveryRepositoryJdbc;
 	
-	@PostConstruct
+	/*@PostConstruct
 	public void init() {
 		try {
 			Connection con = dataSource.getConnection();
@@ -45,12 +45,12 @@ public class CustomerRepositoryJdbc implements CustomerRepository {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	
 	@Override
 	public List<Customer> findAll() {
-		List<Customer> customers = jdbcTemplate.query("SELECT * FROM person WHERE person_type = 'customer'", new CustomerMapper());
+		List<Customer> customers = jdbcTemplate.query("SELECT * FROM person WHERE person_type = 'customer' AND is_approved = 1", new CustomerMapper());
 		for(Customer customer : customers){
 			List<Delivery> deliveries = deliveryRepositoryJdbc.findCustomerDeliveries(customer.id);
 			customer.deliveries = deliveries;
@@ -71,13 +71,15 @@ public class CustomerRepositoryJdbc implements CustomerRepository {
     @Override
     @Transactional
     public void insert(Customer customer){
-	    jdbcTemplate.update("INSERT INTO person (person_type, email, name, address, salary) VALUES ('customer', ?, ?, ?, NULL)", customer.email, customer.name, customer.address);
+	    jdbcTemplate.update("INSERT INTO person (person_type, email, name, login, password, address, salary, is_approved) VALUES ('customer', ?, ?, ?, ?, ?, NULL, ?)", 
+	    		customer.email, customer.name, customer.login, customer.password, customer.address, customer.isApproved);
     }
     
     @Override
     @Transactional
     public void update(Customer customer){
-    	jdbcTemplate.update("UPDATE person SET email = ?, name = ?, address = ? WHERE id = ?", customer.email, customer.name, customer.address, customer.id);
+    	jdbcTemplate.update("UPDATE person SET email = ?, name = ?, login = ?, address = ?, is_approved = ? WHERE id = ?",
+    			customer.email, customer.name, customer.login, customer.address, customer.isApproved, customer.id);
     }
     
     @Override

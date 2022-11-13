@@ -7,7 +7,13 @@ import cz.restauracev2.model.Person;
 public interface PersonRepository {
 	List<Person> findAll();
 	
+	List<Person> findAllRegistrations();
+	
 	Person findById(long id);
+	
+	long findPersonCountByLogin(String login);
+	
+	Person findByLogin(String login) throws Exception;
 	
 	void insert(Person person);
 	

@@ -1,6 +1,10 @@
-<p><a href="/customers">Zpět</a></p>
+<div th:switch="${currentUser}"> 
+  <p th:case="'employee'"><a href="/customers">Zpět</a></p>
+</div>
+
 <b>Zákazník</b><br>
 <p th:text="'ID: ' + ${customer.id}"></p>
+<p th:text="'Login: ' + ${customer.login}"></p>
 <p th:text="'Jméno: ' + ${customer.name}"></p>
 <p th:text="'Email: ' + ${customer.email}"></p>
 <p th:text="'Počet objednávek: ' + ${#lists.size(customer.deliveries)}"></p>
@@ -34,3 +38,5 @@
 		<span th:text="${message}"></span>
 	</div>
 </div> 
+
+<p><a href="/performlogout">Odhlásit se</a></p>

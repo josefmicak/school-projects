@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import cz.restauracev2.model.Customer;
 import cz.restauracev2.model.Employee;
 import cz.restauracev2.model.Person;
+import cz.restauracev2.security.Encoder;
 import cz.restauracev2.service.DeliveryService;
 import cz.restauracev2.service.PersonService;
 
@@ -26,6 +27,8 @@ public class PersonController {
 	private DeliveryService deliveryService;
 	@Autowired
 	private PersonService personService;
+	@Autowired
+	private Encoder encoder;
 	@Value("${customdatasource}")
 	private String customDataSource;
 	
@@ -46,24 +49,41 @@ public class PersonController {
         if (result.hasErrors()) {
             return "add-person";
         }
-        Person newPerson;
-        if(personType.equals("employee")) {
-        	Employee employee = new Employee();
-        	employee.name = person.name;
-        	employee.email = person.email;
-        	employee.salary = Double.parseDouble(salary);
-        	newPerson = employee;
+        String message;
+        
+        //check if person with this login already exists, don't add new person if true
+        long personCountByLogin = personService.findPersonCountByLogin(person.login);
+        if(personCountByLogin > 0) {
+        	message = "Chyba: již existuje jiná osoba s tímto loginem.";
         }
         else {
-        	Customer customer = new Customer();
-        	customer.name = person.name;
-        	customer.email = person.email;
-        	customer.address = address;
-        	newPerson = customer;
+            Person newPerson;
+            person.setPassword(encoder.passwordEncoder().encode(person.password));
+            if(personType.equals("employee")) {
+            	Employee employee = new Employee();
+            	employee.name = person.name;
+            	employee.login = person.login;
+            	employee.password = person.password;
+            	employee.email = person.email;
+            	employee.salary = Double.parseDouble(salary);
+            	employee.isApproved = true;
+            	newPerson = employee;
+            }
+            else {
+            	Customer customer = new Customer();
+            	customer.name = person.name;
+            	customer.login = person.login;
+            	customer.password = person.password;
+            	customer.email = person.email;
+            	customer.address = address;
+            	customer.isApproved = true;
+            	newPerson = customer;
+            }
+            
+            personService.insert(newPerson);
+            message = "Osoba byla úspěšně přidána.";
         }
-        
-        personService.insert(newPerson);
-        String message = "Osoba byla úspěšně přidána.";
+
         attributes.addFlashAttribute("message", message);
         return "redirect:/persons";
     }
@@ -77,31 +97,56 @@ public class PersonController {
     
     @PostMapping("/persons/update/{id}")
     public String updatePerson(@PathVariable("id") long id, @Valid Person person, 
-      BindingResult result, Model model, RedirectAttributes attributes, String personType, String salary, String address) {
+      BindingResult result, Model model, RedirectAttributes attributes, String personType, String salary, String address) throws Exception  {
         if (result.hasErrors()) {
         	person.setId(id);
             return "update-person";
         }
-        Person existingPerson;
-        if(personType.equals("employee")) {
-        	Employee employee = new Employee();
-        	employee.id = person.id;
-        	employee.name = person.name;
-        	employee.email = person.email;
-        	employee.salary = Double.parseDouble(salary);
-        	existingPerson = employee;
+        
+        String message;
+        boolean isDuplicateLogin = false;
+        
+        //check if person with this login already exists, don't edit person if true
+        long personCountByLogin = personService.findPersonCountByLogin(person.login);
+        if(personCountByLogin > 0) {
+        	Person personByLogin = personService.findByLogin(person.login);
+        	if(personByLogin.id != person.id) {
+        		isDuplicateLogin = true;
+        	}	
+        }
+        
+        if(!isDuplicateLogin) {
+            Person existingPerson;
+            if(personType.equals("employee")) {
+            	Employee employee = new Employee();
+            	employee.id = person.id;
+            	employee.name = person.name;
+            	employee.login = person.login;
+            	employee.password = person.password;
+            	employee.email = person.email;
+            	employee.salary = Double.parseDouble(salary);
+            	employee.isApproved = true;
+            	existingPerson = employee;
+            }
+            else {
+            	Customer customer = new Customer();
+            	customer.id = id;
+            	customer.name = person.name;
+            	customer.login = person.login;
+            	customer.password = person.password;
+            	customer.email = person.email;
+            	customer.address = address;
+            	customer.isApproved = true;
+            	existingPerson = customer;
+            }
+            message = "Osoba s id " + id + " byla úspěšně upravena.";
+            personService.update(existingPerson);
         }
         else {
-        	Customer customer = new Customer();
-        	customer.id = id;
-        	customer.name = person.name;
-        	customer.email = person.email;
-        	customer.address = address;
-        	existingPerson = customer;
+        	message = "Chyba: již existuje jiná osoba s tímto loginem.";
         }
-        String message = "Osoba s id " + id + " byla úspěšně upravena.";
+
         attributes.addFlashAttribute("message", message);
-        personService.update(existingPerson);
         return "redirect:/persons";
     }
        
@@ -122,5 +167,38 @@ public class PersonController {
         }
     	personService.delete(person);
         return "redirect:/persons";
+    }
+    
+    
+    @GetMapping("/persons/registrations")
+    public String showRegistrationList(Model model, @ModelAttribute("message") String message) {
+    	model.addAttribute("registrations", personService.findAllRegistrations());
+    	model.addAttribute("message", message);
+        return "registrations";
+    }
+    
+    @GetMapping("/persons/registrations/approve/{id}")
+    public String updatePerson(@PathVariable("id") long id, @Valid Person person, 
+    		BindingResult result, Model model, RedirectAttributes attributes, String personType, String address)  {
+        if (result.hasErrors()) {
+        	person.setId(id);
+            return "/persons/registrations";
+        }
+        
+        Person existingPerson = personService.findById(id);
+        existingPerson.isApproved = true;
+        String message = "Registrace osoby s id " + id + " byla úspěšně schválena.";
+        personService.update(existingPerson);
+        attributes.addFlashAttribute("message", message);
+        return "redirect:/persons/registrations";
+    }
+
+    @GetMapping("/persons/registrations/delete/{id}")
+    public String deleteRegistration(@PathVariable("id") long id, Model model, RedirectAttributes attributes) {
+    	Person person = personService.findById(id);
+        String message = "Registrace osoby s id " + id + " byla úspěšně smazána.";
+        attributes.addFlashAttribute("message", message);       
+    	personService.delete(person);
+        return "redirect:/persons/registrations";
     }
 }

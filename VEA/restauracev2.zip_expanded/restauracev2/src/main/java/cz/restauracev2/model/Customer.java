@@ -26,7 +26,7 @@ public class Customer extends Person{
     
     @Override
     public String toString() {
-        return "Customer: ID = " + id + ", name = " + name + ", email: " + email + ", address: " + address;
+        return "Customer: ID = " + id + ", name = " + name + ", email: " + email + ", address: " + address + ", is approved = " + isApproved;
     }
     
     

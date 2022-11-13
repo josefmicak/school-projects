@@ -32,57 +32,57 @@ public class DeliveryRepositoryJpa implements DeliveryRepository {
    
    @Override
    public Employee findEmployeeId(long id) {
-	   return null;//TODO
+	   return null;
    }
    
    @Override
    public Customer findCustomerId(long id) {
-	   return null;//TODO
+	   return null;
    }
    
    @Override
    public Car findCarId(long carId) {
-	   return null;//TODO
+	   return null;
    }
     
    @Override
    public CustomDateType findCustomDateType(long id) {
-	   return null;//TODO
+	   return null;
    }
    
    @Override
    public Employee findByEmployeeId(long employeeId) {
-	   return null;//TODO
+	   return null;
    }
    
    @Override
    public Customer findByCustomerId(long customerId) {
-	   return null;//TODO
+	   return null;
    }
    
    @Override
    public Car findByCarId(long carId) {
-	   return null;//TODO
+	   return null;
    }
     
 	@Override
 	public List<Delivery> findEmployeeDeliveries(long employeeId) {
-		return null;//TODO
+		return null;
    }
 	
 	@Override
 	public List<Delivery> findCustomerDeliveries(long customerId) {
-		return null;//TODO
+		return null;
    }
 	
 	@Override
 	public List<Delivery> findPersonDeliveries(long personId, String personType) {
-		return null;//TODO
+		return null;
    }
 	
 	@Override
 	public List<Delivery> findCarDeliveries(long carId) {
-		return null;//TODO
+		return null;
    }
 	
    @Override

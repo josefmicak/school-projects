@@ -24,6 +24,9 @@ public class PersonMapper implements RowMapper<Person>{
 			Employee newPerson = new Employee();
 			newPerson.setId(rs.getLong("id"));
 			newPerson.setName(rs.getString("name"));
+			newPerson.setLogin(rs.getString("login"));
+			newPerson.setPassword(rs.getString("password"));
+			newPerson.setIsApproved(rs.getBoolean("is_approved"));
 			newPerson.setEmail(rs.getString("email"));
 			newPerson.setSalary(rs.getDouble("salary"));
 			
@@ -33,6 +36,9 @@ public class PersonMapper implements RowMapper<Person>{
 			Customer newPerson = new Customer();
 			newPerson.setId(rs.getLong("id"));
 			newPerson.setName(rs.getString("name"));
+			newPerson.setLogin(rs.getString("login"));
+			newPerson.setPassword(rs.getString("password"));
+			newPerson.setIsApproved(rs.getBoolean("is_approved"));
 			newPerson.setEmail(rs.getString("email"));
 			newPerson.setAddress(rs.getString("address"));
 			person = newPerson;

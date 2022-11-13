@@ -22,7 +22,7 @@ public class CustomDateTypeRepositoryJpa implements CustomDateTypeRepository {
    }
    
    public CustomDateType findByDeliveryId(long deliveryId) {
-	   return null;//TODO
+	   return null;
    }
 	
    @Override

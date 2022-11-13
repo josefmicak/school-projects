@@ -2,9 +2,14 @@
 <form action="#" th:action="@{/employees/update/{id}(id=${employee.id})}" th:object="${employee}" method="post">
     <label for="name">Jméno</label>
     <input required type="text" th:field="*{name}" id="name" placeholder="Jméno"><br>
+    <label for="name">Login</label>
+    <input required type="text" th:field="*{login}" id="login" placeholder="Login"><br>
     <label for="email">Email</label>
     <input required type="text" th:field="*{email}" id="email" placeholder="Email"><br>
     <label for="salary">Výplata</label>
     <input required type="number" min="0" th:field="*{salary}" id="salary" placeholder="Výplata"> Kč<br>
+    <input type="hidden" th:field="*{password}" th:value="${employee.password}">
     <input type="submit" value="Upravit zaměstnance">   
 </form>
+
+<p><a href="/performlogout">Odhlásit se</a></p>
