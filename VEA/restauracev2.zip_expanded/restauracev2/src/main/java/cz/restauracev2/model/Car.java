@@ -26,6 +26,9 @@ public class Car {
     
     public int mileage;
     
+    // for deserialisation
+    public Car() {}    
+    
     public long getId() {
         return id;
     }

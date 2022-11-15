@@ -49,17 +49,17 @@ public class CarRepositoryJdbc implements CarRepository {
 	}
 
 	
-	//@Override
+	@Override
 	public List<Car> findAll() {
 		List<Car> cars = jdbcTemplate.query("SELECT * FROM car", new CarMapper());
 		for(Car car : cars){
-			List<Delivery> deliveries = deliveryRepositoryJdbc.findEmployeeDeliveries(car.id);
+			List<Delivery> deliveries = deliveryRepositoryJdbc.findCarDeliveries(car.id);
 			car.deliveries = deliveries;
 		}
 		return cars;
     }
 	
-	//@Override
+	@Override
 	public Car findById(long id) {
 		Car car = jdbcTemplate.queryForObject("SELECT * FROM car WHERE id = ?", new CarMapper(), id);
 		List<Delivery> deliveries = deliveryRepositoryJdbc.findCarDeliveries(id);
@@ -67,14 +67,17 @@ public class CarRepositoryJdbc implements CarRepository {
 		return car;
 	}
 	
+	@Override
     public void insert(Car car){
 		jdbcTemplate.update("INSERT INTO car (name, licence_plate, mileage) VALUES (?, ?, ?)", car.name, car.licencePlate, car.mileage);	
     }
     
+	@Override
     public void update(Car car){
 		jdbcTemplate.update("UPDATE car SET name = ?, licence_plate = ?, mileage = ? WHERE id = ?", car.name, car.licencePlate, car.mileage, car.id);	
     }
     
+	@Override
     public void delete(Car car){
     	jdbcTemplate.update("DELETE FROM car WHERE ID = ?", car.id);
     }

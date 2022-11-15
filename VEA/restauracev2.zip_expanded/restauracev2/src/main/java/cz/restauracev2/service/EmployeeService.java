@@ -12,6 +12,7 @@ import cz.restauracev2.model.Employee;
 import cz.restauracev2.repository.EmployeeRepository;
 import cz.restauracev2.repository.EmployeeRepositoryJdbc;
 import cz.restauracev2.repository.EmployeeRepositoryJpa;
+import cz.restauracev2.security.Encoder;
 
 @Service
 public class EmployeeService {
@@ -23,6 +24,8 @@ public class EmployeeService {
 	private EmployeeRepositoryJdbc employeeRepositoryJdbc;
 	@Value("${customdatasource}")
 	private String customDataSource;
+	@Autowired
+	private Encoder encoder;
 	
 	@Autowired
 	public void setEmployeeRepository() throws Exception {
@@ -51,6 +54,7 @@ public class EmployeeService {
 
 	@Log
 	public void insert(Employee employee) {
+		employee.setPassword(encoder.passwordEncoder().encode(employee.password));
 		employeeRepository.insert(employee);
 	}
 	

@@ -13,6 +13,8 @@ public interface PersonRepository {
 	
 	long findPersonCountByLogin(String login);
 	
+	boolean isUpdateLoginDuplicate(Person person);
+	
 	Person findByLogin(String login) throws Exception;
 	
 	void insert(Person person);

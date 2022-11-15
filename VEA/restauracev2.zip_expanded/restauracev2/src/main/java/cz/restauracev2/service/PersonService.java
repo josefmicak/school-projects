@@ -12,6 +12,7 @@ import cz.restauracev2.model.Person;
 import cz.restauracev2.repository.PersonRepository;
 import cz.restauracev2.repository.PersonRepositoryJdbc;
 import cz.restauracev2.repository.PersonRepositoryJpa;
+import cz.restauracev2.security.Encoder;
 
 @Service
 public class PersonService {
@@ -23,6 +24,8 @@ public class PersonService {
 	private PersonRepositoryJdbc personRepositoryJdbc;
 	@Value("${customdatasource}")
 	private String customDataSource;
+	@Autowired
+	private Encoder encoder;
 	
 	@Autowired
 	public void setPersonRepository() throws Exception {
@@ -66,12 +69,28 @@ public class PersonService {
 
 	@Log
 	public void insert(Person person) {
-		personRepository.insert(person);
+		long personCountByLogin = findPersonCountByLogin(person.login);
+		if(personCountByLogin > 0) {
+			System.out.println("Chyba: uživatele s loginem " + person.login + " nelze přidat. Již existuje jiný uživatel s tímto loginem.");
+		}
+		else {
+			person.setPassword(encoder.passwordEncoder().encode(person.password));
+			personRepository.insert(person);
+		}
+	}
+	
+	public boolean isUpdateLoginDuplicate(Person person) {
+		return personRepository.isUpdateLoginDuplicate(person);
 	}
 	
 	@Log
 	public void update(Person person) {
-		personRepository.update(person);
+		if(isUpdateLoginDuplicate(person)) {
+			System.out.println("Chyba: uživateli nelze nastavit login " + person.login + ". Již existuje jiný uživatel s tímto loginem.");
+		}
+		else {
+			personRepository.update(person);
+		}
 	}
 	
 	@Log

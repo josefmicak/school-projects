@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import cz.restauracev2.model.Car;
+import cz.restauracev2.model.Delivery;
 
 @Repository
 public class CarRepositoryJpa implements CarRepository {
@@ -18,7 +19,16 @@ public class CarRepositoryJpa implements CarRepository {
    
    @Override
    public List<Car> findAll() {
-	   	return entityManager.createQuery("select c from Car c", Car.class).getResultList();
+	   List<Car> cars =  entityManager.createQuery("select c from Car c", Car.class).getResultList();
+	   //severing object relations for REST
+	   for(Car car : cars) {
+		   for(Delivery delivery : car.deliveries) {
+			   delivery.car = null;
+			   delivery.employee.deliveries = null;
+			   delivery.customer.deliveries = null;
+		   }
+	   }
+	   return cars;
    }
    
    @Override

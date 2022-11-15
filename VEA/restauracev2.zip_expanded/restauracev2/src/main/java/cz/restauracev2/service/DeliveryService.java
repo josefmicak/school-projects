@@ -1,12 +1,15 @@
 package cz.restauracev2.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Service;
 
 import cz.restauracev2.logging.Log;
+import cz.restauracev2.model.CustomDateType;
 import cz.restauracev2.model.Delivery;
 import cz.restauracev2.repository.DeliveryRepository;
 import cz.restauracev2.repository.DeliveryRepositoryJdbc;
@@ -22,6 +25,9 @@ public class DeliveryService {
 	private DeliveryRepositoryJdbc deliveryRepositoryJdbc;
 	@Value("${customdatasource}")
 	private String customDataSource;
+	@Autowired
+	ConversionService conversionService;
+	
 	
 	@Autowired
 	public void setDeliveryRepository() throws Exception {
@@ -60,7 +66,11 @@ public class DeliveryService {
 
 	@Log
 	public void insert(Delivery delivery) {
-		deliveryRepository.insert(delivery);
+		LocalDateTime currentDateTime = LocalDateTime.now();
+        String currentDateTimeString = String.valueOf(currentDateTime);
+        CustomDateType customDateType = conversionService.convert(currentDateTimeString, CustomDateType.class);
+		
+		deliveryRepository.insert(delivery, customDateType);
 	}
 	
 	@Log

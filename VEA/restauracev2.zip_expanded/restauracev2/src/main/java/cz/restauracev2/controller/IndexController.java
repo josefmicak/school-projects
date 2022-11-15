@@ -70,7 +70,6 @@ public class IndexController {
         }
         else {
             Person newPerson;
-            person.setPassword(encoder.passwordEncoder().encode(person.password));
             if(personType.equals("employee")) {
             	Employee employee = new Employee();
             	employee.name = person.name;

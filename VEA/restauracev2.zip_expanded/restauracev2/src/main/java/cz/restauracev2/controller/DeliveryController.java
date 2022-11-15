@@ -40,8 +40,8 @@ public class DeliveryController {
 	private CarService carService;
 	@Autowired
 	private CustomDateTypeService customDateTypeService;
-	@Autowired
-	ConversionService conversionService;
+	/*@Autowired
+	ConversionService conversionService;*/
 	@Value("${customdatasource}")
 	private String customDataSource;
 	
@@ -114,20 +114,6 @@ public class DeliveryController {
         delivery.employee = employee;
         delivery.customer = customer;
         delivery.car = car;
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        String currentDateTimeString = String.valueOf(currentDateTime);
-        CustomDateType customDateType = conversionService.convert(currentDateTimeString, CustomDateType.class);
-        if(customDataSource.equals("jpa")) {
-        	//in case we are using JPA, we can directly attach newly created customDateType to the delivery
-        	delivery.creationDate = customDateType;
-        }
-        
-        if(customDataSource.equals("jdbc")) {
-        	//in case we are using JDBC, it's necessary to manually add customDateType to the database and then attach this new entity to the delivery
-            CustomDateType customDateTypeInserted = customDateTypeService.insert(customDateType);
-            delivery.creationDate = customDateTypeInserted;
-        }
-
         deliveryService.insert(delivery);
         String message = "Objednávka byla úspěšně přidána.";
         attributes.addFlashAttribute("message", message);
@@ -159,7 +145,7 @@ public class DeliveryController {
         existingDelivery.employee = employee;
         existingDelivery.customer = customer;
         existingDelivery.car = car;
-        existingDelivery.creationDate = existingDeliveryCreationDate;
+        existingDelivery.creationDate = existingDeliveryCreationDate;//TODO: odebrat?
         existingDelivery.price = price;
         String message = "Objednávka s id " + id + " byla úspěšně upravena.";
         attributes.addFlashAttribute("message", message);

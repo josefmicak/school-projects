@@ -58,7 +58,6 @@ public class PersonController {
         }
         else {
             Person newPerson;
-            person.setPassword(encoder.passwordEncoder().encode(person.password));
             if(personType.equals("employee")) {
             	Employee employee = new Employee();
             	employee.name = person.name;
@@ -179,7 +178,7 @@ public class PersonController {
     
     @GetMapping("/persons/registrations/approve/{id}")
     public String updatePerson(@PathVariable("id") long id, @Valid Person person, 
-    		BindingResult result, Model model, RedirectAttributes attributes, String personType, String address)  {
+    		BindingResult result, Model model, RedirectAttributes attributes, String personType, String address) throws Exception  {
         if (result.hasErrors()) {
         	person.setId(id);
             return "/persons/registrations";

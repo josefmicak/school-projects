@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +22,7 @@ import cz.restauracev2.model.CustomDateType;
 import cz.restauracev2.model.Customer;
 import cz.restauracev2.model.Delivery;
 import cz.restauracev2.model.Employee;
+import cz.restauracev2.service.CustomDateTypeService;
 
 @Repository
 public class DeliveryRepositoryJdbc implements DeliveryRepository {
@@ -206,7 +209,10 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 	
     @Override
     @Transactional
-    public void insert(Delivery delivery){
+    public void insert(Delivery delivery, CustomDateType customDateType){
+        CustomDateType customDateTypeInserted = customDateTypeRepositoryJdbc.insert(customDateType);
+        delivery.creationDate = customDateTypeInserted;
+        
 	    jdbcTemplate.update("INSERT INTO delivery (employee, customer, car, creation_date, price) VALUES (?, ?, ?, ?, ?)", 
 	    		delivery.employee.id, delivery.customer.id, delivery.car.id, delivery.creationDate.getCustomDateTypeId(), delivery.price);
     }

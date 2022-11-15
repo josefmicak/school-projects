@@ -11,6 +11,7 @@ import cz.restauracev2.model.Customer;
 import cz.restauracev2.repository.CustomerRepository;
 import cz.restauracev2.repository.CustomerRepositoryJdbc;
 import cz.restauracev2.repository.CustomerRepositoryJpa;
+import cz.restauracev2.security.Encoder;
 
 @Service
 public class CustomerService {
@@ -22,6 +23,8 @@ public class CustomerService {
 	private CustomerRepositoryJdbc customerRepositoryJdbc;
 	@Value("${customdatasource}")
 	private String customDataSource;
+	@Autowired
+	private Encoder encoder;
 	
 	@Autowired
 	public void setCustomerRepository() throws Exception {
@@ -50,6 +53,7 @@ public class CustomerService {
 
 	@Log
 	public void insert(Customer customer) {
+		customer.setPassword(encoder.passwordEncoder().encode(customer.password));
 		customerRepository.insert(customer);
 	}
 	

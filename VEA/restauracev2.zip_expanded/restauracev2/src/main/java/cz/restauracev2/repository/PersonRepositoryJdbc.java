@@ -27,6 +27,8 @@ public class PersonRepositoryJdbc implements PersonRepository {
 	private DataSource dataSource;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	DeliveryRepositoryJdbc deliveryRepositoryJdbc;
 	
 	@PostConstruct
 	public void init() {
@@ -55,7 +57,21 @@ public class PersonRepositoryJdbc implements PersonRepository {
 	@Override
 	public List<Person> findAll() {
 		List<Person> persons = jdbcTemplate.query("SELECT * FROM person WHERE is_approved = 1", new PersonMapper());
-		return persons;
+		List<Person> newPersons = new ArrayList<Person>();
+		
+	   for(Person person : persons) {
+		   if(person.getDiscriminatorValue().equals("employee")) {
+			   Employee employee = (Employee) person;
+			   employee.deliveries = deliveryRepositoryJdbc.findEmployeeDeliveries(employee.id);
+			   newPersons.add(employee);
+		   }
+		   else {
+			   Customer customer = (Customer) person;
+			   customer.deliveries = deliveryRepositoryJdbc.findCustomerDeliveries(customer.id);
+			   newPersons.add(customer);
+		   }
+	   }
+		return newPersons;
     }
 	
 	@Override
@@ -77,7 +93,26 @@ public class PersonRepositoryJdbc implements PersonRepository {
 	}
 	
 	@Override
-	public Person findByLogin(String login) throws Exception {
+	public boolean isUpdateLoginDuplicate(Person person) {
+		long personCountByLogin = findPersonCountByLogin(person.login);
+	   if(personCountByLogin == 0) {
+		   return false;
+	   }
+	   if(personCountByLogin > 1) {
+		   return true;
+	   }
+	   
+	   Person personByLogin = findByLogin(person.login);
+	   if(person.id != personByLogin.id) {
+		   return true;
+	   }
+	   else {
+		   return false;
+	   }
+	}
+	
+	@Override
+	public Person findByLogin(String login) {
 		Person person = jdbcTemplate.queryForObject("SELECT * FROM person WHERE login = ?", new PersonMapper(), login);
 		return person;
 	}

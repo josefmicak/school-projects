@@ -26,28 +26,7 @@ public class CustomerRepositoryJdbc implements CustomerRepository {
 	private JdbcTemplate jdbcTemplate;
 	@Autowired
 	DeliveryRepositoryJdbc deliveryRepositoryJdbc;
-	
-	/*@PostConstruct
-	public void init() {
-		try {
-			Connection con = dataSource.getConnection();
-			try(Statement stm = con.createStatement()){
-				stm.execute(
-						"CREATE TABLE person ("
-						+ "id INTEGER NOT NULL IDENTITY(1,1) PRIMARY KEY, "
-						+ "person_type VARCHAR(255), "
-						+ "email VARCHAR(255), "
-						+ "name VARCHAR(255), "
-						+ "salary FLOAT, "
-						+ "address VARCHAR(255));"
-					);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
 
-	
 	@Override
 	public List<Customer> findAll() {
 		List<Customer> customers = jdbcTemplate.query("SELECT * FROM person WHERE person_type = 'customer' AND is_approved = 1", new CustomerMapper());

@@ -35,7 +35,7 @@ public interface DeliveryRepository {
 	
 	CustomDateType findCustomDateType(long id);
 	
-	void insert(Delivery delivery);
+	void insert(Delivery delivery, CustomDateType customDateType);
 	
 	void update(Delivery delivery);
 	

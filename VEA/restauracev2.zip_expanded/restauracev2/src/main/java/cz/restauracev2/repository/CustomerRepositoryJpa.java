@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import cz.restauracev2.model.Customer;
+import cz.restauracev2.model.Delivery;
 import cz.restauracev2.model.Person;
 
 @Repository
@@ -19,7 +20,16 @@ public class CustomerRepositoryJpa implements CustomerRepository {
    
    @Override
    public List<Customer> findAll() {
-	   	return entityManager.createQuery("SELECT c FROM Customer c WHERE c.isApproved = 1", Customer.class).getResultList();
+	   List<Customer> customers = entityManager.createQuery("SELECT c FROM Customer c WHERE c.isApproved = 1", Customer.class).getResultList();
+	   //severing object relations for REST
+	   for(Customer customer : customers) {
+		   for(Delivery delivery : customer.deliveries) {
+			   delivery.car.deliveries = null;
+			   delivery.employee.deliveries = null;
+			   delivery.customer = null;
+		   }
+	   }
+	   return customers;
    }
    
    @Override

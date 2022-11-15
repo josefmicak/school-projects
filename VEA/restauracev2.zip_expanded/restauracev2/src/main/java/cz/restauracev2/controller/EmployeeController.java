@@ -63,7 +63,6 @@ public class EmployeeController {
         }
         else {
         	employee.isApproved = true;
-            employee.setPassword(encoder.passwordEncoder().encode(employee.password));
             employeeService.insert(employee);
             message = "Zaměstnanec byl úspěšně přidán.";
         }

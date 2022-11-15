@@ -65,7 +65,6 @@ public class CustomerController {
         }
         else {
         	customer.isApproved = true;
-            customer.setPassword(encoder.passwordEncoder().encode(customer.password));
             customerService.insert(customer);
             message = "Zákazník byl úspěšně přidán.";
         }

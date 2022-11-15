@@ -77,6 +77,7 @@ public class ApplicationSecurityConfig {
 			.antMatchers("/register").permitAll()
 			.antMatchers("/register/*").permitAll()
 			.antMatchers("/js/**").permitAll()
+			.antMatchers("/api/**").permitAll()
 			.antMatchers("/awaiting-approval").hasAuthority("UNAPPROVED")
 			.antMatchers("/employeemenu").hasAuthority("ADMIN")
 			.antMatchers("/customermenu").hasAnyAuthority("USER","ADMIN")
@@ -132,11 +133,6 @@ public class ApplicationSecurityConfig {
 	    return http.build();
 	}
 	
-	/*@Override
-	public void configure(WebSecurity web) throws Exception {
-	  web.ignoring().antMatchers("/the_js_path/**");
-	}*/
-	
 	@Configuration
 	@EnableGlobalMethodSecurity(
 	  prePostEnabled = true, 
@@ -172,7 +168,7 @@ public class ApplicationSecurityConfig {
 		customer.setName("b b");
 		customer.setAddress("address");
 		customer.setEmail("email2");
-		customer.isApproved = false;
+		customer.isApproved = true;
 		entityManager.persist(customer);
 	}
 }
