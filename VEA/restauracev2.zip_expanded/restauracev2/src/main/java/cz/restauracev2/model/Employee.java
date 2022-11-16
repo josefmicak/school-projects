@@ -16,7 +16,20 @@ public class Employee extends Person{
     @OneToMany (mappedBy="employee", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
     public List<Delivery> deliveries; 
     
-    public double getSalary() {
+    public Employee() {  	
+    }
+    
+    public Employee(String name, String email, String login, String password, boolean isApproved, double salary) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.login = login;
+		this.password = password;
+		this.isApproved = isApproved;
+		this.salary = salary;
+	}
+    
+	public double getSalary() {
         return salary;
     }
     public void setSalary(double salary) {

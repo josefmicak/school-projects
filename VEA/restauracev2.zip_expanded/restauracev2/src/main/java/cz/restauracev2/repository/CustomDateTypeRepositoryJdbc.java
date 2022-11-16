@@ -63,8 +63,6 @@ public class CustomDateTypeRepositoryJdbc implements CustomDateTypeRepository {
 	    //retreive highest id
 	    CustomDateType customDateTypeMaxId = jdbcTemplate.queryForObject("SELECT TOP 1 * FROM custom_date_type ORDER BY id DESC", new CustomDateTypeMapper());
 	    return customDateTypeMaxId;
-	    //return customDateTypeMaxId.getCustomDateTypeId();
-	    //todo: tady vezmu nejvyssi id, to vratim do delivery controller, toto id nastavit objektu ktery poslu do delivery jdbc..bude to fungovat
     }
 
 }

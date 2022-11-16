@@ -142,15 +142,6 @@ public class ApplicationSecurityConfig {
 	  extends GlobalMethodSecurityConfiguration {
 	}
 	
-	@EventListener(ApplicationReadyEvent.class)
-	@Transactional
-	public void doSomethingAfterStartup() {
-
-		//save();
-		
-	    System.out.println("hello world, I have just started up");
-	}
-	
 	@Transactional
 	public void save() {
 		Employee employee = new Employee();

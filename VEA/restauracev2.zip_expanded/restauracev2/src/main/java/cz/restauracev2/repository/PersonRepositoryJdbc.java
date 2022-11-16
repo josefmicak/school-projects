@@ -52,7 +52,6 @@ public class PersonRepositoryJdbc implements PersonRepository {
 			e.printStackTrace();
 		}
 	}
-
 	
 	@Override
 	public List<Person> findAll() {

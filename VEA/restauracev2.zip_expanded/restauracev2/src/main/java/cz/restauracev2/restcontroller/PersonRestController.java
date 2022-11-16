@@ -116,5 +116,4 @@ public class PersonRestController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Osoba byla úspěšně smazána.");
     }
-
 }

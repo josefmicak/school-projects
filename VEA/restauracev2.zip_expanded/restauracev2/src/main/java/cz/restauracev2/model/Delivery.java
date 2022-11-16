@@ -32,7 +32,19 @@ public class Delivery {
     @JoinColumn(name="car")
     public Car car;
     
-    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    public Delivery() {  	
+    }
+    
+    public Delivery(Employee employee, Customer customer, Car car,  double price) {
+		super();
+		this.employee = employee;
+		this.customer = customer;
+		this.car = car;
+		//this.creationDate = creationDate;
+		this.price = price;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     //@OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="creationDate")
     public CustomDateType creationDate;

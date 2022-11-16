@@ -26,7 +26,7 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     
-    public String name;
+	public String name;
     
     public String email;
     
@@ -35,6 +35,15 @@ public class Person {
     public String password;
     
     public boolean isApproved;
+    
+/*    public Person(String name, String email, String login, String password, boolean isApproved) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.login = login;
+		this.password = password;
+		this.isApproved = isApproved;
+	}*/
     
     public long getId() {
         return id;

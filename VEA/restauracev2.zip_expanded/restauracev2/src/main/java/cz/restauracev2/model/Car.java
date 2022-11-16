@@ -26,7 +26,14 @@ public class Car {
     
     public int mileage;
     
-    // for deserialisation
+    public Car(String name, String licencePlate, int mileage) {
+		super();
+		this.name = name;
+		this.licencePlate = licencePlate;
+		this.mileage = mileage;
+	}
+
+	// for deserialisation
     public Car() {}    
     
     public long getId() {

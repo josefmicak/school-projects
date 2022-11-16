@@ -47,7 +47,6 @@ public class CarRepositoryJdbc implements CarRepository {
 			e.printStackTrace();
 		}
 	}
-
 	
 	@Override
 	public List<Car> findAll() {

@@ -28,27 +28,6 @@ public class EmployeeRepositoryJdbc implements EmployeeRepository {
 	@Autowired
 	DeliveryRepositoryJdbc deliveryRepositoryJdbc;
 	
-	/*@PostConstruct
-	public void init() {
-		try {
-			Connection con = dataSource.getConnection();
-			try(Statement stm = con.createStatement()){
-				stm.execute(
-						"CREATE TABLE person ("
-						+ "id INTEGER NOT NULL IDENTITY(1,1) PRIMARY KEY, "
-						+ "person_type VARCHAR(255), "
-						+ "email VARCHAR(255), "
-						+ "name VARCHAR(255), "
-						+ "salary FLOAT, "
-						+ "address VARCHAR(255));"
-					);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}*/
-
-	
 	@Override
 	public List<Employee> findAll() {
 		List<Employee> employees = jdbcTemplate.query("SELECT * FROM person WHERE person_type = 'employee' AND is_approved = 1", new EmployeeMapper());
