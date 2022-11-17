@@ -61,7 +61,8 @@ public class CustomDateTypeRepositoryJdbc implements CustomDateTypeRepository {
     @Transactional
     public CustomDateType insert(CustomDateType customDateType){
 	    jdbcTemplate.update("INSERT INTO custom_date_type (day, hours, miliseconds, minutes, month, seconds, year) VALUES (?, ?, ?, ?, ?, ?, ?)",
-	    		customDateType.day, customDateType.hours, customDateType.miliseconds, customDateType.minutes, customDateType.month, customDateType.seconds, customDateType.year);
+	    		customDateType.getDay(), customDateType.getHours(), customDateType.getMiliseconds(), customDateType.getMinutes(), 
+	    		customDateType.getMonth(), customDateType.getSeconds(), customDateType.getYear());
 	    //retreive highest id
 	    CustomDateType customDateTypeMaxId = jdbcTemplate.queryForObject("SELECT TOP 1 * FROM custom_date_type ORDER BY id DESC", new CustomDateTypeMapper());
 	    return customDateTypeMaxId;

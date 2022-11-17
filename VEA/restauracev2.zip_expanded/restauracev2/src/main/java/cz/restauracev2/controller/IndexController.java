@@ -61,7 +61,7 @@ public class IndexController {
         String message;
         
         //check if person with this login already exists, don't add new person if true
-        long personCountByLogin = personService.findPersonCountByLogin(person.login);
+        long personCountByLogin = personService.findPersonCountByLogin(person.getLogin());
         if(personCountByLogin > 0) {
         	message = "Chyba: registraci nešlo vytvořit. Zkuste to prosím znovu";
         }
@@ -69,22 +69,22 @@ public class IndexController {
             Person newPerson;
             if(personType.equals("employee")) {
             	Employee employee = new Employee();
-            	employee.name = person.name;
-            	employee.login = person.login;
-            	employee.password = person.password;
-            	employee.email = person.email;
-            	employee.salary = 0;
-            	employee.isApproved = false;
+            	employee.setName(person.getName());
+            	employee.setLogin(person.getLogin());
+            	employee.setPassword(person.getPassword());
+            	employee.setEmail(person.getEmail());
+            	employee.setSalary(0);
+            	employee.setIsApproved(false);
             	newPerson = employee;
             }
             else {
             	Customer customer = new Customer();
-            	customer.name = person.name;
-            	customer.login = person.login;
-            	customer.password = person.password;
-            	customer.email = person.email;
-            	customer.address = address;
-            	customer.isApproved = false;
+            	customer.setName(person.getName());
+            	customer.setLogin(person.getLogin());
+            	customer.setPassword(person.getPassword());
+            	customer.setEmail(person.getEmail());
+            	customer.setAddress(address);
+            	customer.setIsApproved(false);
             	newPerson = customer;
             }
             
@@ -95,11 +95,4 @@ public class IndexController {
         attributes.addFlashAttribute("message", message);
         return "redirect:/login";
     }
-    
-  /*  @GetMapping("/registrations")
-    public String showRegistrationList(Model model, @ModelAttribute("message") String message) {
-    	model.addAttribute("registrations", personService.findAllRegistrations());
-    	model.addAttribute("message", message);
-        return "registrations";
-    }*/
 }

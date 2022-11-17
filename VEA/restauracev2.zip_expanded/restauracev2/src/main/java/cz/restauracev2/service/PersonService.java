@@ -79,12 +79,12 @@ public class PersonService {
 
 	@Log
 	public void insert(Person person) {
-		long personCountByLogin = findPersonCountByLogin(person.login);
+		long personCountByLogin = findPersonCountByLogin(person.getLogin());
 		if(personCountByLogin > 0) {
-			System.out.println("Chyba: uživatele s loginem " + person.login + " nelze přidat. Již existuje jiný uživatel s tímto loginem.");
+			System.out.println("Chyba: uživatele s loginem " + person.getLogin() + " nelze přidat. Již existuje jiný uživatel s tímto loginem.");
 		}
 		else {
-			person.setPassword(encoder.passwordEncoder().encode(person.password));
+			person.setPassword(encoder.passwordEncoder().encode(person.getPassword()));
 			personRepository.insert(person);
 		}
 	}
@@ -96,7 +96,7 @@ public class PersonService {
 	@Log
 	public void update(Person person) {
 		if(isUpdateLoginDuplicate(person)) {
-			System.out.println("Chyba: uživateli nelze nastavit login " + person.login + ". Již existuje jiný uživatel s tímto loginem.");
+			System.out.println("Chyba: uživateli nelze nastavit login " + person.getLogin() + ". Již existuje jiný uživatel s tímto loginem.");
 		}
 		else {
 			personRepository.update(person);

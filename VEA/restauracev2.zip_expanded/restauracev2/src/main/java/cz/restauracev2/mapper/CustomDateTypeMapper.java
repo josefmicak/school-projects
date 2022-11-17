@@ -13,16 +13,13 @@ public class CustomDateTypeMapper implements RowMapper<CustomDateType>{
 	public CustomDateType mapRow(ResultSet rs, int rowNum) throws SQLException {
 		CustomDateType customDateType = new CustomDateType();
 		customDateType.setCustomDateTypeId(rs.getLong("id"));
-		customDateType.day = rs.getInt("day");
-		customDateType.hours = rs.getInt("hours");
-		customDateType.miliseconds = rs.getInt("miliseconds");
-		customDateType.minutes = rs.getInt("minutes");
-		customDateType.month = rs.getInt("month");
-		customDateType.seconds = rs.getInt("seconds");
-		customDateType.year = rs.getInt("year");
-		/*customer.setCustomerId(rs.getLong("id"));
-		customer.setCustomerName(rs.getString("name"));
-		customer.setCustomerEmail(rs.getString("email"));*/
+		customDateType.setDay(rs.getInt("day"));
+		customDateType.setHours(rs.getInt("hours"));
+		customDateType.setMiliseconds(rs.getInt("miliseconds"));
+		customDateType.setMinutes(rs.getInt("minutes"));
+		customDateType.setMonth(rs.getInt("month"));
+		customDateType.setSeconds(rs.getInt("seconds"));
+		customDateType.setYear(rs.getInt("year"));
 		return customDateType;
 	}
 

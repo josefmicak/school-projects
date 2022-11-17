@@ -30,10 +30,10 @@ public class CustomerRestController {
     
     @PostMapping("/api/customers")
     ResponseEntity<String> addCustomer(@RequestBody Customer customer){
-		long personCountByLogin = personService.findPersonCountByLogin(customer.login);
+		long personCountByLogin = personService.findPersonCountByLogin(customer.getLogin());
 		if(personCountByLogin > 0) {
 	        return ResponseEntity.badRequest()
-	                .body("Chyba: uživatele s loginem " + customer.login + " nelze přidat."
+	                .body("Chyba: uživatele s loginem " + customer.getLogin() + " nelze přidat."
 	                		+ " Již existuje jiný uživatel s tímto loginem.");
 		}
 		else {
@@ -47,16 +47,15 @@ public class CustomerRestController {
     ResponseEntity<String> updateCustomer(@RequestBody Customer customer, @PathVariable Long id) throws Exception{	 
 		if(personService.isUpdateLoginDuplicate(customer)) {
 	        return ResponseEntity.badRequest()
-	                .body("Chyba: uživateli nelze nastavit login " + customer.login + ". Již existuje jiný uživatel s tímto loginem.");
+	                .body("Chyba: uživateli nelze nastavit login " + customer.getLogin() + ". Již existuje jiný uživatel s tímto loginem.");
 		}
 		else {
 	        Customer existingCustomer = (Customer)personService.findById(id);
-	        existingCustomer.setName(customer.name);
-	        existingCustomer.setLogin(customer.login);
-	        //existingCustomer.setPassword(customer.password);
-	        existingCustomer.setEmail(customer.email);
-	        existingCustomer.setAddress(customer.address);
-	        existingCustomer.setIsApproved(customer.isApproved);
+	        existingCustomer.setName(customer.getName());
+	        existingCustomer.setLogin(customer.getLogin());
+	        existingCustomer.setEmail(customer.getEmail());
+	        existingCustomer.setAddress(customer.getAddress());
+	        existingCustomer.setIsApproved(customer.getIsApproved());
 	        personService.update(existingCustomer);
 	        return ResponseEntity.status(HttpStatus.OK)
 	                .body("Zákazník byl úspěšně upraven.");

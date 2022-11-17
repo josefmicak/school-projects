@@ -16,7 +16,7 @@ public class DeliveryMapper implements RowMapper<Delivery>{
 	@Override
 	public Delivery mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Delivery delivery = new Delivery();
-		delivery.setDeliveryId(rs.getLong("id"));
+		delivery.setId(rs.getLong("id"));
 		
 		delivery.setPrice(rs.getLong("price"));
 		
@@ -25,16 +25,16 @@ public class DeliveryMapper implements RowMapper<Delivery>{
 		delivery.creationDate = customDateType;
 		
 		Employee employee = new Employee();
-		employee.id = rs.getLong("employee");
-		delivery.employee = employee;
+		employee.setId(rs.getLong("employee"));
+		delivery.setEmployee(employee);
 		
 		Customer customer = new Customer();
-		customer.id = rs.getLong("customer");
-		delivery.customer = customer;
+		customer.setId(rs.getLong("customer"));
+		delivery.setCustomer(customer);
 		
 		Car car = new Car();
-		car.id = rs.getLong("car");
-		delivery.car = car;
+		car.setId(rs.getLong("car"));
+		delivery.setCar(car);
 		return delivery;
 	}
 

@@ -13,34 +13,43 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @DiscriminatorValue("employee")
 public class Employee extends Person{
-	public double salary;
+	private double salary;
 	
 	@JsonIgnore
     @OneToMany (mappedBy="employee", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
-    public List<Delivery> deliveries; 
+    private List<Delivery> deliveries; 
     
     public Employee() {  	
     }
     
     public Employee(String name, String email, String login, String password, boolean isApproved, double salary) {
 		super();
-		this.name = name;
-		this.email = email;
-		this.login = login;
-		this.password = password;
-		this.isApproved = isApproved;
+		this.setName(name);
+		this.setEmail(email);
+		this.setLogin(login);
+		this.setPassword(password);
+		this.setIsApproved(isApproved);
 		this.salary = salary;
 	}
     
 	public double getSalary() {
         return salary;
     }
+	
     public void setSalary(double salary) {
         this.salary = salary;
     }
     
-    @Override
+    public List<Delivery> getDeliveries() {
+		return deliveries;
+	}
+    
+	public void setDeliveries(List<Delivery> deliveries) {
+		this.deliveries = deliveries;
+	}
+
+	@Override
     public String toString() {
-        return "Employee: ID = " + id + ", name = " + name + ", email = " + email + ", salary = " + salary + " Kč" + ", is approved = " + isApproved;
+		return "Employee: ID = " + getId() + ", name = " + getName() + ", email: " + getEmail() + ", salary: " + getSalary() + ", is approved = " + getIsApproved();
     }
 }

@@ -20,21 +20,22 @@ public class Person {
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
     
-	public String name;
+    private String name;
     
-    public String email;
+    private String email;
     
-    public String login;
+    private String login;
     
-    public String password;
+    private String password;
     
-    public boolean isApproved;
+    private boolean isApproved;
     
     public long getId() {
         return id;
     }
+    
     public void setId(long id) {
         this.id = id;
     }
@@ -42,6 +43,7 @@ public class Person {
     public String getName() {
         return name;
     }
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -49,6 +51,7 @@ public class Person {
     public String getEmail() {
         return email;
     }
+    
     public void setEmail(String email) {
         this.email = email;
     }
@@ -56,6 +59,7 @@ public class Person {
     public String getLogin() {
         return login;
     }
+    
     public void setLogin(String login) {
         this.login = login;
     }
@@ -63,6 +67,7 @@ public class Person {
     public String getPassword() {
         return password;
     }
+    
     public void setPassword(String password) {
         this.password = password;
     }
@@ -70,6 +75,7 @@ public class Person {
     public boolean getIsApproved() {
         return isApproved;
     }
+    
     public void setIsApproved(boolean isApproved) {
         this.isApproved = isApproved;
     }

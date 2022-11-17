@@ -30,10 +30,10 @@ public class EmployeeRestController {
     
     @PostMapping("/api/employees")
     ResponseEntity<String> addEmployee(@RequestBody Employee employee){
-		long personCountByLogin = personService.findPersonCountByLogin(employee.login);
+		long personCountByLogin = personService.findPersonCountByLogin(employee.getLogin());
 		if(personCountByLogin > 0) {
 	        return ResponseEntity.badRequest()
-	                .body("Chyba: uživatele s loginem " + employee.login + " nelze přidat."
+	                .body("Chyba: uživatele s loginem " + employee.getLogin() + " nelze přidat."
 	                		+ " Již existuje jiný uživatel s tímto loginem.");
 		}
 		else {
@@ -47,16 +47,15 @@ public class EmployeeRestController {
     ResponseEntity<String> updateEmployee(@RequestBody Employee employee, @PathVariable Long id) throws Exception{	
 		if(personService.isUpdateLoginDuplicate(employee)) {
 	        return ResponseEntity.badRequest()
-	                .body("Chyba: uživateli nelze nastavit login " + employee.login + ". Již existuje jiný uživatel s tímto loginem.");
+	                .body("Chyba: uživateli nelze nastavit login " + employee.getLogin() + ". Již existuje jiný uživatel s tímto loginem.");
 		}
 		else {
 	        Employee existingEmployee = (Employee) personService.findById(id);
-	        existingEmployee.setName(employee.name);
-	        existingEmployee.setLogin(employee.login);
-	        //existingEmployee.setPassword(employee.password);
-	        existingEmployee.setEmail(employee.email);
-	        existingEmployee.setSalary(employee.salary);
-	        existingEmployee.setIsApproved(employee.isApproved);
+	        existingEmployee.setName(employee.getName());
+	        existingEmployee.setLogin(employee.getLogin());
+	        existingEmployee.setEmail(employee.getEmail());
+	        existingEmployee.setSalary(employee.getSalary());
+	        existingEmployee.setIsApproved(employee.getIsApproved());
 	        personService.update(existingEmployee);
 	        return ResponseEntity.status(HttpStatus.OK)
 	                .body("Zaměstnanec byl úspěšně upraven.");

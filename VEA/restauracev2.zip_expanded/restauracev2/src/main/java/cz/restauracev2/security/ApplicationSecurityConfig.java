@@ -138,7 +138,7 @@ public class ApplicationSecurityConfig {
 		employee.setName("a a");
 		employee.setSalary(2);
 		employee.setEmail("email");
-		employee.isApproved = true;
+		employee.setIsApproved(true);
 		entityManager.persist(employee);
 		
 		Customer customer = new Customer();
@@ -147,7 +147,7 @@ public class ApplicationSecurityConfig {
 		customer.setName("b b");
 		customer.setAddress("address");
 		customer.setEmail("email2");
-		customer.isApproved = true;
+		customer.setIsApproved(true);
 		entityManager.persist(customer);
 	}
 }

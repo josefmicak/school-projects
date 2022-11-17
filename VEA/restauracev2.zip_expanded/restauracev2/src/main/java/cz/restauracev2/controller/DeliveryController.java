@@ -99,9 +99,9 @@ public class DeliveryController {
         Customer customer = (Customer)personService.findById(Long.valueOf(customerId));
         Car car = carService.findById(Long.valueOf(carId));
         
-        delivery.employee = employee;
-        delivery.customer = customer;
-        delivery.car = car;
+        delivery.setEmployee(employee);
+        delivery.setCustomer(customer);
+        delivery.setCar(car);
         deliveryService.insert(delivery);
         String message = "Objednávka byla úspěšně přidána.";
         attributes.addFlashAttribute("message", message);
@@ -128,9 +128,9 @@ public class DeliveryController {
         Car car = carService.findById(Long.valueOf(carId));
         
         Delivery existingDelivery = deliveryService.findById(id);
-        existingDelivery.employee = employee;
-        existingDelivery.customer = customer;
-        existingDelivery.car = car;
+        existingDelivery.setEmployee(employee);
+        existingDelivery.setCustomer(customer);
+        existingDelivery.setCar(car);
         existingDelivery.price = price;
         String message = "Objednávka s id " + id + " byla úspěšně upravena.";
         attributes.addFlashAttribute("message", message);

@@ -16,17 +16,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long id;
+    private long id;
     
     @JsonIgnore
     @OneToMany (mappedBy="car", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
-    public List<Delivery> deliveries; 
+    private List<Delivery> deliveries; 
     
-    public String name;
+    private String name;
     
-    public String licencePlate;
+    private String licencePlate;
     
-    public int mileage;
+    private int mileage;
     
     public Car() {}   
     
@@ -40,6 +40,7 @@ public class Car {
     public long getId() {
         return id;
     }
+    
     public void setId(long id) {
         this.id = id;
     }
@@ -47,6 +48,7 @@ public class Car {
     public String getName() {
         return name;
     }
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -54,6 +56,7 @@ public class Car {
     public String getLicencePlate() {
         return licencePlate;
     }
+    
     public void setLicencePlate(String licencePlate) {
         this.licencePlate = licencePlate;
     }
@@ -61,8 +64,17 @@ public class Car {
     public int getMileage() {
         return mileage;
     }
+    
     public void setMileage(int mileage) {
         this.mileage = mileage;
+    }
+    
+    public List<Delivery> getDeliveries() {
+        return deliveries;
+    }
+    
+    public void setDeliveries(List<Delivery> deliveries) {
+        this.deliveries = deliveries;
     }
     
     @Override

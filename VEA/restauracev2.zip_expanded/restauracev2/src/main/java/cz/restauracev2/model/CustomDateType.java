@@ -12,13 +12,13 @@ public class CustomDateType {
 	@Column(name = "id")
 	private long id;
     
-	public int year;
-	public int month;
-	public int day;
-	public int hours;
-	public int minutes;
-	public int seconds;
-	public int miliseconds;
+    private int year;
+    private int month;
+    private int day;
+    private int hours;
+    private int minutes;
+    private int seconds;
+    private int miliseconds;
 	
 	public CustomDateType() {
 		
@@ -41,6 +41,71 @@ public class CustomDateType {
 		this.seconds = seconds;
 		this.miliseconds = miliseconds;
 	}
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public int getYear() {
+		return year;
+	}
+
+	public void setYear(int year) {
+		this.year = year;
+	}
+
+	public int getMonth() {
+		return month;
+	}
+
+	public void setMonth(int month) {
+		this.month = month;
+	}
+
+	public int getDay() {
+		return day;
+	}
+
+	public void setDay(int day) {
+		this.day = day;
+	}
+
+	public int getHours() {
+		return hours;
+	}
+
+	public void setHours(int hours) {
+		this.hours = hours;
+	}
+
+	public int getMinutes() {
+		return minutes;
+	}
+
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
+	}
+
+	public int getSeconds() {
+		return seconds;
+	}
+
+	public void setSeconds(int seconds) {
+		this.seconds = seconds;
+	}
+
+	public int getMiliseconds() {
+		return miliseconds;
+	}
+
+	public void setMiliseconds(int miliseconds) {
+		this.miliseconds = miliseconds;
+	}
+
 	
 	@Override
 	public String toString() {

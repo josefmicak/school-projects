@@ -62,12 +62,12 @@ public class PersonRepositoryJdbc implements PersonRepository {
 	   for(Person person : persons) {
 		   if(person.getDiscriminatorValue().equals("employee")) {
 			   Employee employee = (Employee) person;
-			   employee.deliveries = deliveryRepositoryJdbc.findEmployeeDeliveries(employee.id);
+			   employee.setDeliveries(deliveryRepositoryJdbc.findEmployeeDeliveries(employee.getId()));
 			   newPersons.add(employee);
 		   }
 		   else {
 			   Customer customer = (Customer) person;
-			   customer.deliveries = deliveryRepositoryJdbc.findCustomerDeliveries(customer.id);
+			   customer.setDeliveries(deliveryRepositoryJdbc.findCustomerDeliveries(customer.getId()));
 			   newPersons.add(customer);
 		   }
 	   }
@@ -87,8 +87,8 @@ public class PersonRepositoryJdbc implements PersonRepository {
 		
 		for(Person person : persons){
 			Employee employee = (Employee) person;
-			List<Delivery> deliveries = deliveryRepositoryJdbc.findEmployeeDeliveries(employee.id);
-			employee.deliveries = deliveries;
+			List<Delivery> deliveries = deliveryRepositoryJdbc.findEmployeeDeliveries(employee.getId());
+			employee.setDeliveries(deliveries);
 			newPersons.add(employee);
 		}
 		return newPersons;
@@ -101,8 +101,8 @@ public class PersonRepositoryJdbc implements PersonRepository {
 		
 		for(Person person : persons){
 			Customer customer = (Customer) person;
-			List<Delivery> deliveries = deliveryRepositoryJdbc.findCustomerDeliveries(customer.id);
-			customer.deliveries = deliveries;
+			List<Delivery> deliveries = deliveryRepositoryJdbc.findCustomerDeliveries(customer.getId());
+			customer.setDeliveries(deliveries);
 			newPersons.add(customer);
 		}
 		return newPersons;
@@ -122,7 +122,7 @@ public class PersonRepositoryJdbc implements PersonRepository {
 	
 	@Override
 	public boolean isUpdateLoginDuplicate(Person person) {
-		long personCountByLogin = findPersonCountByLogin(person.login);
+		long personCountByLogin = findPersonCountByLogin(person.getLogin());
 	   if(personCountByLogin == 0) {
 		   return false;
 	   }
@@ -130,8 +130,8 @@ public class PersonRepositoryJdbc implements PersonRepository {
 		   return true;
 	   }
 	   
-	   Person personByLogin = findByLogin(person.login);
-	   if(person.id != personByLogin.id) {
+	   Person personByLogin = findByLogin(person.getLogin());
+	   if(person.getId() != personByLogin.getId()) {
 		   return true;
 	   }
 	   else {
@@ -150,12 +150,12 @@ public class PersonRepositoryJdbc implements PersonRepository {
     	if(person.getDiscriminatorValue().equals("employee")) {
     		Employee employee = (Employee) person;
     		jdbcTemplate.update("INSERT INTO person (person_type, email, name, login, password, address, salary, is_approved) VALUES ('employee', ?, ?, ?, ?, NULL, ?, ?)", 
-    				employee.email, employee.name, employee.login, employee.password, employee.salary, employee.isApproved);
+    				employee.getEmail(), employee.getName(), employee.getLogin(), employee.getPassword(), employee.getSalary(), employee.getIsApproved());
     	}
     	else {
     		Customer customer = (Customer) person;
     		jdbcTemplate.update("INSERT INTO person (person_type, email, name, login, password, address, salary, is_approved) VALUES ('customer', ?, ?, ?, ?, ?, NULL, ?)",
-    				customer.email, customer.name, customer.login, customer.password, customer.address, customer.isApproved);
+    				customer.getEmail(), customer.getName(), customer.getLogin(), customer.getPassword(), customer.getAddress(), customer.getIsApproved());
     	}
     	
     }
@@ -165,17 +165,17 @@ public class PersonRepositoryJdbc implements PersonRepository {
     	if(person.getDiscriminatorValue().equals("employee")) {
     		Employee employee = (Employee) person;
     		jdbcTemplate.update("UPDATE person SET email = ?, name = ?, login = ?, salary = ?, is_approved = ? WHERE id = ?", 
-    				employee.email, employee.name, employee.login, employee.salary, employee.isApproved, employee.id);
+    				employee.getEmail(), employee.getName(), employee.getLogin(), employee.getSalary(), employee.getIsApproved(), employee.getId());
     	}
     	else {
     		Customer customer = (Customer) person;
     		jdbcTemplate.update("UPDATE person SET email = ?, name = ?, login = ?, address = ?, is_approved = ? WHERE id = ?", 
-    				customer.email, customer.name, customer.login, customer.address, customer.isApproved, customer.id);
+    				customer.getEmail(), customer.getName(), customer.getLogin(), customer.getAddress(), customer.getIsApproved(), customer.getId());
     	}
     }
     
 	@Override
     public void delete(Person person){
-    	jdbcTemplate.update("DELETE FROM person WHERE ID = ?", person.id);
+    	jdbcTemplate.update("DELETE FROM person WHERE ID = ?", person.getId());
     }
 }

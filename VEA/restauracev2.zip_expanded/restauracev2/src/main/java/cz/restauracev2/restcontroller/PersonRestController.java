@@ -33,33 +33,33 @@ public class PersonRestController {
     @PostMapping("/api/persons")
     ResponseEntity<String> addPerson(@RequestParam String personType, @RequestParam String salary,
     		@RequestParam String address, @RequestBody Person person){
-		long personCountByLogin = personService.findPersonCountByLogin(person.login);
+		long personCountByLogin = personService.findPersonCountByLogin(person.getLogin());
 		if(personCountByLogin > 0) {
 	        return ResponseEntity.badRequest()
-	                .body("Chyba: uživatele s loginem " + person.login + " nelze přidat."
+	                .body("Chyba: uživatele s loginem " + person.getLogin() + " nelze přidat."
 	                		+ " Již existuje jiný uživatel s tímto loginem.");
 		}
 		else {
 	    	Person newPerson;
 	    	if(personType.equals("employee")) {
 	        	Employee employee = new Employee();
-	        	employee.name = person.name;
-	        	employee.login = person.login;
-	        	employee.password = person.password;
-	        	employee.email = person.email;
-	        	employee.salary = Double.parseDouble(salary);
-	        	employee.isApproved = true;
+	        	employee.setName(person.getName());
+	        	employee.setLogin(person.getLogin());
+	        	employee.setPassword(person.getPassword());
+	        	employee.setEmail(person.getEmail());
+	        	employee.setSalary(Double.parseDouble(salary));
+	        	employee.setIsApproved(person.getIsApproved());
 	        	newPerson = employee;
 	        	personService.insert(newPerson);
 	    	}
 	    	else if (personType.equals("customer")){
 	        	Customer customer = new Customer();
-	        	customer.name = person.name;
-	        	customer.login = person.login;
-	        	customer.password = person.password;
-	        	customer.email = person.email;
-	        	customer.address = address;
-	        	customer.isApproved = true;
+	        	customer.setName(person.getName());
+	        	customer.setLogin(person.getLogin());
+	        	customer.setPassword(person.getPassword());
+	        	customer.setEmail(person.getEmail());
+	        	customer.setAddress(address);
+	        	customer.setIsApproved(person.getIsApproved());
 	        	newPerson = customer;
 	        	personService.insert(newPerson);
 	    	}
@@ -73,32 +73,32 @@ public class PersonRestController {
     		@RequestParam String address, @RequestBody Person person) {
 		if(personService.isUpdateLoginDuplicate(person)) {
 	        return ResponseEntity.badRequest()
-	                .body("Chyba: uživateli nelze nastavit login " + person.login + ". Již existuje jiný uživatel s tímto loginem.");
+	                .body("Chyba: uživateli nelze nastavit login " + person.getLogin() + ". Již existuje jiný uživatel s tímto loginem.");
 		}
 		else {
 	    	Person existingPerson = personService.findById(id);
 	    	String personType = existingPerson.getDiscriminatorValue();
 	    	if(personType.equals("employee")) {
 	        	Employee employee = new Employee();
-	        	employee.id = id;
-	        	employee.name = person.name;
-	        	employee.login = person.login;
-	        	employee.password = existingPerson.password;
-	        	employee.email = person.email;
-	        	employee.salary = Double.parseDouble(salary);
-	        	employee.isApproved = person.isApproved;
+	        	employee.setId(id);
+	        	employee.setName(person.getName());
+	        	employee.setLogin(person.getLogin());
+	        	employee.setPassword(existingPerson.getPassword());
+	        	employee.setEmail(person.getEmail());
+	        	employee.setSalary(Double.parseDouble(salary));
+	        	employee.setIsApproved(person.getIsApproved());
 	        	existingPerson = employee;
 	        	personService.update(existingPerson);
 	    	}
 	    	else if (personType.equals("customer")){
 	        	Customer customer = new Customer();
-	        	customer.id = id;
-	        	customer.name = person.name;
-	        	customer.login = person.login;
-	        	customer.password = existingPerson.password;
-	        	customer.email = person.email;
-	        	customer.address = address;
-	        	customer.isApproved = person.isApproved;
+	        	customer.setId(id);
+	        	customer.setName(person.getName());
+	        	customer.setLogin(person.getLogin());
+	        	customer.setPassword(existingPerson.getPassword());
+	        	customer.setEmail(person.getEmail());
+	        	customer.setAddress(address);
+	        	customer.setIsApproved(person.getIsApproved());
 	        	existingPerson = customer;
 	        	personService.update(existingPerson);
 	    	}

@@ -68,9 +68,9 @@ public class CarController {
         }
         
         Car existingCar = carService.findById(id);
-        existingCar.setName(car.name);
-        existingCar.setLicencePlate(car.licencePlate);
-        existingCar.setMileage(car.mileage);
+        existingCar.setName(car.getName());
+        existingCar.setLicencePlate(car.getLicencePlate());
+        existingCar.setMileage(car.getMileage());
         String message = "Auto s id " + id + " bylo úspěšně upraveno.";
         attributes.addFlashAttribute("message", message);
         carService.update(existingCar);
@@ -97,12 +97,12 @@ public class CarController {
 
     	//format date in view
     	int deliveriesCount = 0;
-    	for(Delivery delivery : car.deliveries) {
+    	for(Delivery delivery : car.getDeliveries()) {
     		deliveriesCount++;
 		}
     	String[] deliveriesCreationDates = new String[deliveriesCount];
     	int i = 0;
-    	for(Delivery delivery : car.deliveries) {
+    	for(Delivery delivery : car.getDeliveries()) {
     		deliveriesCreationDates[i] = delivery.creationDate.toString();
     		i++;
 		}

@@ -49,7 +49,7 @@ public class PersonController {
         String message;
         
         //check if person with this login already exists, don't add new person if true
-        long personCountByLogin = personService.findPersonCountByLogin(person.login);
+        long personCountByLogin = personService.findPersonCountByLogin(person.getLogin());
         if(personCountByLogin > 0) {
         	message = "Chyba: již existuje jiná osoba s tímto loginem.";
         }
@@ -57,22 +57,22 @@ public class PersonController {
             Person newPerson;
             if(personType.equals("employee")) {
             	Employee employee = new Employee();
-            	employee.name = person.name;
-            	employee.login = person.login;
-            	employee.password = person.password;
-            	employee.email = person.email;
-            	employee.salary = Double.parseDouble(salary);
-            	employee.isApproved = true;
+            	employee.setName(person.getName());
+            	employee.setLogin(person.getLogin());
+            	employee.setPassword(person.getPassword());
+            	employee.setEmail(person.getEmail());
+            	employee.setSalary(0);
+            	employee.setIsApproved(true);
             	newPerson = employee;
             }
             else {
             	Customer customer = new Customer();
-            	customer.name = person.name;
-            	customer.login = person.login;
-            	customer.password = person.password;
-            	customer.email = person.email;
-            	customer.address = address;
-            	customer.isApproved = true;
+            	customer.setName(person.getName());
+            	customer.setLogin(person.getLogin());
+            	customer.setPassword(person.getPassword());
+            	customer.setEmail(person.getEmail());
+            	customer.setAddress(address);
+            	customer.setIsApproved(true);
             	newPerson = customer;
             }
             
@@ -103,10 +103,10 @@ public class PersonController {
         boolean isDuplicateLogin = false;
         
         //check if person with this login already exists, don't edit person if true
-        long personCountByLogin = personService.findPersonCountByLogin(person.login);
+        long personCountByLogin = personService.findPersonCountByLogin(person.getLogin());
         if(personCountByLogin > 0) {
-        	Person personByLogin = personService.findByLogin(person.login);
-        	if(personByLogin.id != person.id) {
+        	Person personByLogin = personService.findByLogin(person.getLogin());
+        	if(personByLogin.getId() != person.getId()) {
         		isDuplicateLogin = true;
         	}	
         }
@@ -115,24 +115,24 @@ public class PersonController {
             Person existingPerson;
             if(personType.equals("employee")) {
             	Employee employee = new Employee();
-            	employee.id = person.id;
-            	employee.name = person.name;
-            	employee.login = person.login;
-            	employee.password = person.password;
-            	employee.email = person.email;
-            	employee.salary = Double.parseDouble(salary);
-            	employee.isApproved = true;
+            	employee.setId(person.getId());
+            	employee.setName(person.getName());
+            	employee.setLogin(person.getLogin());
+            	employee.setPassword(person.getPassword());
+            	employee.setEmail(person.getEmail());
+            	employee.setSalary(Double.parseDouble(salary));
+            	employee.setIsApproved(true);
             	existingPerson = employee;
             }
             else {
             	Customer customer = new Customer();
-            	customer.id = id;
-            	customer.name = person.name;
-            	customer.login = person.login;
-            	customer.password = person.password;
-            	customer.email = person.email;
-            	customer.address = address;
-            	customer.isApproved = true;
+            	customer.setId(person.getId());
+            	customer.setName(person.getName());
+            	customer.setLogin(person.getLogin());
+            	customer.setPassword(person.getPassword());
+            	customer.setEmail(person.getEmail());
+            	customer.setAddress(address);
+            	customer.setIsApproved(true);
             	existingPerson = customer;
             }
             message = "Osoba s id " + id + " byla úspěšně upravena.";
@@ -182,7 +182,7 @@ public class PersonController {
         }
         
         Person existingPerson = personService.findById(id);
-        existingPerson.isApproved = true;
+        existingPerson.setIsApproved(true);
         String message = "Registrace osoby s id " + id + " byla úspěšně schválena.";
         personService.update(existingPerson);
         attributes.addFlashAttribute("message", message);

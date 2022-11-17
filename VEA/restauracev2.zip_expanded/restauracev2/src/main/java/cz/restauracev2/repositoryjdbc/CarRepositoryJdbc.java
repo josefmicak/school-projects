@@ -50,8 +50,8 @@ public class CarRepositoryJdbc implements CarRepository {
 	public List<Car> findAll() {
 		List<Car> cars = jdbcTemplate.query("SELECT * FROM car", new CarMapper());
 		for(Car car : cars){
-			List<Delivery> deliveries = deliveryRepositoryJdbc.findCarDeliveries(car.id);
-			car.deliveries = deliveries;
+			List<Delivery> deliveries = deliveryRepositoryJdbc.findCarDeliveries(car.getId());
+			car.setDeliveries(deliveries);
 		}
 		return cars;
     }
@@ -60,22 +60,22 @@ public class CarRepositoryJdbc implements CarRepository {
 	public Car findById(long id) {
 		Car car = jdbcTemplate.queryForObject("SELECT * FROM car WHERE id = ?", new CarMapper(), id);
 		List<Delivery> deliveries = deliveryRepositoryJdbc.findCarDeliveries(id);
-		car.deliveries = deliveries;
+		car.setDeliveries(deliveries);
 		return car;
 	}
 	
 	@Override
     public void insert(Car car){
-		jdbcTemplate.update("INSERT INTO car (name, licence_plate, mileage) VALUES (?, ?, ?)", car.name, car.licencePlate, car.mileage);	
+		jdbcTemplate.update("INSERT INTO car (name, licence_plate, mileage) VALUES (?, ?, ?)", car.getName(), car.getLicencePlate(), car.getMileage());	
     }
     
 	@Override
     public void update(Car car){
-		jdbcTemplate.update("UPDATE car SET name = ?, licence_plate = ?, mileage = ? WHERE id = ?", car.name, car.licencePlate, car.mileage, car.id);	
+		jdbcTemplate.update("UPDATE car SET name = ?, licence_plate = ?, mileage = ? WHERE id = ?", car.getName(), car.getLicencePlate(), car.getMileage(), car.getId());	
     }
     
 	@Override
     public void delete(Car car){
-    	jdbcTemplate.update("DELETE FROM car WHERE ID = ?", car.id);
+    	jdbcTemplate.update("DELETE FROM car WHERE ID = ?", car.getId());
     }
 }

@@ -53,12 +53,12 @@ public class CustomerController {
         String message;
         
         //check if person with this login already exists, don't add new customer if true
-        long personCountByLogin = personService.findPersonCountByLogin(customer.login);
+        long personCountByLogin = personService.findPersonCountByLogin(customer.getLogin());
         if(personCountByLogin > 0) {
         	message = "Chyba: již existuje jiná osoba s tímto loginem.";
         }
         else {
-        	customer.isApproved = true;
+        	customer.setIsApproved(true);
             personService.insert(customer);
             message = "Zákazník byl úspěšně přidán.";
         }
@@ -87,21 +87,21 @@ public class CustomerController {
         boolean isDuplicateLogin = false;
         
       //check if person with this login already exists, don't edit customer if true
-        long personCountByLogin = personService.findPersonCountByLogin(customer.login);
+        long personCountByLogin = personService.findPersonCountByLogin(customer.getLogin());
         if(personCountByLogin > 0) {
-        	Person personByLogin = personService.findByLogin(customer.login);
-        	if(personByLogin.id != customer.id) {
+        	Person personByLogin = personService.findByLogin(customer.getLogin());
+        	if(personByLogin.getId() != customer.getId()) {
         		isDuplicateLogin = true;
         	}	
         }
         
         if(!isDuplicateLogin) {
             Customer existingCustomer = (Customer) personService.findById(id);
-            existingCustomer.setName(customer.name);
-            existingCustomer.setLogin(customer.login);
-            existingCustomer.setPassword(customer.password);
-            existingCustomer.setEmail(customer.email);
-            existingCustomer.setAddress(customer.address);
+            existingCustomer.setName(customer.getName());
+            existingCustomer.setLogin(customer.getLogin());
+            existingCustomer.setPassword(customer.getPassword());
+            existingCustomer.setEmail(customer.getEmail());
+            existingCustomer.setAddress(customer.getAddress());
             existingCustomer.setIsApproved(true);
             message = "Zákazník s id " + id + " byl úspěšně upraven.";
             personService.update(existingCustomer);
@@ -141,12 +141,12 @@ public class CustomerController {
 
     	//format date in view
     	int deliveriesCount = 0;
-    	for(Delivery delivery : customer.deliveries) {
+    	for(Delivery delivery : customer.getDeliveries()) {
     		deliveriesCount++;
 		}
     	String[] deliveriesCreationDates = new String[deliveriesCount];
     	int i = 0;
-    	for(Delivery delivery : customer.deliveries) {
+    	for(Delivery delivery : customer.getDeliveries()) {
     		deliveriesCreationDates[i] = delivery.creationDate.toString();
     		i++;
 		}

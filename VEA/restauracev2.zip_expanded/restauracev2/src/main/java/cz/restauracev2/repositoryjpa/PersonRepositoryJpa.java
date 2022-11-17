@@ -64,7 +64,7 @@ public class PersonRepositoryJpa implements PersonRepository {
    }
    
    public boolean isUpdateLoginDuplicate(Person person) {
-	   long personCountByLogin = findPersonCountByLogin(person.login);
+	   long personCountByLogin = findPersonCountByLogin(person.getLogin());
 	   if(personCountByLogin == 0) {
 		   return false;
 	   }
@@ -74,8 +74,8 @@ public class PersonRepositoryJpa implements PersonRepository {
 	   
 	   Person personByLogin = entityManager.createQuery(
 			   "SELECT p FROM Person p WHERE p.login = :login", Person.class).
-				  setParameter("login", person.login).getSingleResult();
-	   if(person.id != personByLogin.id) {
+				  setParameter("login", person.getLogin()).getSingleResult();
+	   if(person.getId() != personByLogin.getId()) {
 		   return true;
 	   }
 	   else {

@@ -45,15 +45,15 @@ public class DeliveryRestController {
     
     @PutMapping("/api/deliveries/{id}")
     ResponseEntity<String> updateDelivery(@RequestBody Delivery delivery, @PathVariable Long id){	
-        Employee employee = (Employee) personService.findById(Long.valueOf(delivery.employee.id));
-        Customer customer = (Customer) personService.findById(Long.valueOf(delivery.customer.id));
-        Car car = carService.findById(Long.valueOf(delivery.car.id));
+        Employee employee = (Employee) personService.findById(Long.valueOf(delivery.getEmployee().getId()));
+        Customer customer = (Customer) personService.findById(Long.valueOf(delivery.getCustomer().getId()));
+        Car car = carService.findById(Long.valueOf(delivery.getCar().getId()));
     	
         Delivery existingDelivery = deliveryService.findById(id);
         //existingDelivery.id = id;
-        existingDelivery.employee = employee;
-        existingDelivery.customer = customer;
-        existingDelivery.car = car;
+        existingDelivery.setEmployee(employee);
+        existingDelivery.setCustomer(customer);
+        existingDelivery.setCar(car);
         //existingDelivery.creationDate = existingDeliveryCreationDate;
         existingDelivery.price = delivery.price;
         deliveryService.update(existingDelivery);

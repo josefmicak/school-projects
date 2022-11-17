@@ -64,14 +64,14 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 			long customDateTypeId = delivery.creationDate.getCustomDateTypeId();
 			delivery.creationDate = customDateTypeRepositoryJdbc.findByDeliveryId(customDateTypeId);
 			
-			long employeeId = delivery.employee.id;
-			delivery.employee = findByEmployeeId(employeeId);
+			long employeeId = delivery.getEmployee().getId();
+			delivery.setEmployee(findByEmployeeId(employeeId));
 			
-			long customerId = delivery.customer.id;
-			delivery.customer = findByCustomerId(customerId);
+			long customerId = delivery.getCustomer().getId();
+			delivery.setCustomer(findByCustomerId(customerId));
 			
-			long carId = delivery.car.id;
-			delivery.car = findByCarId(carId);
+			long carId = delivery.getCar().getId();
+			delivery.setCar(findByCarId(carId));
 		}
 		return deliveries;
     }
@@ -131,13 +131,13 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 		List<Delivery> deliveries = jdbcTemplate.query("SELECT * FROM delivery WHERE employee = ?", new DeliveryMapper(), employeeId);
 		for(Delivery delivery : deliveries) {
 			
-			Customer customer = findCustomerId(delivery.id);
-			delivery.customer = customer;
+			Customer customer = findCustomerId(delivery.getId());
+			delivery.setCustomer(customer);
 			
-			Car car = findCarId(delivery.id);
-			delivery.car = car;
+			Car car = findCarId(delivery.getId());
+			delivery.setCar(car);
 			
-			CustomDateType customDateType = findCustomDateType(delivery.id);
+			CustomDateType customDateType = findCustomDateType(delivery.getId());
 			delivery.creationDate = customDateType;
 		}
 		return deliveries;
@@ -147,13 +147,13 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 		List<Delivery> deliveries = jdbcTemplate.query("SELECT * FROM delivery WHERE customer = ?", new DeliveryMapper(), customerId);
 		for(Delivery delivery : deliveries) {
 			
-			Employee employee = findEmployeeId(delivery.id);
-			delivery.employee = employee;
+			Employee employee = findEmployeeId(delivery.getId());
+			delivery.setEmployee(employee);
 			
-			Car car = findCarId(delivery.id);
-			delivery.car = car;
+			Car car = findCarId(delivery.getId());
+			delivery.setCar(car);
 			
-			CustomDateType customDateType = findCustomDateType(delivery.id);
+			CustomDateType customDateType = findCustomDateType(delivery.getId());
 			delivery.creationDate = customDateType;
 		}
 		return deliveries;
@@ -170,13 +170,13 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 		List<Delivery> deliveries = jdbcTemplate.query(query, new DeliveryMapper(), personId);
 		for(Delivery delivery : deliveries) {
 			
-			Employee employee = findEmployeeId(delivery.id);
-			delivery.employee = employee;
+			Employee employee = findEmployeeId(delivery.getId());
+			delivery.setEmployee(employee);
 			
-			Car car = findCarId(delivery.id);
-			delivery.car = car;
+			Car car = findCarId(delivery.getId());
+			delivery.setCar(car);
 			
-			CustomDateType customDateType = findCustomDateType(delivery.id);
+			CustomDateType customDateType = findCustomDateType(delivery.getId());
 			delivery.creationDate = customDateType;
 		}
 		return deliveries;
@@ -186,13 +186,13 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
 		List<Delivery> deliveries = jdbcTemplate.query("SELECT * FROM delivery WHERE car = ?", new DeliveryMapper(), carId);
 		for(Delivery delivery : deliveries) {
 			
-			Employee employee = findEmployeeId(delivery.id);
-			delivery.employee = employee;
+			Employee employee = findEmployeeId(delivery.getId());
+			delivery.setEmployee(employee);
 			
-			Customer customer = findCustomerId(delivery.id);
-			delivery.customer = customer;
+			Customer customer = findCustomerId(delivery.getId());
+			delivery.setCustomer(customer);
 			
-			CustomDateType customDateType = findCustomDateType(delivery.id);
+			CustomDateType customDateType = findCustomDateType(delivery.getId());
 			delivery.creationDate = customDateType;
 		}
 		return deliveries;
@@ -205,21 +205,21 @@ public class DeliveryRepositoryJdbc implements DeliveryRepository {
         delivery.creationDate = customDateTypeInserted;
         
 	    jdbcTemplate.update("INSERT INTO delivery (employee, customer, car, creation_date, price) VALUES (?, ?, ?, ?, ?)", 
-	    		delivery.employee.id, delivery.customer.id, delivery.car.id, delivery.creationDate.getCustomDateTypeId(), delivery.price);
+	    		delivery.getEmployee().getId(), delivery.getCustomer().getId(), delivery.getCar().getId(), delivery.creationDate.getCustomDateTypeId(), delivery.price);
     }
     
     @Override
     @Transactional
     public void update(Delivery delivery){
     	jdbcTemplate.update("UPDATE delivery SET price = ?, customer = ?, employee = ?, car = ? WHERE id = ?", 
-    			delivery.price, delivery.customer.id, delivery.employee.id, delivery.car.id, delivery.id);
+    			delivery.price, delivery.getCustomer().getId(), delivery.getEmployee().getId(), delivery.getCar().getId(), delivery.getId());
     }
     
     @Override
     @Transactional
     public void delete(Delivery delivery){
-    	CustomDateType customDateType = findCustomDateType(delivery.id);
-	    jdbcTemplate.update("DELETE FROM delivery WHERE id = ?", delivery.id);
+    	CustomDateType customDateType = findCustomDateType(delivery.getId());
+	    jdbcTemplate.update("DELETE FROM delivery WHERE id = ?", delivery.getId());
 	    
 	    //in case we are using JDBC, this now redundant data doesn't get removed automatically
 	    jdbcTemplate.update("DELETE FROM custom_date_type WHERE id = ?", customDateType.getCustomDateTypeId());

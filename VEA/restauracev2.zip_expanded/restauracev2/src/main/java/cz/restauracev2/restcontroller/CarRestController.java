@@ -37,9 +37,9 @@ public class CarRestController {
     @PutMapping("/api/cars/{id}")
     ResponseEntity<String> updateCar(@RequestBody Car car, @PathVariable Long id){	
         Car existingCar = carService.findById(id);
-        existingCar.setName(car.name);
-        existingCar.setLicencePlate(car.licencePlate);
-        existingCar.setMileage(car.mileage);
+        existingCar.setName(car.getName());
+        existingCar.setLicencePlate(car.getLicencePlate());
+        existingCar.setMileage(car.getMileage());
     	carService.update(existingCar);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Auto bylo úspěšně upraveno.");

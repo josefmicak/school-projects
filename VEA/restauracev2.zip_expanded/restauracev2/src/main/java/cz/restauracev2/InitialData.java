@@ -34,7 +34,7 @@ public class InitialData {
 	@EventListener(ApplicationReadyEvent.class)
 	@Transactional
 	public void afterStartUp() {
-		//addInitialData();
+		addInitialData();
 	}
 	
 	public void addInitialData() {

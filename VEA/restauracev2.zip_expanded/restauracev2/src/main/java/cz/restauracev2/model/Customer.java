@@ -13,36 +13,43 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @DiscriminatorValue("customer")
 public class Customer extends Person{
-	public String address;
+	private String address;
 	
 	@JsonIgnore
 	@OneToMany (mappedBy="customer", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
-    public List<Delivery> deliveries; 
+    private List<Delivery> deliveries; 
 	
-    public Customer() {  	
+	public Customer() {  	
     }
 	
     public Customer(String name, String email, String login, String password, boolean isApproved, String address) {
 		super();
-		this.name = name;
-		this.email = email;
-		this.login = login;
-		this.password = password;
-		this.isApproved = isApproved;
+		this.setName(name);
+		this.setEmail(email);
+		this.setLogin(login);
+		this.setPassword(password);
+		this.setIsApproved(isApproved);
 		this.address = address;
 	}
     
     public String getAddress() {
         return address;
     }
+    
     public void setAddress(String address) {
         this.address = address;
     }
     
+    public List<Delivery> getDeliveries() {
+		return deliveries;
+	}
+
+	public void setDeliveries(List<Delivery> deliveries) {
+		this.deliveries = deliveries;
+	}
+
     @Override
     public String toString() {
-        return "Customer: ID = " + id + ", name = " + name + ", email: " + email + ", address: " + address + ", is approved = " + isApproved;
-    }
-    
-    
+        return "Customer: ID = " + getId() + ", name = " + getName() + ", email: " + getEmail() + ", address: " + getAddress() + ", is approved = " + getIsApproved();
+    }  
 }

@@ -51,12 +51,12 @@ public class EmployeeController {
         String message;
         
         //check if person with this login already exists, don't add new employee if true
-        long personCountByLogin = personService.findPersonCountByLogin(employee.login);
+        long personCountByLogin = personService.findPersonCountByLogin(employee.getLogin());
         if(personCountByLogin > 0) {
         	message = "Chyba: již existuje jiná osoba s tímto loginem.";
         }
         else {
-        	employee.isApproved = true;
+        	employee.setIsApproved(true);
             personService.insert(employee);
             message = "Zaměstnanec byl úspěšně přidán.";
         }
@@ -85,21 +85,21 @@ public class EmployeeController {
         boolean isDuplicateLogin = false;
         
         //check if person with this login already exists, don't edit employee if true
-        long personCountByLogin = personService.findPersonCountByLogin(employee.login);
+        long personCountByLogin = personService.findPersonCountByLogin(employee.getLogin());
         if(personCountByLogin > 0) {
-        	Person personByLogin = personService.findByLogin(employee.login);
-        	if(personByLogin.id != employee.id) {
+        	Person personByLogin = personService.findByLogin(employee.getLogin());
+        	if(personByLogin.getId() != employee.getId()) {
         		isDuplicateLogin = true;
         	}	
         }
         
         if(!isDuplicateLogin) {
             Employee existingEmployee = (Employee) personService.findById(id);
-            existingEmployee.setName(employee.name);
-            existingEmployee.setLogin(employee.login);
-            existingEmployee.setPassword(employee.password);
-            existingEmployee.setEmail(employee.email);
-            existingEmployee.setSalary(employee.salary);
+            existingEmployee.setName(employee.getName());
+            existingEmployee.setLogin(employee.getLogin());
+            existingEmployee.setPassword(employee.getPassword());
+            existingEmployee.setEmail(employee.getEmail());
+            existingEmployee.setSalary(employee.getSalary());
             existingEmployee.setIsApproved(true);
             message = "Zaměstnanec s id " + id + " byl úspěšně upraven.";
             personService.update(existingEmployee);
@@ -132,12 +132,12 @@ public class EmployeeController {
 
     	//format date in view
     	int deliveriesCount = 0;
-    	for(Delivery delivery : employee.deliveries) {
+    	for(Delivery delivery : employee.getDeliveries()) {
     		deliveriesCount++;
 		}
     	String[] deliveriesCreationDates = new String[deliveriesCount];
     	int i = 0;
-    	for(Delivery delivery : employee.deliveries) {
+    	for(Delivery delivery : employee.getDeliveries()) {
     		deliveriesCreationDates[i] = delivery.creationDate.toString();
     		i++;
 		}
