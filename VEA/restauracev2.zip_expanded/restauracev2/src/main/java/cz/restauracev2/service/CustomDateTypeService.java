@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import cz.restauracev2.logging.Log;
 import cz.restauracev2.model.CustomDateType;
 import cz.restauracev2.repository.CustomDateTypeRepository;
-import cz.restauracev2.repository.CustomDateTypeRepositoryJdbc;
-import cz.restauracev2.repository.CustomDateTypeRepositoryJpa;
+import cz.restauracev2.repositoryjdbc.CustomDateTypeRepositoryJdbc;
+import cz.restauracev2.repositoryjpa.CustomDateTypeRepositoryJpa;
 
 @Service
 public class CustomDateTypeService {

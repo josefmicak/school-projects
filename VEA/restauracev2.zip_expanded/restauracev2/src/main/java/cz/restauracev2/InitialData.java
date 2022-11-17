@@ -1,6 +1,5 @@
 package cz.restauracev2;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +12,10 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.convert.ConversionService;
 
 import cz.restauracev2.model.Car;
-import cz.restauracev2.model.CustomDateType;
 import cz.restauracev2.model.Customer;
 import cz.restauracev2.model.Delivery;
 import cz.restauracev2.model.Employee;
 import cz.restauracev2.service.CarService;
-import cz.restauracev2.service.CustomDateTypeService;
 import cz.restauracev2.service.DeliveryService;
 import cz.restauracev2.service.PersonService;
 
@@ -30,8 +27,6 @@ public class InitialData {
 	@Autowired
 	private PersonService personService;
 	@Autowired
-	private CustomDateTypeService customDateTypeService;
-	@Autowired
 	private DeliveryService deliveryService;
 	@Autowired
 	ConversionService conversionService;
@@ -39,7 +34,7 @@ public class InitialData {
 	@EventListener(ApplicationReadyEvent.class)
 	@Transactional
 	public void afterStartUp() {
-		addInitialData();
+		//addInitialData();
 	}
 	
 	public void addInitialData() {

@@ -13,22 +13,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import cz.restauracev2.model.Car;
 import cz.restauracev2.model.Employee;
-import cz.restauracev2.service.EmployeeService;
+import cz.restauracev2.model.Person;
 import cz.restauracev2.service.PersonService;
 
 @RestController
 public class EmployeeRestController {
 	
 	@Autowired
-	private EmployeeService employeeService;
-	@Autowired
 	private PersonService personService;
 	
     @GetMapping("/api/employees")
-    List<Employee> showEmployeeList(){
-    	return employeeService.findAll();
+    List<Person> showEmployeeList(){
+    	return personService.findAllEmployees();
     }
     
     @PostMapping("/api/employees")
@@ -53,7 +50,7 @@ public class EmployeeRestController {
 	                .body("Chyba: uživateli nelze nastavit login " + employee.login + ". Již existuje jiný uživatel s tímto loginem.");
 		}
 		else {
-	        Employee existingEmployee = employeeService.findById(id);
+	        Employee existingEmployee = (Employee) personService.findById(id);
 	        existingEmployee.setName(employee.name);
 	        existingEmployee.setLogin(employee.login);
 	        //existingEmployee.setPassword(employee.password);
@@ -68,8 +65,8 @@ public class EmployeeRestController {
     
     @DeleteMapping("/api/employees/{id}")
     ResponseEntity<String> deleteEmployee(@PathVariable Long id){
-    	Employee employee = employeeService.findById(id);
-    	employeeService.delete(employee);
+    	Employee employee = (Employee) personService.findById(id);
+    	personService.delete(employee);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Zaměstnanec byl úspěšně smazán.");
     }

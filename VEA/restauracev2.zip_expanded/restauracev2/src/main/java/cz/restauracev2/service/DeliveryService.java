@@ -12,8 +12,8 @@ import cz.restauracev2.logging.Log;
 import cz.restauracev2.model.CustomDateType;
 import cz.restauracev2.model.Delivery;
 import cz.restauracev2.repository.DeliveryRepository;
-import cz.restauracev2.repository.DeliveryRepositoryJdbc;
-import cz.restauracev2.repository.DeliveryRepositoryJpa;
+import cz.restauracev2.repositoryjdbc.DeliveryRepositoryJdbc;
+import cz.restauracev2.repositoryjpa.DeliveryRepositoryJpa;
 
 @Service
 public class DeliveryService {
@@ -51,12 +51,12 @@ public class DeliveryService {
 	
 	@Log
 	List<Delivery> findEmployeeDeliveries(long employeeId){
-		return deliveryRepository.findEmployeeDeliveries(employeeId);
+		return deliveryRepositoryJdbc.findEmployeeDeliveries(employeeId);
 	}
 	
 	@Log
 	List<Delivery> findCustomerDeliveries(long customerId){
-		return deliveryRepository.findCustomerDeliveries(customerId);
+		return deliveryRepositoryJdbc.findCustomerDeliveries(customerId);
 	}
 	
 	@Log
@@ -85,16 +85,16 @@ public class DeliveryService {
 
 	@Log
 	public void deleteByCustomerId(long customerId) {
-		deliveryRepository.deleteByCustomerId(customerId);
+		deliveryRepositoryJdbc.deleteByCustomerId(customerId);
 	}
 	
 	@Log
 	public void deleteByEmployeeId(long employeeId) {
-		deliveryRepository.deleteByEmployeeId(employeeId);
+		deliveryRepositoryJdbc.deleteByEmployeeId(employeeId);
 	}
 	
 	@Log
 	public void deleteByCarId(long carId) {
-		deliveryRepository.deleteByCarId(carId);
+		deliveryRepositoryJdbc.deleteByCarId(carId);
 	}
 }

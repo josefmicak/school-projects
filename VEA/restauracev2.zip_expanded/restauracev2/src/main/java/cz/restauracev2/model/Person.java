@@ -12,10 +12,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Transient;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import cz.restauracev2.security.Encoder;
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="person_type", 
@@ -35,15 +31,6 @@ public class Person {
     public String password;
     
     public boolean isApproved;
-    
-/*    public Person(String name, String email, String login, String password, boolean isApproved) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.login = login;
-		this.password = password;
-		this.isApproved = isApproved;
-	}*/
     
     public long getId() {
         return id;
@@ -90,7 +77,6 @@ public class Person {
     @Transient
     public String getDiscriminatorValue(){
         DiscriminatorValue val = this.getClass().getAnnotation( DiscriminatorValue.class );
-
         return val == null ? null : val.value();
     }
     

@@ -1,12 +1,9 @@
 package cz.restauracev2.controller;
 
-import java.time.LocalDateTime;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.convert.ConversionService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,11 +18,11 @@ import cz.restauracev2.model.CustomDateType;
 import cz.restauracev2.model.Customer;
 import cz.restauracev2.model.Delivery;
 import cz.restauracev2.model.Employee;
+import cz.restauracev2.model.Person;
 import cz.restauracev2.service.CarService;
 import cz.restauracev2.service.CustomDateTypeService;
-import cz.restauracev2.service.CustomerService;
 import cz.restauracev2.service.DeliveryService;
-import cz.restauracev2.service.EmployeeService;
+import cz.restauracev2.service.PersonService;
 
 @Controller
 public class DeliveryController {	
@@ -33,15 +30,11 @@ public class DeliveryController {
 	@Autowired
 	private DeliveryService deliveryService;
 	@Autowired
-	private EmployeeService employeeService;
-	@Autowired
-	private CustomerService customerService;
+	private PersonService personService;
 	@Autowired
 	private CarService carService;
 	@Autowired
 	private CustomDateTypeService customDateTypeService;
-	/*@Autowired
-	ConversionService conversionService;*/
 	@Value("${customdatasource}")
 	private String customDataSource;
 	
@@ -56,13 +49,8 @@ public class DeliveryController {
     	String[] deliveriesCreationDates = new String[deliveriesCount];
     	int i = 0;
     	for(Delivery delivery : deliveries) {
-    		//CustomDateType customDateType = conversionService.convert(String.valueOf(delivery.creationDate), CustomDateType.class);
-    		//long creationDateId = delivery.creationDate.getCustomDateTypeId();
-    		//System.out.println("new: " + creationDateId);
     		CustomDateType customDateType = customDateTypeService.findById(delivery.creationDate.getCustomDateTypeId());
     		deliveriesCreationDates[i] = customDateType.toString();
-    		//deliveriesCreationDates[i] = delivery.creationDate.toString();
-    		//deliveriesCreationDates[i] = delivery.creationDate.format(myFormatObj);
     		i++;
 		}
     	model.addAttribute("deliveriesCreationDates", deliveriesCreationDates);
@@ -74,14 +62,14 @@ public class DeliveryController {
     @GetMapping("/deliveries/add")
     public String showAddForm(Model model, Delivery delivery, RedirectAttributes attributes) {
     	//to add a delivery, there has to be at least one employee, one customer and one car
-    	Iterable<Employee> employees = employeeService.findAll();
+    	Iterable<Person> employees = personService.findAllEmployees();
     	int employeesCount = 0;
-    	for(Employee employee : employees) {
+    	for(Person employee : employees) {
     		employeesCount++;
 		}
-    	Iterable<Customer> customers = customerService.findAll();
+    	Iterable<Person> customers = personService.findAllCustomers();
     	int customersCount = 0;
-    	for(Customer customer : customers) {
+    	for(Person customer : customers) {
     		customersCount++;
 		}
     	Iterable<Car> cars = carService.findAll();
@@ -107,8 +95,8 @@ public class DeliveryController {
         	System.out.println("error ");
             return "add-delivery";
         }
-        Employee employee = employeeService.findById(Long.valueOf(employeeId));
-        Customer customer = customerService.findById(Long.valueOf(customerId));
+        Employee employee = (Employee)personService.findById(Long.valueOf(employeeId));
+        Customer customer = (Customer)personService.findById(Long.valueOf(customerId));
         Car car = carService.findById(Long.valueOf(carId));
         
         delivery.employee = employee;
@@ -125,8 +113,8 @@ public class DeliveryController {
     	Delivery delivery = deliveryService.findById(id);
         
         model.addAttribute("delivery", delivery);
-    	model.addAttribute("employees", employeeService.findAll());
-    	model.addAttribute("customers", customerService.findAll());
+    	model.addAttribute("employees", personService.findAllEmployees());
+    	model.addAttribute("customers", personService.findAllCustomers());
     	model.addAttribute("cars", carService.findAll());
         return "update-delivery";
     }
@@ -135,17 +123,14 @@ public class DeliveryController {
     public String updateDelivery(@PathVariable("id") long id, @Valid Delivery delivery, 
       BindingResult result, Model model, RedirectAttributes attributes,
       	String employeeId, String customerId, String carId, double price) {
-        Employee employee = employeeService.findById(Long.valueOf(employeeId));
-        Customer customer = customerService.findById(Long.valueOf(customerId));
+        Employee employee = (Employee)personService.findById(Long.valueOf(employeeId));
+        Customer customer = (Customer)personService.findById(Long.valueOf(customerId));
         Car car = carService.findById(Long.valueOf(carId));
         
         Delivery existingDelivery = deliveryService.findById(id);
-        CustomDateType existingDeliveryCreationDate = existingDelivery.getCreationDate();
-        existingDelivery.id = id;
         existingDelivery.employee = employee;
         existingDelivery.customer = customer;
         existingDelivery.car = car;
-        existingDelivery.creationDate = existingDeliveryCreationDate;//TODO: odebrat?
         existingDelivery.price = price;
         String message = "Objednávka s id " + id + " byla úspěšně upravena.";
         attributes.addFlashAttribute("message", message);

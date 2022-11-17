@@ -19,8 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import cz.restauracev2.model.Customer;
 import cz.restauracev2.model.Delivery;
 import cz.restauracev2.model.Person;
-import cz.restauracev2.security.Encoder;
-import cz.restauracev2.service.CustomerService;
 import cz.restauracev2.service.DeliveryService;
 import cz.restauracev2.service.PersonService;
 
@@ -28,19 +26,15 @@ import cz.restauracev2.service.PersonService;
 public class CustomerController {	
 	
 	@Autowired
-	private CustomerService customerService;
-	@Autowired
 	private DeliveryService deliveryService;
 	@Autowired
 	private PersonService personService;
-	@Autowired
-	private Encoder encoder;
 	@Value("${customdatasource}")
 	private String customDataSource;
 	
     @GetMapping("/customers")
     public String showCustomerList(Model model, @ModelAttribute("message") String message) {
-    	model.addAttribute("customers", customerService.findAll());
+    	model.addAttribute("customers", personService.findAllCustomers());
     	model.addAttribute("message", message);
         return "customers";
     }
@@ -65,7 +59,7 @@ public class CustomerController {
         }
         else {
         	customer.isApproved = true;
-            customerService.insert(customer);
+            personService.insert(customer);
             message = "Zákazník byl úspěšně přidán.";
         }
 
@@ -75,7 +69,7 @@ public class CustomerController {
     
     @GetMapping("/customers/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
-    	Customer customer = customerService.findById(id);
+    	Customer customer = (Customer) personService.findById(id);
         
         model.addAttribute("customer", customer);
         return "update-customer";
@@ -102,7 +96,7 @@ public class CustomerController {
         }
         
         if(!isDuplicateLogin) {
-            Customer existingCustomer = customerService.findById(id);
+            Customer existingCustomer = (Customer) personService.findById(id);
             existingCustomer.setName(customer.name);
             existingCustomer.setLogin(customer.login);
             existingCustomer.setPassword(customer.password);
@@ -110,7 +104,7 @@ public class CustomerController {
             existingCustomer.setAddress(customer.address);
             existingCustomer.setIsApproved(true);
             message = "Zákazník s id " + id + " byl úspěšně upraven.";
-            customerService.update(existingCustomer);
+            personService.update(existingCustomer);
         }
         else {
         	message = "Chyba: již existuje jiná osoba s tímto loginem.";
@@ -122,7 +116,7 @@ public class CustomerController {
         
     @GetMapping("/customers/delete/{id}")
     public String deleteCustomer(@PathVariable("id") long id, Model model, RedirectAttributes attributes) {
-    	Customer customer = customerService.findById(id);
+    	Customer customer = (Customer) personService.findById(id);
         String message = "Zákazník s id " + id + " byl úspěšně smazán.";
         attributes.addFlashAttribute("message", message);
         
@@ -130,7 +124,7 @@ public class CustomerController {
         if(customDataSource.equals("jdbc")) {
         	deliveryService.deleteByCustomerId(id);
         }
-    	customerService.delete(customer);
+    	personService.delete(customer);
         return "redirect:/customers";
     }
     
@@ -143,7 +137,7 @@ public class CustomerController {
     	Person personByLogin = personService.findByLogin(currentUserUsername);
     	model.addAttribute("currentUser", personByLogin.getDiscriminatorValue());
     	
-    	Customer customer = customerService.findById(id);
+    	Customer customer = (Customer) personService.findById(id);
 
     	//format date in view
     	int deliveriesCount = 0;

@@ -10,8 +10,8 @@ import cz.restauracev2.logging.Log;
 
 import cz.restauracev2.model.Person;
 import cz.restauracev2.repository.PersonRepository;
-import cz.restauracev2.repository.PersonRepositoryJdbc;
-import cz.restauracev2.repository.PersonRepositoryJpa;
+import cz.restauracev2.repositoryjdbc.PersonRepositoryJdbc;
+import cz.restauracev2.repositoryjpa.PersonRepositoryJpa;
 import cz.restauracev2.security.Encoder;
 
 @Service
@@ -50,6 +50,16 @@ public class PersonService {
 	@Log
 	public List<Person> findAllRegistrations() {
 		return personRepository.findAllRegistrations();
+	}
+	
+	@Log
+	public List<Person> findAllEmployees() {
+		return personRepository.findAllEmployees();
+	}
+	
+	@Log
+	public List<Person> findAllCustomers() {
+		return personRepository.findAllCustomers();
 	}
 	
 	@Log

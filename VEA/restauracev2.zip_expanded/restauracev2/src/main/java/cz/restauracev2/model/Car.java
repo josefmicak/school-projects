@@ -3,7 +3,6 @@ package cz.restauracev2.model;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,12 +10,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;
     
+    @JsonIgnore
     @OneToMany (mappedBy="car", fetch = FetchType.EAGER, cascade=CascadeType.REMOVE)
     public List<Delivery> deliveries; 
     
@@ -26,6 +28,8 @@ public class Car {
     
     public int mileage;
     
+    public Car() {}   
+    
     public Car(String name, String licencePlate, int mileage) {
 		super();
 		this.name = name;
@@ -33,9 +37,6 @@ public class Car {
 		this.mileage = mileage;
 	}
 
-	// for deserialisation
-    public Car() {}    
-    
     public long getId() {
         return id;
     }

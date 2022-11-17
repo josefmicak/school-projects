@@ -10,8 +10,8 @@ import cz.restauracev2.logging.Log;
 
 import cz.restauracev2.model.Car;
 import cz.restauracev2.repository.CarRepository;
-import cz.restauracev2.repository.CarRepositoryJdbc;
-import cz.restauracev2.repository.CarRepositoryJpa;
+import cz.restauracev2.repositoryjdbc.CarRepositoryJdbc;
+import cz.restauracev2.repositoryjpa.CarRepositoryJpa;
 
 @Service
 public class CarService {

@@ -1,8 +1,0 @@
-<p><a href="/employees">Zpět</a></p>
-<form action="#" th:action="@{/employees/update/{id}(id=${employee.id})}" th:object="${employee}" method="post">
-    <label for="name">Jméno</label>
-    <input required type="text" th:field="*{employeeName}" id="name" placeholder="Jméno"><br>
-    <label for="email">Email</label>
-    <input required type="text" th:field="*{employeeEmail}" id="email" placeholder="Email"><br>
-    <input type="submit" value="Upravit zaměstnance">   
-</form>

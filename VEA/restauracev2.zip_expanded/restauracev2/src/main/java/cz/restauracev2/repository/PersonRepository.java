@@ -9,6 +9,10 @@ public interface PersonRepository {
 	
 	List<Person> findAllRegistrations();
 	
+	List<Person> findAllEmployees();
+	
+	List<Person> findAllCustomers();
+	
 	Person findById(long id);
 	
 	long findPersonCountByLogin(String login);

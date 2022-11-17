@@ -14,7 +14,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import cz.restauracev2.model.Customer;
 import cz.restauracev2.model.Employee;
 import cz.restauracev2.model.Person;
-import cz.restauracev2.security.Encoder;
 import cz.restauracev2.service.PersonService;
 
 @Controller
@@ -22,8 +21,6 @@ public class IndexController {
 	
 	@Autowired
 	private PersonService personService;
-	@Autowired
-	private Encoder encoder;
 	
     @GetMapping("/")
     public String index() {

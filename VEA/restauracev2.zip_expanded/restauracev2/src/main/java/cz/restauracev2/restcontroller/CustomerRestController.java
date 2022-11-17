@@ -13,23 +13,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import cz.restauracev2.model.Car;
 import cz.restauracev2.model.Customer;
-import cz.restauracev2.model.Employee;
-import cz.restauracev2.service.CustomerService;
+import cz.restauracev2.model.Person;
 import cz.restauracev2.service.PersonService;
 
 @RestController
 public class CustomerRestController {
 	
 	@Autowired
-	private CustomerService customerService;
-	@Autowired
 	private PersonService personService;
 	
     @GetMapping("/api/customers")
-    List<Customer> showCustomerList(){
-    	return customerService.findAll();
+    List<Person> showCustomerList(){
+    	return personService.findAllCustomers();
     }
     
     @PostMapping("/api/customers")
@@ -54,7 +50,7 @@ public class CustomerRestController {
 	                .body("Chyba: uživateli nelze nastavit login " + customer.login + ". Již existuje jiný uživatel s tímto loginem.");
 		}
 		else {
-	        Customer existingCustomer = customerService.findById(id);
+	        Customer existingCustomer = (Customer)personService.findById(id);
 	        existingCustomer.setName(customer.name);
 	        existingCustomer.setLogin(customer.login);
 	        //existingCustomer.setPassword(customer.password);
@@ -69,8 +65,8 @@ public class CustomerRestController {
     
     @DeleteMapping("/api/customers/{id}")
     ResponseEntity<String> deleteCustomer(@PathVariable Long id){
-    	Customer customer = customerService.findById(id);
-    	customerService.delete(customer);
+    	Customer customer = (Customer)personService.findById(id);
+    	personService.delete(customer);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("Zákazník byl úspěšně smazán.");
     }

@@ -17,28 +17,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import cz.restauracev2.model.Delivery;
 import cz.restauracev2.model.Employee;
 import cz.restauracev2.model.Person;
-import cz.restauracev2.security.Encoder;
 import cz.restauracev2.service.DeliveryService;
-import cz.restauracev2.service.EmployeeService;
 import cz.restauracev2.service.PersonService;
 
 @Controller
 public class EmployeeController {	
 	
 	@Autowired
-	private EmployeeService employeeService;
-	@Autowired
 	private DeliveryService deliveryService;
 	@Autowired
 	private PersonService personService;
-	@Autowired
-	private Encoder encoder;
 	@Value("${customdatasource}")
 	private String customDataSource;
 	
     @GetMapping("/employees")
     public String showEmployeeList(Model model, @ModelAttribute("message") String message) {
-    	model.addAttribute("employees", employeeService.findAll());
+    	model.addAttribute("employees", personService.findAllEmployees());
     	model.addAttribute("message", message);
         return "employees";
     }
@@ -63,7 +57,7 @@ public class EmployeeController {
         }
         else {
         	employee.isApproved = true;
-            employeeService.insert(employee);
+            personService.insert(employee);
             message = "Zaměstnanec byl úspěšně přidán.";
         }
 
@@ -73,7 +67,7 @@ public class EmployeeController {
     
     @GetMapping("/employees/edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
-    	Employee employee = employeeService.findById(id);
+    	Employee employee = (Employee) personService.findById(id);
         
         model.addAttribute("employee", employee);
         return "update-employee";
@@ -100,7 +94,7 @@ public class EmployeeController {
         }
         
         if(!isDuplicateLogin) {
-            Employee existingEmployee = employeeService.findById(id);
+            Employee existingEmployee = (Employee) personService.findById(id);
             existingEmployee.setName(employee.name);
             existingEmployee.setLogin(employee.login);
             existingEmployee.setPassword(employee.password);
@@ -108,7 +102,7 @@ public class EmployeeController {
             existingEmployee.setSalary(employee.salary);
             existingEmployee.setIsApproved(true);
             message = "Zaměstnanec s id " + id + " byl úspěšně upraven.";
-            employeeService.update(existingEmployee);
+            personService.update(existingEmployee);
         }
         else {
         	message = "Chyba: již existuje jiná osoba s tímto loginem.";
@@ -120,7 +114,7 @@ public class EmployeeController {
        
     @GetMapping("/employees/delete/{id}")
     public String deleteEmployee(@PathVariable("id") long id, Model model, RedirectAttributes attributes) {
-    	Employee employee = employeeService.findById(id);
+    	Employee employee = (Employee) personService.findById(id);
         String message = "Zaměstnanec s id " + id + " byl úspěšně smazán.";
         attributes.addFlashAttribute("message", message);
         
@@ -128,13 +122,13 @@ public class EmployeeController {
         if(customDataSource.equals("jdbc")) {
         	deliveryService.deleteByEmployeeId(id);
         }
-    	employeeService.delete(employee);
+    	personService.delete(employee);
         return "redirect:/employees";
     }
     
     @GetMapping("/employees/deliveries/{id}")
     public String showDeliveries(@PathVariable("id") long id, Model model) {
-    	Employee employee = employeeService.findById(id);
+    	Employee employee = (Employee) personService.findById(id);
 
     	//format date in view
     	int deliveriesCount = 0;
