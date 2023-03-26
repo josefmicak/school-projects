@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Contact</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="script.js"></script>
+</head>
+<body>
+
+<div class="content">
+ <div class="container main-container">
+  
+	<nav class="navbar navbar-expand-sm navbar-light bg-light">
+		<a class="navbar-brand" href="index.html"><img src="images/company-logo.png" alt="Logo" style="width:80%;"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav mr-auto">
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="index.html">Home</a>
+					 </li>
+					 <li class="nav-item">
+						<a class="nav-link" href="blog.html">Blog</a>
+					 </li>
+					 <li class="nav-item">
+						<a class="nav-link active" href="#">Contact</a>
+					 </li>
+					<li class="nav-item">
+						<a class="nav-link" href="eshop.html">Eshop</a>
+					 </li>
+				</ul>
+			</div> 
+	</nav>
+	
+	<div class="jumbotron contact-jumbotron">
+		<h1 style="font-size: 60px;"> <b>Your feedback</b></h1>
+		<p style="color: white; font-size: 25px;">is welcomed and appreciated</p>
+	</div>
+
+	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+		  <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+		  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+		  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner location-slider">
+		  <div class="carousel-item slider-item active">
+			<img style="height: 500px;" class="d-block w-100" src="images/location/vsb1.png" alt="First slide">
+			<div class="carousel-caption d-none d-md-block">
+				<h5>Our location</h5>
+				<p>First picture</p>
+			</div>
+		  </div>
+		  <div class="carousel-item slider-item">
+			<img class="d-block w-100" src="images/location/vsb2.jpg" alt="Second slide">
+			<div class="carousel-caption d-none d-md-block">
+				<h5>Our location</h5>
+				<p>Second picture</p>
+			</div>
+		  </div>
+		  <div class="carousel-item slider-item">
+			<img class="d-block w-100" src="images/location/vsb3.jpeg" alt="Third slide">
+			<div class="carousel-caption d-none d-md-block">
+				<h5>Our location</h5>
+				<p>Third picture</p>
+			</div>
+		  </div>
+		</div>
+		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		  <span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		  <span class="sr-only">Next</span>
+		</a>
+	  </div>
+
+	<iframe style="margin-top:-32px;margin-left:-15px;" src="https://en.frame.mapy.cz/s/fohunutucu" width="102.75%" height="450" frameborder="0"></iframe>
+
+	<div class="container contact-form-container">
+		<div class="row">
+			<div class="col-8">
+				<h2><b>Contact us</b></h2><br>
+				We appreciate all your offers and feedback, if you want to contact us you can do so by Social Media, Email, Phone or the following contact form. <br>
+				Note: All fields in the contact form are required!<br>
+				Due to the ongoing pandemic of COVID-19, we are currently not available on our physical address that is written on this page. Thank you for understanding.<br><br>
+				<form>
+				<label for="name"><b>Name</b></label>
+				<input required type="name" class="form-control" id="name" placeholder="" value="" style="width:350px;"><br>
+				<label for="name"><b>Email</b></label>
+				<input required type="email" class="form-control" id="email" placeholder="" value="" style="width:350px;"><br>
+				<label for="name"><b>Message</b></label>
+				<textarea required class="form-control" id="message" name="message" placeholder="" rows="7"></textarea><br>
+				<p class="lead">
+					<input class="btn submit-button" type="submit" style="font-weight: bold;" value="Submit form">
+				</p>
+				</form>
+				<div class="status"></div>
+			</div>
+			<div class="col">
+				<h2><b>Contact info</b></h2><br>
+				17. listopadu 2172/15<br>
+				708 00 Ostrava-Poruba<br><br>
+				Phone: (+420) 777 777 777<br>
+				<a href="mailto:josef.micak@dota2fanwebsite.com" style="color: gray;">josef.micak@dota2fanwebsite.com</a><br><br>
+				<h2><b>Social Links</b></h2><br>
+				<ul id="social-links">
+					<li><a href="#"><img class="social-links-icon" src="images/icons/social-media/twitter.png" alt="Twitter"></a></li>
+					<li><a href="#"><img class="social-links-icon" src="images/icons/social-media/facebook.png" alt="Facebook"></a></li>
+					<li><a href="#"><img class="social-links-icon" src="images/icons/social-media/linkedin.png" alt="Linkedin"></a></li>
+					<li><a href="#"><img class="social-links-icon" src="images/icons/social-media/pinterest.png" alt="Pinterest"></a></li>
+					<li><a href="#"><img class="social-links-icon" src="images/icons/social-media/vimeo.png" alt="Vimeo"></a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="container bottom-container">
+		<div class="row">
+			<div class="col bottom-container-col">
+				<img src="images/company-logo2.png" alt="Logo" style="width:80%;"><br><br>
+				<p class="bottom-container-text">This website has been created as an educational project, images contained on this website have been taken from 
+					<a class="copyright-text" href="https://blog.dota2.com">https://blog.dota2.com</a> and are owned by Valve Corporation
+				</p>
+			</div>
+			<div class="col bottom-container-col">
+				<h5 class="bottom-container-header">Latest Tweets</h5><br>
+			</div>
+			<div class="col bottom-container-col">
+				<h5 class="bottom-container-header">Recent Posts</h5><br>
+				<h6 class="recent-posts-header">The Diretide Event</h6>
+				<p class="bottom-container-text">The Diretide event will begin soon.</p>
+				<h6 class="recent-posts-header">The International</h6>
+				<p class="bottom-container-text">The International is the biggest and most prestigious event in Dota 2.</p>
+			</div>
+			<div class="col-4 bottom-container-col photo-stream">
+				<h5 class="bottom-container-header">Photo Stream</h5><br>
+				<div class="row">
+					<div class="col">
+						<img class="photo-stream-image" src="images/thumbnails/7.22-update.png" alt="7.22 Update">
+					</div>
+					<div class="col">
+						<img class="photo-stream-image" src="images/thumbnails/artwork-1.png" alt="Artwork 1">
+					</div>
+					<div class="col">
+						<img class="photo-stream-image" src="images/thumbnails/artwork-2.jpg" alt="Artwork 2">
+					</div>
+					<div class="col">
+						<img class="photo-stream-image" src="images/thumbnails/diretide.png" alt="Diretide">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col">
+						<img class="photo-stream-image" src="images/thumbnails/grimstroke.png" alt="Grimstroke">
+					</div>
+					<div class="col">
+						<img class="photo-stream-image" src="images/thumbnails/international.png" alt="International">
+					</div>
+					<div class="col">
+						<img class="photo-stream-image" src="images/thumbnails/matchmaking.png" alt="Matchmaking">
+					</div>
+					<div class="col">
+						<img class="photo-stream-image" src="images/thumbnails/ogalliance-thumbnail.jpg" alt="OG vs Alliance">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container copyright">
+		<ul id="bottom-info">
+			<li>Website created by Josef Micak/MIC0378</li>
+			<li><a class="copyright-text" href="#">Legal notice</a></li>
+			<li><a class="copyright-text" href="#">Terms & Conditions</a></li>
+			<li class="social-media-item"><a href="#"><img class="social-media-icon" src="images/icons/social-media/vimeo.png" alt="Vimeo"></a></li>
+			<li class="social-media-item"><a href="#"><img class="social-media-icon" src="images/icons/social-media/pinterest.png" alt="Pinterest"></a></li>
+			<li class="social-media-item"><a href="#"><img class="social-media-icon" src="images/icons/social-media/linkedin.png" alt="Linkedin"></a></li>
+			<li class="social-media-item"><a href="#"><img class="social-media-icon" src="images/icons/social-media/facebook.png" alt="Facebook"></a></li>
+			<li class="social-media-item"><a href="#"><img class="social-media-icon" src="images/icons/social-media/twitter.png" alt="Twitter"></a></li>
+		</ul>
+	</div>
+
+  </div>
+</div>
+
+</body>

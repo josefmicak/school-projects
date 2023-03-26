@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+ <script > 
+
+var rangeHeight = 150, rangeWeight = 50, gender = "Male", age, name;
+var rangeHeightText = "Height: " + rangeHeight + " cm",
+    rangeWeightText = "Weight: " + rangeWeight + " kg",
+    genderText = "Gender: " + gender,
+    ageText = "Age: ",
+    bmiText;
+
+document.addEventListener('init', function(event) {
+
+    var page = event.target;   
+    
+    if (page.id === 'page1') 
+    {
+        $("#push_button").on("click", function(e) 
+        {
+            var myNavigator = document.getElementById('myNavigator');
+            myNavigator.pushPage('page2.html');     
+        });
+    } 
+    else if (page.id === 'page2') 
+    {   
+        var bmi = rangeWeight / ((rangeHeight / 100) * (rangeHeight / 100));
+        if(bmi < 18.5){
+            bmiText = name + ", you are underweight.";
+        }
+        else if(bmi < 25){
+            bmiText = name + ", you are healthy.";
+        }
+        else if(bmi < 30){
+            bmiText = name + ", you are overweight.";
+        }
+        else{
+            bmiText = name + ", you are obese.";
+        }
+        $("#bmi").text(bmiText);
+        $("#bmi").css("color",bmiColor);
+        $("#p_gender").text(genderText);
+        $("#p_rangeHeight").text(rangeHeightText);
+        $("#p_rangeWeight").text(rangeWeightText);
+        $("#p_age").text(ageText);
+    }    
+  
+});
+
+function input(element, data){
+    var value = element.value;
+    var dataName;
+    
+    // Save data
+    switch(data){
+        case "username":
+            name = value;
+            break;
+        case "age":
+            dataName = "Age";
+            age = value;
+            ageText = dataName + ": " + value;
+            break;
+        case "gender":
+            dataName = "Gender";
+            gender = value;
+            genderText = dataName + ": " + value;
+            break;
+        case "rangeHeight":
+            dataName = "Height";
+            dataUnit = "cm";
+            rangeHeight = value;
+            rangeHeightText = dataName + ": " + value + " " + dataUnit;
+            break;
+        case "rangeWeight":
+            dataName = "Weight";
+            dataUnit = "kg";
+            rangeWeight = value;
+            rangeWeightText = dataName + ": " + value + " " + dataUnit;
+            break;
+    }
+    
+    // Display current value
+    if(document.getElementById(data + "_display")){
+        document.getElementById(data + "_display").innerHTML = dataName + " is " + value + " " + dataUnit;
+    }
+    
+    console.log(data, value);
+}
+
+function usernameInput(element){
+    var value = element.value;
+    var dataName;
+    
+    name = value;
+    
+    if(document.getElementById(data + "_display")){
+        document.getElementById(data + "_display").innerHTML = dataName + " is " + value + " " + dataUnit;
+    }
+    
+    console.log(data, value);
+}
+
+function ageInput(element){
+    var value = element.value;
+    var dataName;
+    
+    dataName = "Age";
+    age = value;
+    ageText = dataName + ": " + value;
+    
+    if(document.getElementById(data + "_display")){
+        document.getElementById(data + "_display").innerHTML = dataName + " is " + value + " " + dataUnit;
+    }
+}
+
+function genderInput(element){
+    var value = element.value;
+    var dataName;
+    
+    dataName = "Gender";
+    gender = value;
+    genderText = dataName + ": " + value;
+    
+    if(document.getElementById(data + "_display")){
+        document.getElementById(data + "_display").innerHTML = dataName + " is " + value + " " + dataUnit;
+    }
+}
+
+function weightInput(element){
+    var value = element.value;
+    var dataName;
+    
+    dataName = "Weight";
+    dataUnit = "kg";
+    rangeWeight = value;
+    rangeWeightText = dataName + ": " + value + " " + dataUnit;
+    
+    if(document.getElementById("rangeWeight_display")){
+        document.getElementById("rangeWeight_display").innerHTML = dataName + " is " + value + " " + dataUnit;
+    }
+}
+
+function heightInput(element){
+    var value = element.value;
+    var dataName;
+    
+    dataName = "Height";
+    dataUnit = "cm";
+    rangeHeight = value;
+    rangeHeightText = dataName + ": " + value + " " + dataUnit;
+    
+    if(document.getElementById("rangeHeight_display")){
+        document.getElementById("rangeHeight_display").innerHTML = dataName + " is " + value + " " + dataUnit;
+    }
+}
+
+</script>  
+  
+</head>
+<body>
+<ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+
+<template id="page1.html">
+  <ons-page id="page1">
+    <ons-toolbar>
+      <div class="center">Body Mass Index</div>
+    </ons-toolbar>
+
+    
+  <ons-list>
+  
+    <ons-list-item tappable>
+      <ons-input id="myName" type="text" placeholder="Username" onchange="input(this,'username')"></ons-input>
+    </ons-list-item>
+      
+    <ons-list-item tappable>
+      <ons-input id="myAge" type="text" placeholder="Age" onchange="ageInput(this)"></ons-input>
+    </ons-list-item>
+      
+    <ons-list-item tappable>
+       <label for="radio_1" class="center list-item__center">Male</label> 
+        <label class="left list-item__left">
+            <ons-radio checked modifier="material" name="gender" input-id="radio_1" value="Male" onchange="genderInput(this)" class="radio-button radio-button--material"></ons-radio>
+        </label>
+    </ons-list-item>
+      
+    <ons-list-item tappable>
+        <label for="radio_2" class="center list-item__center">Female</label>
+        <label class="left list-item__left">
+            <ons-radio modifier="material" name="gender" input-id="radio_2" value="Female" onchange="genderInput(this)" class="radio-button radio-button--material"></ons-radio>
+        </label>
+    </ons-list-item>
+      
+    <ons-list-item tappable>
+        <div class="center list-item__center">
+            Height (cm)
+            <ons-range modifier="material" id="range_1" style="width: 100%;" value="150" min="50" max="250" step="1" oninput="heightInput(this)" class="range range--material">
+                   <input type="range" class="range__input range--material__input" max="250" min="100" step="1" value="150" style="background-size: 45% 2px;">  
+                <input type="range" class="range__focus-ring range--material__focus-ring" tabindex="-1" min="50" max="250">
+            </ons-range>   
+            <div id="rangeHeight_display">Height is 150 cm</div>         
+        </div>
+    </ons-list-item>
+      
+    <ons-list-item tappable>
+        <div class="center list-item__center">
+            Weight (kg)
+            <ons-range modifier="material" id="range_1" style="width: 100%;" value="50" min="20" max="150" step="1" oninput="weightInput(this)" class="range range--material">
+        <input type="range" class="range__input range--material__input" max="150" min="20" step="1" value="50" style="background-size: 45% 2px;"> 
+                <input type="range" class="range__focus-ring range--material__focus-ring" tabindex="-1" min="20" max="150">
+            </ons-range>   
+            <div id="rangeWeight_display">Weight is 50 kg</div>         
+        </div>
+    </ons-list-item>
+    
+    <ons-list-item>
+        <div class="left"> 
+        <ons-button modifier="material" id="push_button">CALCULATE</ons-button>
+    </ons-list-item>
+    
+  </ons-list>
+
+  </ons-page>
+</template>
+
+<template id="page2.html">
+  <ons-page id="page2">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>BMI Result</ons-back-button></div>
+      <div class="center"></div>
+    </ons-toolbar>
+
+  <ons-card>
+  
+    <div class="title">
+      BMI Result: 
+      <p id="bmi"> </p>
+    </div>
+    <div class="content">
+      <ons-list>
+      
+        <ons-list-item><p id="p_gender"> </p></ons-list-item>
+        <ons-list-item><p id="p_rangeHeight"> </p></ons-list-item>
+        <ons-list-item><p id="p_rangeWeight"> </p></ons-list-item>
+        <ons-list-item><p id="p_age"> </p></ons-list-item>
+        
+      </ons-list>
+    </div>
+    
+  </ons-card>   
+    
+  </ons-page>
+</template>
+</body>
+</html>

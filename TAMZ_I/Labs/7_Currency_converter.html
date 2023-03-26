@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+ <script > 
+
+var lastInput;
+var langList = ['en','cs'];
+var lang = langList[0];
+var date;
+var cur;
+var curList = [];
+var urlCNB = "https://homel.vsb.cz/~mor03/TAMZ/cnb_json.php";
+
+document.addEventListener('init', function(event)
+{
+    if (event.target.id === 'page1')
+    {
+        date = document.getElementById('date').value;
+        
+        loadCNB();
+        
+        // SSE - Server-Sent Events
+        if(typeof(EventSource) !== "undefined"){
+            var src = new EventSource(urlCNB + '?lang=' + lang + '&date=' + date + '&sse=y');
+            src.onmessage = function(e){
+                var json = JSON.parse(e.data);
+                for(var i = 0; i < json.data.length; i++){
+                    var currency = json.data[i];
+                    curList[json.lang][currency.code] = currency;
+                }
+                
+                if(json.lang == lang){
+                    setRateText();
+                    setAmount($("#CZK").val());
+                }
+            };
+        }
+        
+        $("#CZK").keyup(function(){
+            setAmount($("#CZK").val(),'CZK');
+        });     
+
+        $("#CUR").keyup(function(){
+            setAmount($("#CUR").val(),'CUR');
+        });
+    }
+
+});
+
+function loadCNB()
+{
+    // Clear list
+    curList = {};
+    
+    // Load list
+    langList.forEach(langListItem => {
+        curList[langListItem] = {};
+        $.getJSON( urlCNB + '?lang=' + langListItem + '&date=' + date, function( json ){
+            for(var i = 0; i < json.data.length; i++){
+                var currency = json.data[i];
+                curList[json.lang][currency.code] = currency;
+            }
+            
+            if(json.lang == lang){
+                setRateText();
+                setAmount($("#CZK").val());
+            }
+        });
+    });
+}
+
+function addDialog()
+{
+    document.getElementById('dialog-1').show();
+    $("#onsList").empty();
+    var i = 0;
+    Object.keys(curList[lang]).forEach(curListItemKey => {
+        var curListItem = curList[lang][curListItemKey];
+        var curListItemText = [curListItem.country_label, curListItem.curr_label, curListItem.code, curListItem.rate];
+        var onsItemText = i + ". " + curListItemText.join(" - ");
+        
+        var onsItem = document.createElement('ons-list-item');
+        onsItem.innerHTML = onsItemText;
+        onsItem.setAttribute('modifier', "tappable");
+        onsItem.setAttribute('onclick', 'setCurrency("'+curListItem.code+'")');
+        document.getElementById('onsList').appendChild(onsItem);
+        
+        i++;
+    });
+}
+
+function search(el){
+    var searchText = el.value.toLowerCase();
+    var searchAttrList = ["country_label","curr_label","code"];
+    
+    $("#onsList").empty();
+    var i = 0;
+    Object.keys(curList[lang]).forEach(curListItemKey => {
+        var curListItem = curList[lang][curListItemKey];
+        var curListItemText = [curListItem.country_label, curListItem.curr_label, curListItem.code, curListItem.rate];
+        var onsItemText = i + ". " + curListItemText.join(" - ");
+        
+        var onsItem = document.createElement('ons-list-item');
+        onsItem.innerHTML = onsItemText;
+        onsItem.setAttribute('modifier', "tappable");
+        onsItem.setAttribute('onclick', 'setCurrency("'+curListItem.code+'")');
+        
+        if(searchText.length > 0){
+            var found = false;
+            for(var j = 0; j < searchAttrList.length; j++){
+                var searchAttr = curListItem[searchAttrList[j]].toLowerCase();
+                
+                if(searchAttr.indexOf(searchText) > -1){
+                    found = true
+                    break;
+                }
+            }
+            if(!found){onsItem.style.display = 'none';}
+        }
+        
+        document.getElementById('onsList').appendChild(onsItem);
+        
+        i++;
+    });
+}
+
+function setDate(el){
+    date = el.value;
+    
+    loadCNB();
+}
+
+function setCurrency(id)
+{
+    document.getElementById('dialog-1').hide();
+    cur = id;
+    setCountryText();
+    setRateText();
+    setAmount($("#CZK").val());
+}
+
+function setCountryText(){
+    if(cur !== undefined){
+        $("#cur_country").text(curList[lang][cur].country_label);
+        $("#button_country").text(curList[lang][cur].country_label);
+    }
+}
+
+function setRateText(){
+    if(cur !== undefined){
+        $("#cur_rate").text(curList[lang][cur].rate);
+        $("#button_rate").text(curList[lang][cur].rate);
+    }
+}
+
+function setAmount(amount, id=''){
+    if(cur !== undefined){
+        if(id == 'CZK'){
+            var CUR = $("#CZK").val() * (curList[lang][cur].unit / curList[lang][cur].rate);
+            $("#CUR").val(CUR.toFixed(3));
+            
+        }
+        else if(id == 'CUR'){
+            var CZK = $("#CUR").val() * (curList[lang][cur].rate / curList[lang][cur].unit);
+            $("#CZK").val(CZK.toFixed(3));
+        }
+        else if(lastInput !== undefined){
+            setAmount(amount, lastInput);
+        }
+    }
+    
+    if(id != ''){
+        lastInput = id;
+    }
+}
+
+function closeDialog()
+{
+    document.getElementById('dialog-1').hide();
+}
+
+function setLang(el){
+    lang = (el.checked ? langList[1] : langList[0]);
+    $("#langS").text(lang);
+    setCountryText();
+}
+</script>  
+/*
+
+</head>
+<body>
+<ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+
+<template id="page1.html">
+    <ons-page id="page1">
+        <ons-toolbar>
+            <div class="center">CNB Convertor</div>
+        </ons-toolbar>
+                <p style="text-align: center"> CZK </p>
+                <p style="text-align: center"> <ons-input id="CZK" modifier="underbar material"></ons-input> </p>
+               
+                <p style="text-align: center" id="curP"><span id="cur_country"></span> <span id="cur_rate"></span></p>
+                <p style="text-align: center"> <ons-input id="CUR" modifier="underbar material"></ons-input> </p>
+
+                <p style="text-align: center"> <ons-input id="date" onchange="setDate(this);" type="date" modifier="underbar material"></ons-input> </p>
+
+                <p style="text-align: center" id="langP"> Select Language </p>
+                <p style="text-align: center"> <ons-switch id="lang" onchange="setLang(this);" modifier="underbar"></ons-switch> </p>
+                <p style="text-align: center" id="langS"> en </p>
+                
+                <p style="text-align: center">
+                <ons-button modifier="material" id="push-button1" onclick="addDialog();">
+                    <span id="button_country">Select Currency</span> <span id="button_rate"></span>
+                </ons-button>         
+                </p>
+    </ons-page>   
+</template>
+
+<ons-dialog id="dialog-1">
+    <ons-carousel style="width: 100%; height: 400px" swipeable auto-scroll>
+      <ons-carousel-item>
+      <ons-page>
+        <ons-toolbar>
+            <div class="center"><ons-search-input id="search" placeholder="Search" oninput="search(this);"></ons-search-input></div>
+        </ons-toolbar>
+        <ons-list id="onsList"></ons-list>
+      </ons-page>
+      </ons-carousel-item>
+    </ons-carousel> 
+    
+</ons-dialog>
+
+</body>
+</html>

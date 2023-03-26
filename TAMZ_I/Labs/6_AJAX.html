@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+<script> 
+
+var scriptURL = "";
+var login = "";
+var receivedData = "";
+
+function scriptURLInsert(element){
+    scriptURL = element.value;
+}
+
+function loginInsert(element){
+    login = element.value;
+}
+
+function getSecretCode(){
+    document.getElementById("scriptURLInput").setAttribute("readonly","");
+    document.getElementById("loginInput").setAttribute("readonly","");
+    document.getElementById("secretCodeButton").setAttribute("disabled","");
+    var url = scriptURL + "?login=" + login;
+    var req = new XMLHttpRequest();
+    req.open("GET", url);
+    req.send();
+    req.onload = function(event){
+    receivedData = event.target.responseText;
+    document.getElementById("receivedDataInput").value = "Received Data: " + receivedData;
+    document.getElementById("testAPIKeyButton").removeAttribute("disabled");
+    };
+}
+
+function testAPIKey(){
+    var url = scriptURL;
+    var message = window.btoa(login + ":" + receivedData);
+    var req = new XMLHttpRequest();
+    req.open("GET", url);
+    req.setRequestHeader("API-Token", message);
+    req.send();
+    req.onload = function(event){
+    document.getElementById("receivedDataInput").value = "Received Data: " + event.target.responseText;
+    document.getElementById("scriptURLInput").removeAttribute("readonly");
+    document.getElementById("loginInput").removeAttribute("readonly");
+    document.getElementById("secretCodeButton").removeAttribute("disabled");
+    document.getElementById("testAPIKeyButton").setAttribute("disabled","");
+    };
+}
+
+</script>  
+  
+</head>
+<body>
+<ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+
+<template id="page1.html">
+  <ons-page id="page1">
+    <ons-toolbar>
+      <div class="center">AJAX</div>
+    </ons-toolbar>
+    
+  <ons-list>
+  
+    <ons-list-item tappable>
+      <ons-input id="scriptURLInput" style="width: 100%" oninput="scriptURLInsert(this);" modifier="underbar material" placeholder="Script URL"></ons-input>
+    </ons-list-item>
+      
+    <ons-list-item tappable>
+      <ons-input id="loginInput" oninput="loginInsert(this);" modifier="underbar material" placeholder="Login"></ons-input>
+    </ons-list-item>
+      
+    <ons-list-item tappable>
+      <ons-input id="receivedDataInput" style="width: 100%" placeholder="Received Data" readonly></ons-input>
+    </ons-list-item>
+    
+    <ons-list-item> 
+        <div class="left"> 
+        <ons-button id="secretCodeButton" onclick="getSecretCode();">Get secret code</ons-button>
+     </ons-list-item>
+      &nbsp;
+    <div class="left"> 
+    <ons-button id="testAPIKeyButton" onclick="testAPIKey();"  style="margin-right: 100" disabled>Test API key</ons-button>
+    
+  </ons-list>
+
+  </ons-page>
+</template>
+
+</body>
+</html>

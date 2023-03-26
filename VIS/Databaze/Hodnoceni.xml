@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SeznamHodnoceni>
+  <UdeleneHodnoceni>
+    <Id_hodnoceni>1</Id_hodnoceni>
+    <Id_zakaznika>3</Id_zakaznika>
+    <Id_zamestnance>4</Id_zamestnance>
+    <Id_objednavky>9</Id_objednavky>
+    <Datum>02.11.2019 13:23:44</Datum>
+    <Hodnoceni>5</Hodnoceni>
+  </UdeleneHodnoceni>
+  <UdeleneHodnoceni>
+    <Id_hodnoceni>2</Id_hodnoceni>
+    <Id_zakaznika>9</Id_zakaznika>
+    <Id_zamestnance>2</Id_zamestnance>
+    <Id_objednavky>6</Id_objednavky>
+    <Datum>02.11.2019 16:45:28</Datum>
+    <Hodnoceni>10</Hodnoceni>
+  </UdeleneHodnoceni>
+  <UdeleneHodnoceni>
+    <Id_hodnoceni>3</Id_hodnoceni>
+    <Id_zakaznika>10</Id_zakaznika>
+    <Id_zamestnance>5</Id_zamestnance>
+    <Id_objednavky>2</Id_objednavky>
+    <Datum>05.11.2019 21:02:45</Datum>
+    <Hodnoceni>5</Hodnoceni>
+  </UdeleneHodnoceni>
+  <UdeleneHodnoceni>
+    <Id_hodnoceni>4</Id_hodnoceni>
+    <Id_zakaznika>1</Id_zakaznika>
+    <Id_zamestnance>4</Id_zamestnance>
+    <Id_objednavky>5</Id_objednavky>
+    <Datum>08.11.2019 14:44:47</Datum>
+    <Hodnoceni>5</Hodnoceni>
+  </UdeleneHodnoceni>
+  <UdeleneHodnoceni>
+    <Id_hodnoceni>5</Id_hodnoceni>
+    <Id_zakaznika>1</Id_zakaznika>
+    <Id_zamestnance>6</Id_zamestnance>
+    <Id_objednavky>18</Id_objednavky>
+    <Datum>2020-12-14T10:02:45.1930661+01:00</Datum>
+    <Hodnoceni>5</Hodnoceni>
+  </UdeleneHodnoceni>
+</SeznamHodnoceni>

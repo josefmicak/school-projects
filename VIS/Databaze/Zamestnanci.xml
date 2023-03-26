@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<Zamestnanci>
+  <Zamestnanec>
+    <Id_zamestnance>0</Id_zamestnance>
+    <Jmeno>TEMP</Jmeno>
+    <Prijmeni>TEMP</Prijmeni>
+    <Adresa>TEMP</Adresa>
+    <Telefonni_cislo>TEMP</Telefonni_cislo>
+    <Pohlavi>M</Pohlavi>
+    <Datum_narozeni>01.01.2001 0:00:00</Datum_narozeni>
+    <Datum_nastupu>01.01.2001 0:00:00</Datum_nastupu>
+    <Pozice>TEMP</Pozice>
+    <Plat>1</Plat>
+    <Vyhozen>N</Vyhozen>
+  </Zamestnanec>
+  <Zamestnanec>
+    <Id_zamestnance>1</Id_zamestnance>
+    <Jmeno>Vaclav</Jmeno>
+    <Prijmeni>Prochazka</Prijmeni>
+    <Adresa>1256 Poklidna Ostrava-Vyskovice</Adresa>
+    <Telefonni_cislo>420625451468</Telefonni_cislo>
+    <Pohlavi>M</Pohlavi>
+    <Datum_narozeni>04.08.1985 0:00:00</Datum_narozeni>
+    <Datum_nastupu>10.10.2014 0:00:00</Datum_nastupu>
+    <Pozice>Manazer</Pozice>
+    <Plat>25000</Plat>
+    <Vyhozen>N</Vyhozen>
+  </Zamestnanec>
+  <Zamestnanec>
+    <Id_zamestnance>2</Id_zamestnance>
+    <Jmeno>Karolina</Jmeno>
+    <Prijmeni>Mastna</Prijmeni>
+    <Adresa>1454 Kosmounautu Havirov</Adresa>
+    <Telefonni_cislo>420745145215</Telefonni_cislo>
+    <Pohlavi>Z</Pohlavi>
+    <Datum_narozeni>22.10.1996</Datum_narozeni>
+    <Datum_nastupu>14.10.2014</Datum_nastupu>
+    <Pozice>Kuchar</Pozice>
+    <Plat>20000</Plat>
+    <Vyhozen>N</Vyhozen>
+  </Zamestnanec>
+  <Zamestnanec>
+    <Id_zamestnance>3</Id_zamestnance>
+    <Jmeno>Prokop</Jmeno>
+    <Prijmeni>Buben</Prijmeni>
+    <Adresa>412 Licha Ostrava-Michalkovice</Adresa>
+    <Telefonni_cislo>420785215361</Telefonni_cislo>
+    <Pohlavi>M</Pohlavi>
+    <Datum_narozeni>01.01.1984</Datum_narozeni>
+    <Datum_nastupu>08.08.2015</Datum_nastupu>
+    <Pozice>Ridic</Pozice>
+    <Plat>18000</Plat>
+    <Vyhozen>N</Vyhozen>
+  </Zamestnanec>
+  <Zamestnanec>
+    <Id_zamestnance>4</Id_zamestnance>
+    <Jmeno>Ursula</Jmeno>
+    <Prijmeni>Dobra</Prijmeni>
+    <Adresa>666 Garazni Ostrava-Moravska Ostrava</Adresa>
+    <Telefonni_cislo>420722145156</Telefonni_cislo>
+    <Pohlavi>Z</Pohlavi>
+    <Datum_narozeni>03.12.2000</Datum_narozeni>
+    <Datum_nastupu>11.02.2016</Datum_nastupu>
+    <Pozice>Kuchar</Pozice>
+    <Plat>20000</Plat>
+    <Vyhozen>N</Vyhozen>
+  </Zamestnanec>
+  <Zamestnanec>
+    <Id_zamestnance>5</Id_zamestnance>
+    <Jmeno>Radoslav</Jmeno>
+    <Prijmeni>Kozeny</Prijmeni>
+    <Adresa>Demlova 323 Ostrava-Kuncice</Adresa>
+    <Telefonni_cislo>420654145125</Telefonni_cislo>
+    <Pohlavi>M</Pohlavi>
+    <Datum_narozeni>03.02.1995</Datum_narozeni>
+    <Datum_nastupu>14.05.2017</Datum_nastupu>
+    <Pozice>Kuchar</Pozice>
+    <Plat>20000</Plat>
+    <Vyhozen>N</Vyhozen>
+  </Zamestnanec>
+  <Zamestnanec>
+    <Id_zamestnance>6</Id_zamestnance>
+    <Jmeno>Klara</Jmeno>
+    <Prijmeni>Horakova</Prijmeni>
+    <Adresa>Skrbenska 463 Senov</Adresa>
+    <Telefonni_cislo>420744152614</Telefonni_cislo>
+    <Pohlavi>Z</Pohlavi>
+    <Datum_narozeni>09.07.1978 0:00:00</Datum_narozeni>
+    <Datum_nastupu>07.09.2018 0:00:00</Datum_nastupu>
+    <Pozice>Ridic</Pozice>
+    <Plat>18000</Plat>
+    <Vyhozen>N</Vyhozen>
+  </Zamestnanec>
+</Zamestnanci>

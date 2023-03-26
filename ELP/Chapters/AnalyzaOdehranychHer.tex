@@ -1,0 +1,118 @@
+\chapter{Analýza odehraných her}
+\section{Hry mezi lidským a počítačovým hráčem}
+Práce neobsahuje podrobnou analýzu odebraných her lidského hráče proti jednomu nebo více počítačových hráčů, a to kvůli tomu, že taková analýza by byla silně závislá na dovednosti a momentálním rozpoložení lidského hráče. Z toho důvodu bychom takovou analýzu nemohli považovat za objektivní a směrodatnou. Proto analyzujeme hlavně vzájemné hry počítačových hráčů, ti totiž nejsou ovlivňováni externími vlivy a jejich dovednosti jsou jasně definované (viz podkapitola \ref{sec:UrovneObtiznosti}). Tento způsob analýzy lze tedy považovat za objektivní, samotnou analýzu lze najít v následující podkapitole.
+
+I přesto lze ale určit, jak hra vzhledem k dovednosti lidského hráče pravděpodobně dopadne. Lehkému počítačovému hráči bychom také mohli přidělit název \enquote{pasivní}, jeho postup totiž není příliš rychlý a dokončení hry trvá zejména u hráčů začínajících v jiných než nejvýše a nejníže položeném trojúhelníku mimořádně dlouhou dobu. Dá se tedy říct, že hra proti lehkému hráči by neměla být příliš velká výzva ani pro úplného začátečníka, který se pouze seznamuje s principy hry.
+
+Následuje střední hráč. Ten by už mohl být začátečníkovi rovnocenným soupeřem, pro mírně pokročilého už ale opět nebude představovat příliš velkou výzvu, takový lidský hráč by jej měl bez problému porazit.
+
+Posledním zbývajícím počítačovým hráčem je těžký hráč. Ten už je vzhledem ke všem implementovaným funkcím a kontrolám rovnocenným soupeřem i pro pokročilého hráče. Hra v takovém případě končí většinou výhrou některého z hráčů o několik tahů. Je ale nutné brát v potaz funkci, která kontroluje, jestli provedení daného tahu počítačového hráče neumožní lidskému hráči provedení pro něj výhodnějšího tahu než předtím. Tato funkce je totiž u tohoto hráče využívána, z čehož vyplývá, že síla tohoto hráče spočívá mimo jiné v jeho počtu. U hry jednoho lidského hráče proti pěti počítačovým hráčům je totiž při každém tahu každého počítačového hráče kontrolováno, jestli provedení tahu nezvýhodní lidského hráče. U hry dvou hráčů není tato funkce vzhledem k menšímu počtu kamenů na herní desce příliš důležitá, u hry šesti hráčů ale velmi výrazně ztíží lidskému hráči přesun ke svému cílovému trojúhelníku. Vyhrát proti pěti počítačovým hráčům s obtížností těžký je tudíž podstatně těžší než vyhrát proti jednomu hráči s toutéž obtížností. Může se tedy stát, že hráč, který stabilně poráží jednoho počítačového hráče s obtížností těžký, nebude schopen porazit vyšší počet počítačových hráčů s touto obtížností.
+
+\section{Hry mezi počítačovými hráči}
+\label{sec:HryMeziPocitacovymiHraci}
+V této práci budou dovednosti jednotlivých počítačových hráčů prezentovány dvěma způsoby. Prvním je průměrný počet tahů potřebných k výhře u her počítačových hráčů stejné obtížnosti. Tyto výsledky jsou uvedeny v tabulce \ref{tab:PocetTahuStejniHraci}.
+
+\begin{table}
+	\centering
+	\caption{Průměrný počet tahů potřebných k výhře počítačových hráčů podle jejich obtížností}
+	\label{tab:PocetTahuStejniHraci}
+	\begin{tabular}{cd{5}d{5}d{5}d{5}d{5}}
+		\toprule
+		Obtížnost hráčů & \multicolumn{1}{c}{Dva hráči} & \multicolumn{1}{c}{Tři hráči} & \multicolumn{1}{c}{Čtyři hráči} & \multicolumn{1}{c}{Šest hráčů} & \multicolumn{1}{c}{Průměr}\\
+		\midrule
+		Lehký & 164,2 & 200,1 & 1106,3 & 233,8 & 426,1\\
+		Střední & 93,4 & 88,1 & 85,7 & 89,3 & 89,1\\
+		Těžký & 35 & 34 & 31 & 35 & 33,7\\
+		\bottomrule
+	\end{tabular}
+    \begin{tablenotes}
+      \small
+      \item *U hráče jsou sice výsledky zprůměrovány z 50 her, výsledky her jsou nicméně z důvodu absence náhodných tahů ve všech případech totožné
+    \end{tablenotes}
+\end{table}
+
+Z údajů v posledním sloupci tabulky můžeme vyčíst, že střední hráč dokončí hru jednoznačně rychleji než lehký hráč, a stejně tak těžký hráč dokončí hru jednoznačně rychleji než střední hráč. Z~toho vyplývá, že mezi hráči jsou očividné dovednostní rozdíly a že jsou jednotliví hráči implementováni korektně, jinak řečeno, nestává se, že například lehký hráč dokončí hru rychleji než střední hráč.
+
+Druhým způsobem prezentace dovedností jednotlivých hráčů je analýza výsledků her, ve kterých proti sobě hrají hráči různých obtížností. Vzhledem k velmi vysokému počtů kombinací her s ohledem na počet hráčů a jejich obtížnosti analyzujeme hry vždy jednoho počítačového hráče vyšší obtížnosti s počítačovými hráči menší obtížnosti. Například u hry šesti hráčů, viz tabulka \ref{tab:TurnajSestHracu}, nastoupí proti sobě jeden počítačový hráč těžší obtížnosti a pět počítačových hráčů lehčí obtížnosti. Poloha těžšího počítačového hráče se mění, vždy je analyzováno 50 her pro každý možný výchozí trojúhelník počítačového hráče s vyšší obtížností. Za předpokladu že dříve, než počítačový hráč vyšší obtížnosti dokončí hru libovolný hráč nižší obtížnosti, je hra v tabulce zapsána ve prospěch hráče s nižší obtížností.
+
+\begin{table}
+	\centering
+	\caption{Turnaj hráčů různých obtížností ve hře pro dva hráče}
+	\label{tab:TurnajDvaHraci}
+	\begin{tabular}{cccc}
+		\toprule
+		Obtížnost hráčů & \multicolumn{1}{c}{Lehký} & \multicolumn{1}{c}{Střední} & \multicolumn{1}{c}{Těžký}\\
+		\midrule
+		Lehký & \faTimes & 3 : 97 & 0 : 100\\
+		Střední & 97 : 3 & \faTimes & 0 : 100\\
+		Těžký & 100 : 0 & 100 : 0 & \faTimes\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption[Turnaj hráčů různých obtížností ve hře pro tři hráče]{Turnaj hráčů různých obtížností ve hře pro tři hráče -- údaj 5: 145 uvedený v prvním řádku druhého sloupce znamená, že ze 150 proběhlých her (50 pro každý možný výchozí trojúhelník hráče s vyšší obtížností) 5$\times$ vyhrál některý ze dvou hráčů lehké obtížnosti a 145$\times$ vyhrál hráč střední obtížnosti.}
+	\label{tab:TurnajTriHraci}
+	\begin{tabular}{cccc}
+		\toprule
+		Obtížnost hráčů & \multicolumn{1}{c}{Lehký} & \multicolumn{1}{c}{Střední} & \multicolumn{1}{c}{Těžký}\\
+		\midrule
+		Lehký & \faTimes & 5 : 145 & 2 : 148\\
+		Střední & 145 : 5 & \faTimes & 2 : 148\\
+		Těžký & 148 : 2 & 148 : 2 & \faTimes\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{Turnaj hráčů různých obtížností ve hře pro čtyři hráče}
+	\label{tab:TurnajCtyriHraci}
+	\begin{tabular}{cccc}
+		\toprule
+		Obtížnost hráčů & \multicolumn{1}{c}{Lehký} & \multicolumn{1}{c}{Střední} & \multicolumn{1}{c}{Těžký}\\
+		\midrule
+		Lehký & \faTimes & 0 : 200 & 0 : 200\\
+		Střední & 200 : 0 & \faTimes & 24 : 176\\
+		Těžký & 200 : 0 & 176 : 24 & \faTimes\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{Turnaj hráčů různých obtížností ve hře pro šest hráčů}
+	\label{tab:TurnajSestHracu}
+	\begin{tabular}{cccc}
+		\toprule
+		Obtížnost hráčů & \multicolumn{1}{c}{Lehký} & \multicolumn{1}{c}{Střední} & \multicolumn{1}{c}{Těžký}\\
+		\midrule
+		Lehký & \faTimes & 8 : 292 & 6 : 294\\
+		Střední & 292 : 8 & \faTimes & 40 : 260\\
+		Těžký & 294 : 6 & 260 : 40 & \faTimes\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+\begin{table}
+	\centering
+	\caption{Turnaj hráčů různých obtížností -- souhrn všech her}
+	\label{tab:TurnajSouhrn}
+	\begin{tabular}{cccc}
+		\toprule
+		Obtížnost hráčů & \multicolumn{1}{c}{Lehký} & \multicolumn{1}{c}{Střední} & \multicolumn{1}{c}{Těžký}\\
+		\midrule
+		Lehký & \faTimes & 2,2 \% & 0,8 \%\\
+		Střední & 97,7 \% & \faTimes & 7,5 \%\\
+		Těžký & 99,1 \% & 92,4 \% & \faTimes\\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Vzhledem k podmínce, že je na herní desce jeden hráč vyšší obtížnosti a zbývající rohy obsadí hráči nižší obtížnosti, logicky se stoupajícím počtem hráčů stoupá počet analyzovaných her, protože určený počet 50 her je pevný a neměnný. V souhrnné tabulce proto neuvádíme, kolik her z celkového počtu her daný hráč vyhrál, nýbrž u každé z tabulek zaznamenáme podíl her, které daný hráč vyhrál, a z těchto podílů pak spočítáme průměr, který ve výsledku uvedeme v souhrnné tabulce. Tím je zajištěno, že hry dvou hráčů mají na údaje uvedené v souhrnné tabulce stejný vliv jako hry šesti hráčů, a to i přestože je jich v absolutních číslech třikrát méně.
+
+V tabulkách \ref{tab:TurnajDvaHraci}, \ref{tab:TurnajTriHraci}, \ref{tab:TurnajCtyriHraci}, \ref{tab:TurnajSestHracu} a souhrnné tabulce \ref{tab:TurnajSouhrn} můžeme vidět statistiky výsledků her počítačových hráčů různých obtížností. Z výsledků lze usoudit, že hry dopadly podle očekávání, ve většině případů vyhrál počítačový hráč vyšší obtížnosti. V některých případech vyhrál počítačový hráč nižší obtížnosti, k čemuž mohlo dojít například \enquote{zapomenutím} některého z kamenů hráče vyšší obtížnosti na kraji herní desky nebo rychlým postupem jiného hráče směrem na pole, která jsou umístěna před cílovým trojúhelníkem hráče vyšší obtížnosti, což ve výsledku výrazně zpomalí postup hráče vyšší obtížnosti.
+
+Detailní záznamy o všech odehraných hrách analyzovaných v této podkapitole jsou, stejně jako jakékoli další simulace provedené uživatelem, uloženy ve statistikách ke kterým lze přistoupit přes hlavní menu. 
+\endinput

@@ -1,0 +1,80 @@
+% Nejprve uvedeme tridu dokumentu s volbami
+\documentclass[czech,bachelor]{diploma}
+% Dalsi doplnujici baliky maker
+\usepackage[autostyle=true,czech=quotes]{csquotes} % korektni sazba uvozovek, podpora pro balik biblatex
+\usepackage[backend=biber, style=iso-numeric, alldates=iso]{biblatex} 
+\let\biblatexaddspace\addspace
+
+\usepackage{dcolumn} % sloupce tabulky s ciselnymi hodnotami
+\usepackage{subfig} % makra pro "podobrazky" a "podtabulky"
+\usepackage[cpp]{diplomalst}
+
+\usepackage{float}
+\usepackage{threeparttable}
+\usepackage{fontawesome}
+%\usepackage{todonotes}
+\usepackage{comment}
+\usepackage[miktex]{gnuplottex}
+\usepackage{imakeidx}
+\usepackage{graphicx}
+\usepackage{musixtex}
+\usepackage{courier}
+\usepackage{lmodern}
+
+\makeindex[columns=1, title=Alphabetical Index, intoc]
+
+% Zadame pozadovane vstupy pro generovani titulnich stran.
+\ThesisAuthor{Josef Micak}
+
+\ThesisSupervisor{doc. Mgr. Jiří Dvorský, Ph.D.}
+
+\CzechThesisTitle{Čínská dáma}
+
+\EnglishThesisTitle{Chinese Checkers}
+
+\SubmissionYear{2021}
+
+% Pokud nechceme nikomu dekovat makro zapoznamkujeme.
+\Acknowledgement{Chtěl bych tímto poděkovat vedoucímu mé bakalářské práce, doc. Mgr. Jiřímu Dvorskému, Ph.D. za poskytnutí konstruktivních poznatků k obsahu práce a za trpělivost a čas strávený při konzultacích týkajících se této práce.}
+
+\CzechAbstract{Cílem této bakalářské práce je implementovat počítačovou podobu deskové hry Čínská dáma. K~implementaci hry je využíván programovací jazyk C\#, je umožněna hra člověka proti dvěma až pěti počítačovým hráčům. Další části bakalářské práce obsahují popis této deskové hry a~analýzu množství ukázkových partií.}
+
+\CzechKeywords{Bakalářská práce; Čínská dáma; C\#; programování; desková hra}
+
+\EnglishAbstract{The purpose of this bachelor thesis is to implement the computer form of the board game Chinese Checkers. The C\# programming language is used for implementation purposes, the implementation supports playing against two to five computer opponents. Other parts of the thesis include description of this board game and analysis of a number of exemplary games.}
+
+\EnglishKeywords{Bachelor thesis; Chinese Checkers; C\#; programming; board game}
+
+\addbibresource{MyB.bib}
+
+\makeatletter
+\newcommand*{\mxaddspace}[1]{\kern#1\global\advance\x@skip#1}
+\makeatother
+
+% Novy druh tabulkoveho sloupce, ve kterem jsou cisla zarovnana podle desetinne carky
+\newcolumntype{d}[1]{D{,}{,}{#1}}
+
+% Zacatek dokumentu
+\begin{document}
+
+% Nechame vysazet titulni strany.
+\MakeTitlePages
+
+% A nasleduje text zaverecne prace.
+\input{Chapters/Uvod.tex}
+\input{Chapters/TeoretickePodklady.tex}
+\input{Chapters/RozborHry.tex}
+\input{Chapters/PocitacovyHrac.tex}
+\input{Chapters/Implementace.tex}
+\input{Chapters/UzivatelskeRozhrani.tex}
+\input{Chapters/AnalyzaOdehranychHer.tex}
+\input{Chapters/Zaver.tex}
+
+\appendix
+\input{Chapters/Priloha.tex}
+
+\let\addspace\biblatexaddspace
+\printbibliography[title={Literatura}, heading=bibintoc]
+
+\printindex
+\end{document}

@@ -1,0 +1,18 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    string message = string.Empty;
+    if(ViewBag.message != null)
+    {
+        message = ViewBag.message;
+    }
+}
+
+<div class="text-center">
+    <div id="message">@message</div>
+    <form method="POST">
+        <p>Obtížnost (0-4): <input type="text" id="difficulty" name="difficulty" value="0"></p>
+        <p>Zadej heslo: <input type="text" id="guessedPassword" name="guessedPassword"></p>
+        <input class="button" title="Odešli" type="submit" name="action" value="Odešli"><br />
+        <input class="button" title="Prolom pomocí C#" type="submit" name="action" value="Prolom pomocí C#">
+    </form>
+</div>

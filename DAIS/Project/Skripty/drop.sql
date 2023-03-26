@@ -1,0 +1,9 @@
+drop table historie_ujetych_km;
+drop table stiznost;
+drop table hodnoceni;
+drop table objednavka;
+drop table zakaznik;
+drop table zakaznikstatistika;
+drop table rozvazka;
+drop table vozidlo;
+drop table zamestnanec;

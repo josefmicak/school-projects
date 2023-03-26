@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Stiznosti>
+  <Stiznost>
+    <Id_stiznosti>1</Id_stiznosti>
+    <Id_zakaznika>2</Id_zakaznika>
+    <Id_zamestnance>5</Id_zamestnance>
+    <Id_objednavky>1</Id_objednavky>
+    <Datum>06.11.2019 14:52:41</Datum>
+    <Typ_stiznosti>3</Typ_stiznosti>
+    <Vyrizena>Y</Vyrizena>
+  </Stiznost>
+  <Stiznost>
+    <Id_stiznosti>2</Id_stiznosti>
+    <Id_zakaznika>3</Id_zakaznika>
+    <Id_zamestnance>5</Id_zamestnance>
+    <Id_objednavky>15</Id_objednavky>
+    <Datum>07.11.2019 21:47:32</Datum>
+    <Typ_stiznosti>1</Typ_stiznosti>
+    <Vyrizena>Y</Vyrizena>
+  </Stiznost>
+  <Stiznost>
+    <Id_stiznosti>3</Id_stiznosti>
+    <Id_zakaznika>1</Id_zakaznika>
+    <Id_zamestnance>1</Id_zamestnance>
+    <Id_objednavky>20</Id_objednavky>
+    <Datum>2020-12-14T10:02:23.5445455+01:00</Datum>
+    <Typ_stiznosti>2</Typ_stiznosti>
+    <Vyrizena>N</Vyrizena>
+  </Stiznost>
+</Stiznosti>

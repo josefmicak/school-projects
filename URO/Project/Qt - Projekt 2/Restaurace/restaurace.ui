@@ -1,0 +1,1256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Restaurace</class>
+ <widget class="QMainWindow" name="Restaurace">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>538</width>
+    <height>482</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Restaurace</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>541</width>
+      <height>441</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>2</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>Správa zaměstnanců</string>
+     </attribute>
+     <widget class="QGroupBox" name="pridatZam">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>281</width>
+        <height>371</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Přidat zaměstnance</string>
+      </property>
+      <widget class="QLabel" name="jmenoZamL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>47</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Jméno</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="prijmeniZamL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>65</y>
+         <width>37</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Příjmení</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="pohlaviZamL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Pohlaví</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="datumNarZamL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>135</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Datum narození</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="datumFormatL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>150</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>(DD/MM/YYYY)</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="adresaZamL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>185</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Adresa</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="emailZamL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>220</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Email</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="telefonZamL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>255</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Telefon</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="datumNasZamL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>290</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Datum nástupu</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="datumFormat2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>305</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>(DD/MM/YYYY)</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="jmenoZamB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>30</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="prijmeniZamB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>65</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="pohlaviZamRB1">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>97</y>
+         <width>41</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>muž</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="pohlaviZamRB2">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>97</y>
+         <width>51</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>žena</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumNarZamBD">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>135</y>
+         <width>25</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumNarZamBM">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>135</y>
+         <width>25</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumNarZamBR">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>135</y>
+         <width>50</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="adresaZamB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>180</y>
+         <width>161</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="emailZamB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>215</y>
+         <width>161</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="telefonZamB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>250</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumNasZamBM">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>290</y>
+         <width>25</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumNasZamBR">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>290</y>
+         <width>50</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumNasZamBD">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>290</y>
+         <width>25</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pridatZamBut1">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>340</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Uložit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pridatZamBut2">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>340</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Zrušit</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="odebratZam">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>10</y>
+        <width>241</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Odebrat zaměstnance</string>
+      </property>
+      <widget class="QLabel" name="idZamL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ID zaměstnance</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="idZamB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>30</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="odebratZamBut1">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>60</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Uložit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="odebratZamBut2">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>60</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Zrušit</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="vyhledatZamBut">
+      <property name="geometry">
+       <rect>
+        <x>335</x>
+        <y>130</y>
+        <width>161</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Vyhledat zaměstnance</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="odebratVsechZamBut">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>170</y>
+        <width>191</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Odebrat všechny zaměstnance</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="potvrditZmenyBut">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>390</y>
+        <width>101</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Potvrdit změny</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="zrusitBut">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>390</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zrušit</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Správa objednávek</string>
+     </attribute>
+     <widget class="QPushButton" name="vyhledatObjBut">
+      <property name="geometry">
+       <rect>
+        <x>335</x>
+        <y>130</y>
+        <width>161</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Vyhledat objednávku</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="odebratVsechObjBut">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>170</y>
+        <width>191</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Odebrat všechny objednávky</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="potvrditZmenyBut_2">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>390</y>
+        <width>101</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Potvrdit změny</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="pridatObj">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>281</width>
+        <height>291</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Přidat objednávku</string>
+      </property>
+      <widget class="QLabel" name="jmenoZakL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>61</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Jméno zák.</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="prijmeniZakL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>65</y>
+         <width>61</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Příjmení zák.</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="adresaZakL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Adresa zák.</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="cenaL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>220</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cena</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="telefonZakL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>135</y>
+         <width>71</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Telefon zák.</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="jmenoZamB_2">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>30</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="prijmeniZamB_2">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>62</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="adresaZakB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>97</y>
+         <width>161</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="cenaObjB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>215</y>
+         <width>111</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="telefonZamB_2">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>132</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pridatObjBut1">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>260</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Uložit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pridatObjBut2">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>260</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Zrušit</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumVytvoreniBR">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>167</y>
+         <width>50</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumVytvoreniBM">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>167</y>
+         <width>25</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="datumVytvoreniL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>170</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Datum vytvoření</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="datumFormatL_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>185</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>(DD/MM/YYYY)</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumVytvoreniBD">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>167</y>
+         <width>25</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="menaL">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>217</y>
+         <width>21</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Kč</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="zrusitBut_2">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>390</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zrušit</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="odebratObj">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>10</y>
+        <width>241</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Odebrat objednávku</string>
+      </property>
+      <widget class="QLabel" name="idObjL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ID objednávky</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="idObjB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>30</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="odebratObjBut1">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>60</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Uložit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="odebratObjBut2">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>60</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Zrušit</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Správa vozidel</string>
+     </attribute>
+     <widget class="QPushButton" name="vyhledatVozBut">
+      <property name="geometry">
+       <rect>
+        <x>335</x>
+        <y>130</y>
+        <width>161</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Vyhledat vozidlo</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="pridatVoz">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>281</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Přidat vozidlo</string>
+      </property>
+      <widget class="QLabel" name="modelL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>61</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Model</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="SPZL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>65</y>
+         <width>61</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>SPZ</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="obejmKufruL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>155</y>
+         <width>61</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Objem kufru</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="modelB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>30</y>
+         <width>161</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="SPZB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>62</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="objemKufruB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>152</y>
+         <width>111</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pridatVozBut1">
+       <property name="geometry">
+        <rect>
+         <x>60</x>
+         <y>220</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Uložit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pridatVozBut2">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>220</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Zrušit</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumVytvoreniBR_3">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>97</y>
+         <width>50</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumVytvoreniBM_3">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>97</y>
+         <width>25</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="datumVytvoreniL_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Datum vytvoření</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="datumFormatL_4">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>91</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>(DD/MM/YYYY)</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="datumVytvoreniBD_3">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>97</y>
+         <width>25</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="cenaVozB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>187</y>
+         <width>111</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="cenaL_3">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>190</y>
+         <width>47</width>
+         <height>13</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cena</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="menaL_3">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>190</y>
+         <width>21</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Kč</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="zrusitBut_3">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>390</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Zrušit</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="potvrditZmenyBut_3">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>390</y>
+        <width>101</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Potvrdit změny</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="odebratVoz">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>10</y>
+        <width>241</width>
+        <height>91</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Odebrat vozidlo</string>
+      </property>
+      <widget class="QLabel" name="idVozL">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>81</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ID vozidla</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="idVozB">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>30</y>
+         <width>113</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="odebratObjBut1_3">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>60</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Uložit</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="odebratObjBut2_3">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>60</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Zrušit</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="odebratVsechVozBut">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>170</y>
+        <width>191</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Odebrat všechna vozidla</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>538</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSoubor">
+    <property name="title">
+     <string>Soubor</string>
+    </property>
+    <addaction name="actionNov"/>
+    <addaction name="actionOtev_t"/>
+    <addaction name="actionUlo_it"/>
+    <addaction name="separator"/>
+    <addaction name="actionN_hled"/>
+    <addaction name="actionTisk"/>
+    <addaction name="separator"/>
+    <addaction name="actionOdeslat"/>
+    <addaction name="separator"/>
+    <addaction name="actionZav_t"/>
+   </widget>
+   <widget class="QMenu" name="menuZobrazit">
+    <property name="title">
+     <string>Zobrazit</string>
+    </property>
+    <addaction name="actionP_ibl_it"/>
+    <addaction name="actionNaj_t"/>
+    <addaction name="separator"/>
+    <addaction name="actionHistorie"/>
+    <addaction name="actionStatistiky"/>
+   </widget>
+   <widget class="QMenu" name="menuNastaven">
+    <property name="title">
+     <string>Nastavení</string>
+    </property>
+    <addaction name="actionSpr_va_tu"/>
+    <addaction name="actionPreference"/>
+    <addaction name="separator"/>
+    <addaction name="actionMo_nosti"/>
+   </widget>
+   <widget class="QMenu" name="menuN_pov_da">
+    <property name="title">
+     <string>Nápověda</string>
+    </property>
+    <addaction name="actionZobrait_n_vod"/>
+    <addaction name="separator"/>
+    <addaction name="actionO_aplikaci"/>
+   </widget>
+   <addaction name="menuSoubor"/>
+   <addaction name="menuZobrazit"/>
+   <addaction name="menuNastaven"/>
+   <addaction name="menuN_pov_da"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionZobrait_n_vod">
+   <property name="text">
+    <string>Zobrazit návod</string>
+   </property>
+  </action>
+  <action name="actionO_aplikaci">
+   <property name="text">
+    <string>O aplikaci</string>
+   </property>
+  </action>
+  <action name="actionSpr_va_tu">
+   <property name="text">
+    <string>Správa účtu</string>
+   </property>
+  </action>
+  <action name="actionPreference">
+   <property name="text">
+    <string>Preference</string>
+   </property>
+  </action>
+  <action name="actionMo_nosti">
+   <property name="text">
+    <string>Možnosti</string>
+   </property>
+  </action>
+  <action name="actionNov">
+   <property name="text">
+    <string>Nový</string>
+   </property>
+  </action>
+  <action name="actionOtev_t">
+   <property name="text">
+    <string>Otevřít</string>
+   </property>
+  </action>
+  <action name="actionUlo_it">
+   <property name="text">
+    <string>Uložit</string>
+   </property>
+  </action>
+  <action name="actionN_hled">
+   <property name="text">
+    <string>Náhled</string>
+   </property>
+  </action>
+  <action name="actionTisk">
+   <property name="text">
+    <string>Tisk</string>
+   </property>
+  </action>
+  <action name="actionOdeslat">
+   <property name="text">
+    <string>Odeslat</string>
+   </property>
+  </action>
+  <action name="actionZav_t">
+   <property name="text">
+    <string>Zavřít</string>
+   </property>
+  </action>
+  <action name="actionP_ibl_it">
+   <property name="text">
+    <string>Přiblížit</string>
+   </property>
+  </action>
+  <action name="actionNaj_t">
+   <property name="text">
+    <string>Najít</string>
+   </property>
+  </action>
+  <action name="actionHistorie">
+   <property name="text">
+    <string>Historie</string>
+   </property>
+  </action>
+  <action name="actionStatistiky">
+   <property name="text">
+    <string>Statistiky</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

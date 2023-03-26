@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Zakaznici>
+  <Zakaznik>
+    <Id_zakaznika>1</Id_zakaznika>
+    <Jmeno>Jan</Jmeno>
+    <Prijmeni>Novak</Prijmeni>
+    <Adresa>22 Bendova Ostrava-Radvanice</Adresa>
+    <Telefonni_cislo>420774158449</Telefonni_cislo>
+    <Neaktivni>N</Neaktivni>
+    <Kategorie>1</Kategorie>
+    <V_blacklistu>N</V_blacklistu>
+    <Zrusen>N</Zrusen>
+    <Email>jan.novak@seznam.cz</Email>
+    <Heslo>novakheslo</Heslo>
+  </Zakaznik>
+  <Zakaznik>
+    <Id_zakaznika>2</Id_zakaznika>
+    <Jmeno>Petra</Jmeno>
+    <Prijmeni>Novotna</Prijmeni>
+    <Adresa>12 Hradecka Ostrava-Svinov</Adresa>
+    <Telefonni_cislo>420604584725</Telefonni_cislo>
+    <Neaktivni>N</Neaktivni>
+    <Kategorie>1</Kategorie>
+    <V_blacklistu>N</V_blacklistu>
+    <Zrusen>N</Zrusen>
+    <Email>petra.novotna@seznam.cz</Email>
+    <Heslo>novotnaheslo</Heslo>
+  </Zakaznik>
+  <Zakaznik>
+    <Id_zakaznika>3</Id_zakaznika>
+    <Jmeno>Pavel</Jmeno>
+    <Prijmeni>Omacka</Prijmeni>
+    <Adresa>125 Karvinska Orlova</Adresa>
+    <Telefonni_cislo>420776254441</Telefonni_cislo>
+    <Neaktivni>N</Neaktivni>
+    <Kategorie>1</Kategorie>
+    <V_blacklistu>N</V_blacklistu>
+    <Zrusen>N</Zrusen>
+    <Email>pavel.omacka@seznam.cz</Email>
+    <Heslo>omackaheslo</Heslo>
+  </Zakaznik>
+  <Zakaznik>
+    <Id_zakaznika>4</Id_zakaznika>
+    <Jmeno>Jiri</Jmeno>
+    <Prijmeni>Blecha</Prijmeni>
+    <Adresa>442 Nad Porubkou Ostrava-Poruba</Adresa>
+    <Telefonni_cislo>420723541165</Telefonni_cislo>
+    <Neaktivni>N</Neaktivni>
+    <Kategorie>1</Kategorie>
+    <V_blacklistu>N</V_blacklistu>
+    <Zrusen>N</Zrusen>
+    <Email>jiri.blecha@seznam.cz</Email>
+    <Heslo>blechaheslo</Heslo>
+  </Zakaznik>
+  <Zakaznik>
+    <Id_zakaznika>5</Id_zakaznika>
+    <Jmeno>Patrik</Jmeno>
+    <Prijmeni>Nimrod</Prijmeni>
+    <Adresa>123 Orlovska Petrvald</Adresa>
+    <Telefonni_cislo>420741214628</Telefonni_cislo>
+    <Neaktivni>N</Neaktivni>
+    <Kategorie>1</Kategorie>
+    <V_blacklistu>N</V_blacklistu>
+    <Zrusen>N</Zrusen>
+    <Email>patrik.nimrod@seznam.cz</Email>
+    <Heslo>nimrodheslo</Heslo>
+  </Zakaznik>
+  <Zakaznik>
+    <Id_zakaznika>6</Id_zakaznika>
+    <Jmeno>Kvetoslava</Jmeno>
+    <Prijmeni>Homolkova</Prijmeni>
+    <Adresa>54 Palickova Ostrava-Nova Ves</Adresa>
+    <Telefonni_cislo>420722145478</Telefonni_cislo>
+    <Neaktivni>N</Neaktivni>
+    <Kategorie>1</Kategorie>
+    <V_blacklistu>N</V_blacklistu>
+    <Zrusen>N</Zrusen>
+    <Email>kvetoslava.homolkova@seznam.cz</Email>
+    <Heslo>homolkovaheslo</Heslo>
+  </Zakaznik>
+  <Zakaznik>
+    <Id_zakaznika>7</Id_zakaznika>
+    <Jmeno>Zuzana</Jmeno>
+    <Prijmeni>Svobodova</Prijmeni>
+    <Adresa>2777 Sionkova Ostrava-Slezska Ostrava</Adresa>
+    <Telefonni_cislo>420766452145</Telefonni_cislo>
+    <Neaktivni>N</Neaktivni>
+    <Kategorie>1</Kategorie>
+    <V_blacklistu>N</V_blacklistu>
+    <Zrusen>N</Zrusen>
+    <Email>zuzana.svobodova@seznam.cz</Email>
+    <Heslo>svobodovaheslo</Heslo>
+  </Zakaznik>
+  <Zakaznik>
+    <Id_zakaznika>8</Id_zakaznika>
+    <Jmeno>Antonin</Jmeno>
+    <Prijmeni>Cerny</Prijmeni>
+    <Adresa>12 Hradecka Ostrava-Svinov</Adresa>
+    <Telefonni_cislo>420604584725</Telefonni_cislo>
+    <Neaktivni>N</Neaktivni>
+    <Kategorie>1</Kategorie>
+    <V_blacklistu>N</V_blacklistu>
+    <Zrusen>N</Zrusen>
+    <Email>antonin.cerny@seznam.cz</Email>
+    <Heslo>cernyheslo</Heslo>
+  </Zakaznik>
+  <Zakaznik>
+    <Id_zakaznika>9</Id_zakaznika>
+    <Jmeno>Premysl</Jmeno>
+    <Prijmeni>Vesely</Prijmeni>
+    <Adresa>145 U statku Ostrava-Bartovice</Adresa>
+    <Telefonni_cislo>420733251425</Telefonni_cislo>
+    <Neaktivni>N</Neaktivni>
+    <Kategorie>1</Kategorie>
+    <V_blacklistu>N</V_blacklistu>
+    <Zrusen>N</Zrusen>
+    <Email>premysl.vesely@seznam.cz</Email>
+    <Heslo>veselyheslo</Heslo>
+  </Zakaznik>
+  <Zakaznik>
+    <Id_zakaznika>10</Id_zakaznika>
+    <Jmeno>Dusan</Jmeno>
+    <Prijmeni>Hala</Prijmeni>
+    <Adresa>256 U sterkovny Hlucin</Adresa>
+    <Telefonni_cislo>420774158449</Telefonni_cislo>
+    <Neaktivni>N</Neaktivni>
+    <Kategorie>1</Kategorie>
+    <V_blacklistu>N</V_blacklistu>
+    <Zrusen>N</Zrusen>
+    <Email>dusan.hala@seznam.cz</Email>
+    <Heslo>halaheslo</Heslo>
+  </Zakaznik>
+</Zakaznici>

@@ -1,0 +1,120 @@
+<!doctype html>
+
+<html lang="cz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MIC0378 - FA App</title> 
+  <script src=
+  "https://www.google.com/recaptcha/api.js" async defer>
+  </script>
+</head>
+
+<body>
+    <form action="pass.php" method="post">
+        <label for="difficulty">Obtížnost (0-4):</label><br>
+        <input type="number" id="difficulty" name="difficulty" value="0"><br>
+        <label for="guessedPassword">Zadej heslo:</label><br>
+        <input type="text" id="guessedPassword" name="guessedPassword"><br>
+        <div class="g-recaptcha" 
+          data-sitekey="6LfvBNsiAAAAAIZp65lO0A0Lf1KV-v39aKC5R-yK">
+        </div>
+        <input type="submit" name="submit-btn" value="Odešli"><br>
+      </form>     
+      <button type="button" onclick="crack()">Prolom pomocí JS</button>  
+      <div id="difficulty-text"></div>
+      <div id="correct-password"></div>
+      <div id="number-of-attempts"></div>
+      <div id="seconds-passed"></div>
+
+      <script>  
+
+      //a function designated to crack the password
+      async function crack() {
+          var difficulty = document.getElementById("difficulty").value; 
+          var attemptsCounter = 0;
+
+          //set up timer that will let the user know how long did it take to crack the password
+          var start = Date.now();
+          var secondsPassedInterval = setInterval(function() {
+              var delta = Date.now() - start;
+              document.getElementById("seconds-passed").innerHTML = "Počet sekund: " + Math.floor(delta / 1000);
+          }, 1000); // update every 1000 ms
+
+          var input;
+          var combinations;
+          //4 numbers
+          if(difficulty == 0){
+            input = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            combinations = Combinations(input, 4, '');
+          }
+          //5 numbers
+          else if(difficulty == 1){
+            input = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            combinations = Combinations(input, 5, '');
+          }
+          //4 letters
+          else if(difficulty == 2){
+            input = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+            combinations = Combinations(input, 4, '');
+          }
+          //four letters and numbers
+          else if(difficulty == 3){
+            input = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            combinations = Combinations(input, 4, '');
+          }
+          //four letters, numbers and several special characters typically used in passwords
+          else if(difficulty == 4){
+            input = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+            '?', '!', '@', '+', '-', '.', ','];
+            combinations = Combinations(input, 4, '');
+          }
+
+          for(var i = 0; i < combinations.length; i++){
+              attemptsCounter++;
+              document.getElementById("number-of-attempts").innerHTML = "Počet pokusů: " + attemptsCounter;  
+              var guessedPassword = combinations[i];
+              var response = await getResponse(difficulty, guessedPassword);
+              if(response == "OK"){//the correct password has been found out
+                document.getElementById("difficulty-text").innerHTML = "Obtížnost: " + difficulty;
+                document.getElementById("correct-password").innerHTML = "Správné heslo: " + combinations[i];
+                break;
+              } 
+            }
+
+          //stop the timer
+          clearInterval(secondsPassedInterval);
+      }
+
+      //the request itself has to be contained within its own function, otherwise there would be no way to break the for loop in the crack() function
+      function getResponse(difficulty, guessedPassword){
+        return new Promise(function (resolve, reject){
+          var data = new FormData();
+              data.append('difficulty', difficulty);
+              data.append('guessedPassword', guessedPassword);
+
+        var xhr = new XMLHttpRequest();
+              xhr.open('POST', 'pass.php', true);
+              xhr.onload = function () {
+                console.log(this.responseText);
+                return resolve(this.responseText);
+              };
+              xhr.send(data);
+        });
+
+      }
+
+      //creates all possible combinations of the input characters of the specified length
+      function Combinations(input, length, curstr) {
+        if(curstr.length == length) return [ curstr ];
+        var ret = [];
+        for(var i = 0; i < input.length; i++) {
+            ret.push.apply(ret, Combinations(input, length, curstr + input[i]));
+        }
+        return ret;
+    }
+        </script> 
+</body>
+</html>

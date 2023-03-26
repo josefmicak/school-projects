@@ -1,0 +1,4 @@
+New entry: Sun Nov 15 2020 13:18:52 GMT+0100 (Central European Standard Time)
+username1;password1;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0;[object MediaDevices];en-US,en;49.7844224;18.4451072;
+New entry: Sun Nov 15 2020 13:18:59 GMT+0100 (Central European Standard Time)
+username2;password2;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:80.0) Gecko/20100101 Firefox/80.0;[object MediaDevices];en-US,en;49.7844224;18.4451072; = 

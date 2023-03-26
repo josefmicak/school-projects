@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">  
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+<script>
+var task_id, task_name, task_date, task_notes, task_priority = "high", task_vibration = false, task_volume = "50", dialog_id;
+
+document.addEventListener('init', function(event){
+    showTodo();
+});
+
+function showTodo(){
+    $("#todoList").empty();
+    for(var i = 0; i < localStorage.length; i++){
+        var onsItem = document.createElement('ons-list-item');
+        var onsItemTitle = document.createElement('div');
+        var onsItemContent = document.createElement('div');
+        
+        var key = localStorage.key(i);
+        
+        onsItem.classList.add("swipe-area");
+        onsItem.setAttribute('id', "task-" + key);
+        onsItem.setAttribute('swipeable', "");
+        onsItem.setAttribute('expandable', "");
+        onsItemTitle.setAttribute('id', "task-title-" + key);
+        onsItemContent.setAttribute('id', "task-content-" + key);
+        onsItemContent.classList.add("expandable-content");
+        onsItemContent.setAttribute('onclick', "itemClick("+key+")");
+        onsItemContent.style.whiteSpace = "pre";
+        
+        var gesture = ons.GestureDetector(onsItem);
+        gesture.on('swipeleft', function(event){
+            var element = event.target;
+            while(!element.classList.contains("swipe-area")){
+                element = element.parentNode;
+            }
+            var taskID = element.getAttribute("id").split("task-")[1];
+            localStorage.removeItem(taskID);
+            
+            showTodo();
+        });
+        
+        onsItem.append(onsItemTitle);
+        onsItem.append(onsItemContent);
+        document.getElementById('todoList').prepend(onsItem);
+        
+        var task = JSON.parse(localStorage.getItem(key));
+		var date_parts = task.date.split("-").reverse();
+		var date = [];
+		date_parts.forEach(date_part => {
+			date.push(parseInt(date_part));
+		});
+		document.getElementById("task-title-" + key).innerHTML = date.join("-") + " - " + task.name;
+		document.getElementById("task-content-" + key).innerHTML = "<b>Note: </b>" + task.notes + "<br>";
+		document.getElementById("task-content-" + key).innerHTML += "<b>Priority: </b>" + task.priority + "<br>";
+		document.getElementById("task-content-" + key).innerHTML += "<b>Vibration: </b>" + task.vibration + "<br>";
+		document.getElementById("task-content-" + key).innerHTML += "<b>Alert Volume: </b>" + task.volume + "<br>";
+    }
+}
+
+function showDialog(id){
+    dialog_id = id;
+    $('#dialog-' + id).show();
+}
+
+function hideDialog(){
+    $('#dialog-' + dialog_id).hide();
+    
+    document.getElementById("add_task-name").value = task_name;
+    document.getElementById("add_task-date").value = task_date;
+    document.getElementById("add_task-notes").value = task_notes;
+    document.getElementById("add_task-priority-" + task_priority).checked = true;
+    document.getElementById("add_task-vibration").checked = task_vibration;
+    document.getElementById("add_task-volume").value = task_volume;
+}
+
+function addTask(){
+    if(task_name.length > 0){
+		var date = new Date();
+        var key = date.getTime();
+        
+		var task = {};
+		task.name = task_name;
+		task.date = task_date;
+		task.notes = task_notes;
+		task.priority = task_priority;
+		task.vibration = task_vibration;
+		task.volume = task_volume;
+        localStorage.setItem(key,JSON.stringify(task));
+        
+        showTodo();
+        hideDialog();
+    }
+}
+
+function remove(){
+    localStorage.removeItem(task_id);
+    
+    showTodo();
+    hideDialog();
+}
+
+function removeAll(){
+    localStorage.clear();
+    
+    showTodo();
+}
+
+function editTask(element, type){
+    input(element, type);
+	
+	var task = {};
+	task.name = task_name;
+	task.date = task_date;
+	task.notes = task_notes;
+	task.priority = task_priority;
+	task.vibration = task_vibration;
+	task.volume = task_volume;
+    localStorage.setItem(task_id,JSON.stringify(task));
+	
+	showTodo();
+}
+
+function input(element, type){
+    switch(type){
+        case "name":
+            task_name = element.value;
+            break;
+		case "date":
+            task_date = element.value;
+            break;
+		case "notes":
+            task_notes = element.value;
+            break;
+		case "priority":
+            task_priority = element.value;
+            break;
+		case "vibration":
+            task_vibration = element.checked;
+            break;
+		case "volume":
+            task_volume = element.value;
+            break;
+    }
+}
+
+function itemClick(id){
+	task_id = id;
+    var task = JSON.parse(localStorage.getItem(task_id));
+    task_name = task.name;
+	task_date = task.date;
+	task_notes = task.notes;
+	task_priority = task.priority;
+	task_vibration = task.vibration;
+	task_volume = task.volume;
+    
+    document.getElementById("edit_task-name").value = task_name;
+    document.getElementById("edit_task-date").value = task_date;
+    document.getElementById("edit_task-notes").value = task_notes;
+    document.getElementById("edit_task-priority-" + task_priority).checked = true;
+    document.getElementById("edit_task-vibration").checked = task_vibration;
+    document.getElementById("edit_task-volume").value = task_volume;
+    
+    showDialog("edit");
+}
+</script>
+</head>
+<body>
+    <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+    
+    <template id="page1.html">
+        <ons-page id="page1">
+            <ons-toolbar>
+                <div class="center">TODO List</div>
+            </ons-toolbar>
+            <ons-list id="todoList"></ons-list>
+            <p>
+                <ons-button modifier="material" onclick="showDialog('add');">Add Task Using Dialog</ons-button>
+                <ons-button modifier="material" onclick="removeAll();">Remove All Tasks</ons-button>
+            </p>
+        </ons-page>
+    </template>
+    
+    <ons-dialog id="dialog-add">
+        <p>
+			<center>
+				<p><ons-input id="add_task-name" oninput="input(this,'name');" modifier="underbar material" placeholder="Task Name"></ons-input></p>
+				<p><ons-input id="add_task-date" onchange="input(this,'date');" modifier="underbar material" type="date"></ons-input></p>
+				<p><textarea id="add_task-notes" oninput="input(this,'notes');" class="textarea" rows="3" placeholder="Notes"></textarea></p>
+			</center>
+            <ons-list>
+                <ons-list-header>Task Priority</ons-list-header>
+                <ons-list-item tappable>
+                    <label for="radio_1" class="center list-item__center" style="color:blue">Low</label>
+                    <label class="left list-item__left"><ons-radio id="add_task-priority-low" onchange="input(this,'priority');" modifier="material" name="taskPriority" input-id="radio_1" value="low" class="radio-button radio-button--material"></ons-radio></label>
+                </ons-list-item>
+                <ons-list-item tappable>
+                    <label for="radio_2" class="center list-item__center">Medium</label>
+                    <label class="left list-item__left"><ons-radio id="add_task-priority-medium" onchange="input(this,'priority');" modifier="material" name="taskPriority" input-id="radio_2" value="medium" class="radio-button radio-button--material"></ons-radio></label>
+                </ons-list-item>
+                <ons-list-item tappable>
+                    <label for="radio_3" class="center list-item__center" style="color:red">High</label>
+                    <label class="left list-item__left"><ons-radio checked id="add_task-priority-high" onchange="input(this,'priority');" modifier="material" name="taskPriority" input-id="radio_3" value="high" class="radio-button radio-button--material"></ons-radio></label>
+                </ons-list-item>
+                <ons-list-header>Notifications</ons-list-header>
+                <ons-list-item>
+                    <p>Enable Vibration</p>
+                    <div class="right"><ons-switch id="add_task-vibration" onchange="input(this,'vibration');"></ons-switch></div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div class="center list-item__center">
+                        Alert Volume
+                        <ons-range id="add_task-volume" oninput="input(this,'volume');" modifier="material" style="width: 100%;" value="50" min="0" max="100" step="5" class="range range--material">
+                            <input type="range" class="range__input range--material__input" value="50" min="0" max="100" step="5" style="background-size: 50% 2px;">
+                            <input type="range" class="range__focus-ring range--material__focus-ring" tabindex="-1" min="0" max="100">
+                        </ons-range>      
+                    </div>
+                </ons-list-item>
+            </ons-list>
+			<center>
+				<p><ons-button modifier="material" onclick="addTask();">Add Task</ons-button></p>
+				<p><ons-button modifier="material" onclick="hideDialog();">Close</ons-button></p>
+			</center>
+        </p>
+    </ons-dialog>
+    
+    <ons-dialog id="dialog-edit">
+        <p>
+            <center>
+				<p><ons-input id="edit_task-name" oninput="editTask(this,'name');" modifier="underbar material" placeholder="Task Name"></ons-input></p>
+				<p><ons-input id="edit_task-date" onchange="editTask(this,'date');" modifier="underbar material" type="date"></ons-input></p>
+				<p><textarea id="edit_task-notes" oninput="editTask(this,'notes');" class="textarea" rows="3" placeholder="Notes"></textarea></p>
+			</center>
+            <ons-list>
+                <ons-list-header>Task Priority</ons-list-header>
+                <ons-list-item tappable>
+                    <label for="radio_4" class="center list-item__center" style="color:blue">Low</label>
+                    <label class="left list-item__left"><ons-radio id="edit_task-priority-low" onchange="editTask(this,'priority');" modifier="material" name="taskPriority" input-id="radio_4" value="low" class="radio-button radio-button--material"></ons-radio></label>
+                </ons-list-item>
+                <ons-list-item tappable>
+                    <label for="radio_5" class="center list-item__center">Medium</label>
+                    <label class="left list-item__left"><ons-radio id="edit_task-priority-medium" onchange="editTask(this,'priority');" modifier="material" name="taskPriority" input-id="radio_5" value="medium" class="radio-button radio-button--material"></ons-radio></label>
+                </ons-list-item>
+                <ons-list-item tappable>
+                    <label for="radio_6" class="center list-item__center" style="color:red">High</label>
+                    <label class="left list-item__left"><ons-radio id="edit_task-priority-high" onchange="editTask(this,'priority');" modifier="material" name="taskPriority" input-id="radio_6" value="high" class="radio-button radio-button--material"></ons-radio></label>
+                </ons-list-item>
+                <ons-list-header>Notifications</ons-list-header>
+                <ons-list-item>
+                    <p>Enable Vibration</p>
+                    <div class="right"><ons-switch id="edit_task-vibration" onchange="editTask(this,'vibration');"></ons-switch></div>
+                </ons-list-item>
+                <ons-list-item>
+                    <div class="center list-item__center">
+                        Alert Volume
+                        <ons-range id="edit_task-volume" oninput="editTask(this,'volume');" modifier="material" style="width: 100%;" value="50" min="0" max="100" step="5" class="range range--material">
+                            <input type="range" class="range__input range--material__input" value="50" min="0" max="100" step="5" style="background-size: 50% 2px;">
+                            <input type="range" class="range__focus-ring range--material__focus-ring" tabindex="-1" min="0" max="100">
+                        </ons-range>      
+                    </div>
+                </ons-list-item>
+            </ons-list>
+            <center>
+				<p><ons-button modifier="material" onclick="remove();">Remove</ons-button></p>
+				<p><ons-button modifier="material" onclick="hideDialog();">Close</ons-button></p>
+			</center>
+        </p>
+    </ons-dialog>
+</body>
+</html>

