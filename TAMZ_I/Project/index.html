@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pexeso</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<div id="container" class="grid">
+		<header id="header" class="grid-item">PEXESO</header>
+		<section id="game" class="grid-item">
+			<section id="controls" class="grid">
+				<div class="grid-item"><button id="controlsRefreshButton"></button></div>
+				<div class="grid-item"><button id="controlsMuteButton"></button></div>
+				<div class="grid-item"><small>Moves</small><b id="moves">0</b></div>
+				<div class="grid-item"><small>Remaining</small><b id="remaining">16</b></div>
+			</section>
+			<section id="cards" class="grid">
+				<button class="card grid-item" data-card="antelope"></button>
+				<button class="card grid-item" data-card="antelope"></button>
+				<button class="card grid-item" data-card="elephant"></button>
+				<button class="card grid-item" data-card="elephant"></button>
+				<button class="card grid-item" data-card="giraffe"></button>
+				<button class="card grid-item" data-card="giraffe"></button>
+				<button class="card grid-item" data-card="hippopotamus"></button>
+				<button class="card grid-item" data-card="hippopotamus"></button>
+				<button class="card grid-item" data-card="chimpanzee"></button>
+				<button class="card grid-item" data-card="chimpanzee"></button>
+				<button class="card grid-item" data-card="lion"></button>
+				<button class="card grid-item" data-card="lion"></button>
+				<button class="card grid-item" data-card="rhino"></button>
+				<button class="card grid-item" data-card="rhino"></button>
+				<button class="card grid-item" data-card="zebra"></button>
+				<button class="card grid-item" data-card="zebra"></button>
+			</section>
+			<div id="location">Geolocation is not supported by this browser.</div>
+		</section>
+		<footer id="footer" class="grid-item">
+			<button id="footerHighscoresButton" onclick="showHighscores();">Show Highscores</button>
+		</footer>
+	</div>
+	<div id="dialog">
+		<section id="highscores" class="grid">
+			<header class="grid" id="highscoresHeader"><div id="dialogTitle">Top 5 results <i>(by number of moves)</i></div><button id="dialogCloseButton">&times;</button></header>
+			<ul class="grid-item" id="highscoresList"></ul>
+			<footer class="grid-item"><button id="highscoresDownloadButton" onclick="downloadHighscores()">Download</button></footer>
+		</section>
+	</div>
+	<script src="scripts.js"></script>
+</body>
+</html>

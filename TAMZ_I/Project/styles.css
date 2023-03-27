@@ -1,0 +1,291 @@
+*:focus, *:active{
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+}
+body{
+	color: #ffffff;
+	font-family: Calibri;
+	background-color: #00b7eb;
+	margin: 0px;
+}
+#container{
+	height: 100vh;
+}
+#header{
+	font: 32px/64px Calibri;
+	background-color: #000;
+	text-align: center;
+}
+#game{
+	align-self: center;
+	justify-self: center;
+}
+#controls{
+	color: #959595;
+	font-size: 20px;
+	background-color: #ffffff;
+	border-radius: 8px;
+	height: 64px;
+	margin: 8px 0px;
+	overflow: hidden;
+	text-align: center;
+	align-items: center;
+	justify-items: center;
+}
+#controls b{
+	color: #00b7eb;
+}
+#controls button{
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+	box-shadow: none;
+	filter: grayscale(100%);
+}
+#controls button:hover{
+	filter: grayscale(0%);
+}
+#controlsRefreshButton{
+	background-image: url(images/Refresh.png);
+}
+#controlsMuteButton{
+	background-image: url(images/Sound.png);
+}
+#controlsMuteButton.muted{
+	background-image: url(images/NoSound.png);
+}
+#cards{
+	grid-gap: 8px;
+}
+#cards button{
+	position: relative;
+	background-color: transparent;
+	min-width: 128px;
+	min-height: 128px;
+}
+#cards button:before, #cards button:after{
+	content: "";
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background-color: #ffffff;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 60% 60%;
+	border-radius: 8px;
+	transition: 0.25s;
+	backface-visibility: hidden;
+}
+#cards button:hover:before, #cards button:hover:after,
+#cards button.flipped:before, #cards button.flipped:after{
+	background-size: 80% 80%;
+}
+#cards button:after{
+	transform: rotateY(180deg);
+}
+#cards button.flipped:before{
+	transform: rotateY(180deg);
+}
+#cards button.flipped:after{
+	transform: rotateY(360deg);
+}
+#location{
+	color: #959595;
+	font-size: 20px;
+	background-color: #ffffff;
+	border-radius: 8px;
+	padding: 8px;
+	margin-top: 8px;
+	text-align: center;
+}
+#location b{
+	color: #00b7eb;
+}
+footer{
+	height: 64px;
+	align-content: center;
+	justify-self: center;
+}
+#footerHighscoresButton, #highscoresDownloadButton{
+	border-radius: 24px;
+	padding: 0px 16px;
+}
+#dialog{
+	pointer-events: none;
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	background: rgba(0,0,0,0.75);
+	opacity: 0;
+	transition: 0.25s;
+}
+#dialog.opened{
+	pointer-events: all;
+	opacity: 1;
+}
+#dialogTitle{
+	font-size: 24px;
+	padding: 0px 8px;
+	white-space: nowrap;
+	text-align: center;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	grid-column: 2 / 3;
+	align-self: center;
+}
+#dialogCloseButton{
+	color: #ff0000;
+	font-size: 24px;
+	border-radius: 8px;
+	grid-column: 3 / 4;
+}
+#dialogCloseButton:hover{
+	color: #ffffff;
+	background-color: #ff0000;
+}
+#highscores{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	color: #000000;
+	background-color: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.25);
+	min-width: 536px;
+	max-width: 100%;
+	transform: translate(-50%,-50%);
+}
+#highscoresList{
+	padding: 0px;
+	margin: 0px auto;
+	list-style-type: none;
+}
+#highscoresList li{
+	font-size: 16px;
+	line-height: 32px;
+}
+#highscoresDownloadButton{
+	color: #00b7eb;
+}
+#highscoresDownloadButton:hover{
+	color: #ffffff;
+	background-color: #00b7eb;
+}
+
+/* CARD IMAGE */
+#cards button:before{background-image: url(images/Pexeso.png);}
+#cards button[data-card="antelope"]:after{background-image: url(images/Antelope.jpg);}
+#cards button[data-card="elephant"]:after{background-image: url(images/Elephant.jpg);}
+#cards button[data-card="giraffe"]:after{background-image: url(images/Giraffe.jpg);}
+#cards button[data-card="hippopotamus"]:after{background-image: url(images/Hippopotamus.jpg);}
+#cards button[data-card="chimpanzee"]:after{background-image: url(images/Chimpanzee.jpg);}
+#cards button[data-card="lion"]:after{background-image: url(images/Lion.jpg);}
+#cards button[data-card="rhino"]:after{background-image: url(images/Rhino.jpg);}
+#cards button[data-card="zebra"]:after{background-image: url(images/Zebra.jpg);}
+
+/* BUTTON */
+button{
+	font-size: 16px;
+	background-color: #ffffff;
+	border: none;
+	min-width: 48px;
+	height: 48px;
+	padding: 0px;
+	transition: 0.25s;
+}
+button:hover{
+	box-shadow: 0px 2px 8px 0px rgba(0,0,0,0.25);
+}
+
+/* GRID */
+.grid{
+	display: grid;
+}
+.grid-item{
+	display: inline-grid;
+}
+
+/* GRID TEMPLATE */
+#container, #highscores{
+	grid-template-rows: auto 1fr auto;
+}
+#controls, #cards{
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+#highscoresHeader{
+	grid-template-columns: 48px 1fr 48px;
+}
+
+/* MEDIA */
+@media(max-width: 536px){
+	#header{
+		font: 24px/48px Calibri;
+	}
+	#controls{
+		font-size: 15px;
+		height: 48px;
+	}
+	#cards button{
+		min-width: 96px;
+		min-height: 96px;
+	}
+	footer{
+		height: 48px;
+	}
+	#footerHighscoresButton, #highscoresDownloadButton{
+		padding: 0px 12px;
+	}
+	#dialogTitle, #dialogCloseButton{
+		font-size: 18px;
+	}
+	#highscores{
+		min-width: 408px;
+	}
+	button{
+		font-size: 12px;
+		min-width: 36px;
+		height: 36px;
+	}
+	#highscoresHeader{
+		grid-template-columns: 36px 1fr 36px;
+	}
+}
+
+@media(max-width: 408px){
+	#header{
+		font: 16px/32px Calibri;
+	}
+	#controls{
+		font-size: 10px;
+		height: 32px;
+	}
+	#cards button{
+		min-width: 64px;
+		min-height: 64px;
+	}
+	footer{
+		height: 32px;
+	}
+	#footerHighscoresButton, #highscoresDownloadButton{
+		padding: 0px 8px;
+	}
+	#dialogTitle, #dialogCloseButton{
+		font-size: 12px;
+	}
+	#highscores{
+		min-width: 280px;
+	}
+	button{
+		font-size: 8px;
+		min-width: 24px;
+		height: 24px;
+	}
+	#highscoresHeader{
+		grid-template-columns: 24px 1fr 24px;
+	}
+}
