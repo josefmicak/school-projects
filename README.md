@@ -43,4 +43,5 @@ Projects are classified by their subjects and, if necessary, by the characterist
 - <a href="https://github.com/josefmicak/school-projects/tree/main/TSK">TSK (Testování a softwarová kvalita / Testing and Software Quality)</a> - C#, Java
 
 9th semester (Master's studies):
+- <a href="https://github.com/josefmicak/school-projects/tree/main/FA">FA (Forenzní analýza / Forensic Analysis)</a> - C#, JavaScript, HTML, C
 - <a href="https://github.com/josefmicak/school-projects/tree/main/VEA">VEA (Vývoj enterprise aplikací / Enterprise Application Development)</a> - Java
