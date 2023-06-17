@@ -1,0 +1,63 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+   http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <build>
+      <pluginManagement>
+         <plugins>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-resources-plugin</artifactId>
+               <version>3.2.0</version>
+                  <executions>
+                     <execution>
+                           <id>copy-resource-one</id>
+                           <phase>generate-sources</phase>
+                           <goals>
+                              <goal>copy-resources</goal>
+                           </goals>
+                           <configuration>
+                              <outputDirectory>${basedir}/target</outputDirectory>
+                              <resources>
+                                 <resource>
+                                       <directory>scripts</directory>
+                                       <includes>
+                                          <include>run.sh</include>
+                                       </includes>
+                                 </resource>
+                              </resources>
+                           </configuration>
+                     </execution>
+                  </executions>
+            </plugin>
+
+            <plugin>
+               <!-- Build an executable JAR -->
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-jar-plugin</artifactId>
+               <version>3.1.0</version>
+               <configuration>
+               <archive>
+                  <manifest>
+                     <addClasspath>true</addClasspath>
+                     <classpathPrefix>lib/</classpathPrefix>
+                     <mainClass>HelloWorldRun</mainClass>
+                  </manifest>
+               </archive>
+               </configuration>
+            </plugin>
+         </plugins>
+      </pluginManagement>
+    </build>
+
+   <groupId>cz.vsb.cs.ukm</groupId>
+   <artifactId>lab04-01</artifactId>
+   <version>1.0</version>
+   <properties>
+      <maven.compiler.source>1.8</maven.compiler.source>
+      <maven.compiler.target>1.8</maven.compiler.target>
+   </properties>
+ 
+</project>

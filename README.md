@@ -21,7 +21,7 @@ Projects are classified by their subjects and, if necessary, by the characterist
 4th semester (Bachelor's studies):
 - <a href="https://github.com/josefmicak/school-projects/tree/main/DAIS">DAIS (Datábazové a informační systémy / Database and Information Systems)</a> - PL/SQL, C#
 - <a href="https://github.com/josefmicak/school-projects/tree/main/PJ_II">PR II (Programovácí jazyky II / Programming languages II)</a> - C#
-- <a href="https://github.com/josefmicak/school-projects/tree/main/URO">TAMZ I (Tvorba aplikací pro mobilní zařízení I / Design of Applications for Mobile Devices I)</a> - JavaScript, HTML, CSS
+- <a href="https://github.com/josefmicak/school-projects/tree/main/TAMZ_I">TAMZ I (Tvorba aplikací pro mobilní zařízení I / Design of Applications for Mobile Devices I)</a> - JavaScript, HTML, CSS
 - <a href="https://github.com/josefmicak/school-projects/tree/main/URO">URO (Uživatelská rozhraní / User Interfaces)</a> - Python, C++
 
 5th semester (Bachelor's studies):
@@ -45,3 +45,6 @@ Projects are classified by their subjects and, if necessary, by the characterist
 9th semester (Master's studies):
 - <a href="https://github.com/josefmicak/school-projects/tree/main/FA">FA (Forenzní analýza / Forensic Analysis)</a> - C#, JavaScript, HTML, C
 - <a href="https://github.com/josefmicak/school-projects/tree/main/VEA">VEA (Vývoj enterprise aplikací / Enterprise Application Development)</a> - Java
+
+10th semester (Master's studies):
+- <a href="https://github.com/josefmicak/school-projects/tree/main/UKM">UKM (Údržba software a konfigurační management / Software Maintanance and Configuration Management)</a> - Java, C#, Makefile

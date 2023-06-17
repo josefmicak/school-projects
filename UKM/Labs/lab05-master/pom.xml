@@ -1,0 +1,22 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ukm.mic0378</groupId>
+  <artifactId>lab05</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  
+    <repositories>
+  	<repository>
+    	<id>ukm</id>
+      	<url>https://artifactory.cs.vsb.cz/ukm</url>
+    </repository>
+  </repositories>
+  
+  <dependencies>
+  	<dependency>
+	    <groupId>ukm.mic0378</groupId>
+	    <artifactId>ukol5</artifactId>
+	    <version>1.0.0-20230406.175212-1</version>
+	</dependency>
+  </dependencies>
+  
+</project>
